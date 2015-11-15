@@ -7,7 +7,7 @@ published: True
 
 ---
 
-Kafka是依赖于Zookeeper的，也就是说如果要启动kafka, 必须要先启动zookeeper，但是如果每次调试都要进入命令行启动两个黑框框就太蛋疼了，所以可以学习Tomcat来把Java的程序以windows的Service方式来运行，一下是修改Kafka的启动脚本：
+Kafka是依赖于Zookeeper的，也就是说如果要启动kafka, 必须要先启动zookeeper，但是如果每次调试都要进入命令行启动两个黑框框就太蛋疼了，所以可以学习Tomcat来把Java的程序以windows的Service方式来运行，一下是修改Kafka的启动脚本`server.cmd`：
 
 ``` java
 @echo off
@@ -67,4 +67,6 @@ goto :eof
 EndLocal
 ```
 
-注意上面的`kafka-run-class-cracked.bat`是将`kafka-run-class.bat`注释了`%COMMAND%`这一行，只保留该脚本的环境变量操作。
+> 注意上面的`kafka-run-class-cracked.bat`是将`kafka-run-class.bat`注释了`%COMMAND%`这一行，只保留该脚本的环境变量操作。
+
+> 注意windows下的脚本需要考虑编码（linux下编辑的直接运行会诡异的错误）
