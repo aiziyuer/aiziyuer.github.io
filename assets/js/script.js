@@ -37,6 +37,27 @@ $('.pl__all').on('click', function() {
   }
 });
 
+
+$('#search-input').keyup(function() {
+
+    $(this).addClass('active').siblings().removeClass('active');
+    $('.pl__all').hide();
+
+    var search_val = $('#search-input').val().toLowerCase();
+
+    $('#pl__container > .' + $('#tags__ul > .active').attr('id') + ' > .pl__title ').each(function(i) {
+
+        var e = $(this);
+        if (e.text().toLowerCase().contains(search_val)) {
+            
+            e.parent().delay(10).fadeIn(15);
+        }
+
+    });
+
+});
+
+
 // Enable fullscreen.
 $('#js-fullscreen').on('click', function() {
   if (button.hasClass('fullscreen')) {
