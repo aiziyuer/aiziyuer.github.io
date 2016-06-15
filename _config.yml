@@ -1,6 +1,9 @@
 permalink: /:year/:month/:day/:title.html
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
+
+kramdown:
+  syntax_highlighter: rouge
 
 # markdown: redcarpet2
 # redcarpet:
