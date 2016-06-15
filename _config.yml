@@ -12,6 +12,12 @@ kramdown:
 kramdown:
   input: GFM
 
+exclude:
+  - CNAME
+  - README
+  - "*.BAK"
+  - bower_components
+
 # 作者信息
 author: 
   name: 李聪
