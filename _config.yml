@@ -24,6 +24,5 @@ url: http://aiziyuer.github.io/Blog/
 #rss_url: /pages/atom.xml
 
 # avatar头像及Favicon
-avatar:  https://lh3.googleusercontent.com/-egqSwRv2JXw/VLtcDnf1LqI/AAAAAAAAABE/sXJ1rQEGM0o/w140-h140-p/fuck-you.jpg
-favicon: https://lh3.googleusercontent.com/-egqSwRv2JXw/VLtcDnf1LqI/AAAAAAAAABE/sXJ1rQEGM0o/w140-h140-p/fuck-you.jpg
-
+avatar:  assets/img/butterflies_800x800.jpg
+favicon: assets/img/butterflies_favor.ico
