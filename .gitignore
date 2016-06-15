@@ -5,3 +5,4 @@
 *.sublime-project
 *.DS_Store
 _site
+*.log
