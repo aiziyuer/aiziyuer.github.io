@@ -14,15 +14,5 @@ gulp.task('bower:js', function() {
 
 });
 
-gulp.task('bower:fonts', function() {
-
-    const fillterJS = $.filter('**/*.js', { restore: true });
-    gulp.src(mainBowerFiles())
-        .pipe(fillterJS)
-        .pipe(gulp.dest('assets/js'));
-
-});
-
-
 
 gulp.task('bower', ['bower:js']);

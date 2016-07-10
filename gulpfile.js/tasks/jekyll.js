@@ -3,7 +3,6 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')({ lazy: true });
 var child = require('child_process');
-var config = require('../config')();
 
 
 gulp.task('jekyll', () => {
@@ -27,22 +26,4 @@ gulp.task('jekyll', () => {
 });
 
 
-var browserSync = require('browser-sync').create();
-
-gulp.task('server', ['css'], () => {
-
-	$.util.log(config.site);
-
-    browserSync.init({
-        files: [config.site.root + '/**'],
-        port: 3131,
-        server: {
-            baseDir: config.site.root
-        }
-    });
-
-    gulp.watch(config.src.scss + '**/*.?(s)css', ['css']);
-});
-
-
-gulp.task('start', ['jekyll', 'server']);
+gulp.task('start', ['jekyll', 'server', 'watch']);
