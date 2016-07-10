@@ -1,0 +1,14 @@
+{
+    "maxerr": 50, // {int} Maximum error before stopping
+    "esversion": 6, // {int} Specify the ECMAScript version to which the code must adhere.	
+    "strict": true, // true: Requires all functions run in ES5 Strict Mode
+    "undef": true, // true: Require all non-global variables to be declared (prevents global leaks)
+    "unused": true, // Unused variables:
+    //   true     : all variables, last function parameter
+    //   "vars"   : all variables only
+    // "strict" : all variables, all function parameters
+    "node": true, // Node.js
+    "globalstrict": false, // true: Allow global "use strict" (also enables 'strict')
+    // Custom Globals
+    "globals": {} // additional predefined global variables
+}
