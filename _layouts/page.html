@@ -4,6 +4,7 @@ layout: base
 
 <article id="post__content">
   <h1 id="post__title" data-identifier="{{ page.date | date: "%Y%m%d" }}">{{ page.title }}</h1>
-  {{ content }}
+  <!-- {{ content }} -->
+  {{ content | replace: '<li>[ ]', '<li class = "box">' | replace: '<li>[x]', '<li class = "box_done">'  }}
 </article> <!-- end #post__content -->
 
