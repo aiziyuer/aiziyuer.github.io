@@ -2,9 +2,17 @@
 layout: base
 ---
 
+<!-- 本页面是刷新页面而展示的 -->
+
 <article id="post__content">
     <h1 id="post__title" data-identifier="{{ page.date | date: " %Y%m%d" }}">{{ page.title }}</h1>
-    <!-- {{ content }} -->
-    {{ content | replace: '<li>[ ]', '<li class = "box">' | replace: '<li>[x]', '<li class = "box_done">'  }}
+
+  <!-- 以下是一些特殊的处理, 可以让博客支持tasklist这种特性, 即碰到<li>[]这种类型的时候直接替换成带checkbox的样式 -->
+  {{ 
+  content
+  | replace: '<li>[ ]', '<li class="task-list-item"><input type="checkbox" disabled="" class="task-list-item-checkbox">'
+  | replace: '<li>[x]', '<li class="task-list-item"><input type="checkbox" disabled="" checked="" class="task-list-item-checkbox">' 
+   }}
+   
 </article> <!-- end #post__content -->
 
