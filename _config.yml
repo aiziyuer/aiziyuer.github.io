@@ -17,6 +17,7 @@ exclude:
   - README
   - "*.BAK"
   - bower_components
+  - node_modules
 
 # 作者信息
 author: 
