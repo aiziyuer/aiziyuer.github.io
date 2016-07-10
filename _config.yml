@@ -18,6 +18,7 @@ exclude:
   - "*.BAK"
   - bower_components
   - node_modules
+  - gulpfile.js
 
 # 作者信息
 author: 
