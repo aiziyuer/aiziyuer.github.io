@@ -27,17 +27,6 @@ gulp.task('jekyll:server', () => {
 });
 
 
-gulp.task('css', () => {
-
-    gulp.src(config.src.scss + '/**/*.?(s)css')
-        .pipe($.print())
-        .pipe($.sass())
-        .pipe($.concat('style.css'))
-        .pipe($.print())
-        .pipe(gulp.dest(config.src.css));
-});
-
-
 var browserSync = require('browser-sync').create();
 
 gulp.task('server', () => {
