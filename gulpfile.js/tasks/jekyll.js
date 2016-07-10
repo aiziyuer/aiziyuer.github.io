@@ -29,11 +29,12 @@ gulp.task('jekyll:server', () => {
 
 gulp.task('css', () => {
 
-    var cssFilter = $.filter(config.src.sass + '/**/*.?(s)css');
-    gulp.src(cssFilter)
+    gulp.src(config.src.scss + '/**/*.?(s)css')
+        .pipe($.print())
         .pipe($.sass())
         .pipe($.concat('style.css'))
-        .pipe(gulp.dest('assets'));
+        .pipe($.print())
+        .pipe(gulp.dest(config.src.css));
 });
 
 
