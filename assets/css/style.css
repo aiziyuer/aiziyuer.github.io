@@ -1,10 +1,8 @@
-/*!--------------------------------*\
-   3-Jekyll Theme
+/*!--------------------------------*   3-Jekyll Theme
    @author Peiwen Lu (P233)
    https://github.com/P233/3-Jekyll
 \*---------------------------------*/
-/*---------------------------------*\
-   Fonts
+/*---------------------------------*   Fonts
 \*---------------------------------*/
 @font-face {
   font-family: "fontello";
@@ -12,6 +10,7 @@
   src: url("../font/fontello.eot#iefix") format("embedded-opentype"), url("../font/fontello.woff") format("woff"), url("../font/fontello.ttf") format("truetype"), url("../font/fontello.svg#fontello") format("svg");
   font-weight: normal;
   font-style: normal; }
+
 .fontello, .post__toc-li:before {
   font-family: "fontello";
   speak: none;
@@ -20,8 +19,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
-/*---------------------------------*\
-   Base
+/*---------------------------------*   Base
 \*---------------------------------*/
 * {
   -webkit-box-sizing: border-box;
@@ -46,8 +44,7 @@ a {
   -o-transition: color .35s;
   transition: color .35s; }
 
-/*---------------------------------*\
-   Sidebar => Tags & Posts List
+/*---------------------------------*   Sidebar => Tags & Posts List
 \*---------------------------------*/
 #sidebar {
   width: 585px;
@@ -80,8 +77,7 @@ a {
     #sidebar {
       width: 100%; } }
 
-/*---------------------------------*\
-   Tags
+/*---------------------------------*   Tags
 \*---------------------------------*/
 #tags {
   width: 165px;
@@ -205,8 +201,7 @@ a {
     color: #F7F7F7;
     background: #40464f; }
 
-/*---------------------------------*\
-   Posts List
+/*---------------------------------*   Posts List
 \*---------------------------------*/
 #posts-list {
   width: 420px;
@@ -344,8 +339,7 @@ a {
   font-size: 14px;
   float: right; }
 
-/*---------------------------------*\
-   Post
+/*---------------------------------*   Post
 \*---------------------------------*/
 #post {
   height: 100%;
@@ -401,15 +395,19 @@ h1, h2, h3, h4, h5, h6 {
 #post__content > p, #post__content > ul, #post__content > ol {
   margin-top: 1.5em;
   margin-bottom: 1.5em; }
+
 #post__content > ol > li {
   margin: .5em 0; }
+
 #post__content li > p {
   margin: 0; }
+
 #post__content a {
   color: #7D8B99;
   word-break: break-all; }
   #post__content a:hover {
     text-decoration: underline; }
+
 #post__content img {
   max-width: 100%;
   max-height: 500px;
@@ -599,12 +597,12 @@ iframe {
     #copyright > a:hover {
       text-decoration: underline; }
 
-/*---------------------------------*\
-   Fullscreen Style
+/*---------------------------------*   Fullscreen Style
 \*---------------------------------*/
 @media screen and (min-device-width: 1281px) {
   #sidebar.fullscreen {
     margin-left: -585px; } }
+
 @media screen and (max-device-width: 1280px) {
   #sidebar.fullscreen {
     -webkit-transform: translateX(-585px);
@@ -686,8 +684,7 @@ iframe {
     #icon-arrow {
       padding: 15px; } }
 
-/*---------------------------------*\
-   Vendors
+/*---------------------------------*   Vendors
 \*---------------------------------*/
 @-webkit-keyframes fadeIn {
   from {
@@ -696,6 +693,7 @@ iframe {
   to {
     -webkit-transform: translateY(0);
     opacity: 1; } }
+
 @-moz-keyframes fadeIn {
   from {
     -moz-transform: translateY(30px);
@@ -703,6 +701,7 @@ iframe {
   to {
     -moz-transform: translateY(0);
     opacity: 1; } }
+
 @-ms-keyframes fadeIn {
   from {
     -ms-transform: translateY(30px);
@@ -710,6 +709,7 @@ iframe {
   to {
     -ms-transform: translateY(0);
     opacity: 1; } }
+
 @-o-keyframes fadeIn {
   from {
     -o-transform: translateY(30px);
@@ -717,6 +717,7 @@ iframe {
   to {
     -o-transform: translateY(0);
     opacity: 1; } }
+
 @keyframes fadeIn {
   from {
     transform: translateY(30px);
@@ -724,6 +725,7 @@ iframe {
   to {
     transform: translateY(0);
     opacity: 1; } }
+
 @-webkit-keyframes fadeOut {
   from {
     -webkit-transform: translateY(0);
@@ -731,6 +733,7 @@ iframe {
   to {
     -webkit-transform: translateY(-30px);
     opacity: 0; } }
+
 @-moz-keyframes fadeOut {
   from {
     -moz-transform: translateY(0);
@@ -738,6 +741,7 @@ iframe {
   to {
     -moz-transform: translateY(-30px);
     opacity: 0; } }
+
 @-ms-keyframes fadeOut {
   from {
     -ms-transform: translateY(0);
@@ -745,6 +749,7 @@ iframe {
   to {
     -ms-transform: translateY(-30px);
     opacity: 0; } }
+
 @-o-keyframes fadeOut {
   from {
     -o-transform: translateY(0);
@@ -752,6 +757,7 @@ iframe {
   to {
     -o-transform: translateY(-30px);
     opacity: 0; } }
+
 @keyframes fadeOut {
   from {
     transform: translateY(0);
@@ -759,6 +765,7 @@ iframe {
   to {
     transform: translateY(-30px);
     opacity: 0; } }
+
 @-webkit-keyframes flash {
   from, to {
     color: inherit;
@@ -766,6 +773,7 @@ iframe {
   35% {
     color: #F8645A;
     -webkit-transform: translateX(-0.75em); } }
+
 @-moz-keyframes flash {
   from, to {
     color: inherit;
@@ -773,6 +781,7 @@ iframe {
   35% {
     color: #F8645A;
     -moz-transform: translateX(-0.75em); } }
+
 @-ms-keyframes flash {
   from, to {
     color: inherit;
@@ -780,6 +789,7 @@ iframe {
   35% {
     color: #F8645A;
     -ms-transform: translateX(-0.75em); } }
+
 @-o-keyframes flash {
   from, to {
     color: inherit;
@@ -787,6 +797,7 @@ iframe {
   35% {
     color: #F8645A;
     -o-transform: translateX(-0.75em); } }
+
 @keyframes flash {
   from, to {
     color: inherit;
@@ -794,31 +805,37 @@ iframe {
   35% {
     color: #F8645A;
     transform: translateX(-0.75em); } }
+
 @-webkit-keyframes spin {
   from {
     -webkit-transform: rotate(0deg); }
   to {
     -webkit-transform: rotate(359deg); } }
+
 @-moz-keyframes spin {
   from {
     -moz-transform: rotate(0deg); }
   to {
     -moz-transform: rotate(359deg); } }
+
 @-o-keyframes spin {
   from {
     -o-transform: rotate(0deg); }
   to {
     -o-transform: rotate(359deg); } }
+
 @-ms-keyframes spin {
   from {
     -ms-transform: rotate(0deg); }
   to {
     -ms-transform: rotate(359deg); } }
+
 @keyframes spin {
   from {
     transform: rotate(0deg); }
   to {
     transform: rotate(359deg); } }
+
 /* Make clicks pass-through */
 /* Modified by Peiwen Lu @ 06 Nov 2013 */
 #nprogress {
@@ -1202,5 +1219,3 @@ pre > code {
   color: #2AA198; }
 
 /* Literal.Number.Integer.Long */
-
-/*# sourceMappingURL=style.css.map */
