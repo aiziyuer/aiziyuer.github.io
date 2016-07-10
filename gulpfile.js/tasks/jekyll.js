@@ -9,8 +9,8 @@ gulp.task('jekyll', () => {
 
     var jekyll_exe = process.platform === "win32" ? "jekyll.bat" : "jekyll";
     var jekyll = child.spawn(jekyll_exe, ['build',
-        '--watch',
-        '--incremental'
+        '--incremental', // 当文章非常多的时候开启, 文章少的时候貌似不开效果更好
+        '--watch'
     ]);
 
     var jekyllLogger = (buffer) => {
@@ -26,4 +26,4 @@ gulp.task('jekyll', () => {
 });
 
 
-gulp.task('start', ['jekyll', 'server', 'watch']);
+gulp.task('start', ['jekyll','server', 'watch']);
