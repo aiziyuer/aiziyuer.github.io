@@ -32,3 +32,5 @@ gulp-concat: 用于拼接文件
 
 ### gulp脚本重构
 
+- [x] 第一次重构, 将`config.json`改写成`config.js`, 是的配置的编写更加自由
+- [x] 第二次重构, 将gulp的task根据功能分成不同的文件, 便于管理和区分
