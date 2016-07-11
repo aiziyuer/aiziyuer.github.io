@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 如何让Kafka以Windows的Service的方式运行
+title: win下让Kafka以Service方式运行
 categories: [学习]
-tags: []
+tags: [bat,windows]
 published: True
 
 ---
