@@ -19,7 +19,7 @@ published: true
 - [x] `gulp`的常用任务实现: `watch`, `jekyll`, `sass`
 - [x] 博客字体美化修改, 使得在`mac`, `android`, `win`下的字体都比较好看
 - [ ] 将`RoadMap`做成`Timeline`
-- [ ] 订阅功能: `feed`、`atom`我还需要考虑一下;
+- [x] 订阅功能: `feed`、`atom`我还需要考虑一下;
 - [ ] 代码高亮, 需要一个黑色主题的, 尽可能丰富, 尽可能支持多中语言
 - [ ] 实现博客的评论功能
 - [ ] 访问统计, 国内外分流
