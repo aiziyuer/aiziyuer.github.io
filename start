@@ -1,3 +1,66 @@
-#!/bin/sh
-ps -ef | grep jekyll | grep -v grep | awk '{print $2}' | xargs kill -9
-jekyll server >output.log 2>&1 &
+#!/usr/bin/env bash
+
+usage()
+{
+	printf "
+Usage
+
+  start [options]
+
+Options
+
+[-k|--kill] 杀死jekyll进程
+
+[-j|--jekyll] 启动jekyll进程
+
+[-h|--help] 显示帮助
+
+[-g|--gulp] gulp的方式运行
+	
+"
+
+}
+
+kill_jekyll_service(){
+  ps -ef | grep jekyll | grep -v grep | awk '{print $2}' | xargs kill -9
+}
+
+start_jekyll_service(){
+  jekyll server >output.log 2>&1 &
+}
+
+gulp_start(){
+  gulp start
+}
+
+while true; do
+  case "$1" in
+
+    (-k|--kill)
+	    kill_jekyll_service
+      exit 0
+	    ;;
+
+    (-j|--jekyll)
+      kill_jekyll_service
+      start_jekyll_service
+      exit 0
+      ;;
+
+    (-h|--help)
+      usage
+      exit 0
+      ;;
+
+    (-g|--gulp)
+      gulp_start
+      exit 0
+      ;;
+
+    (*)
+      usage
+      exit 1
+      ;;
+
+  esac
+done

@@ -41,15 +41,20 @@ $('.pl__all').on('click', function() {
 $('#search-input').keyup(function() {
 
     $(this).addClass('active').siblings().removeClass('active');
+
+    // 先将隐藏所有的文章
     $('.pl__all').hide();
 
+    // 获取输入框的内容(转小写是为了不区分大小写)
     var search_val = $('#search-input').val().toLowerCase();
 
+    // 这里是获取当前用户选择了分类
     $('#pl__container > .' + $('#tags__ul > .active').attr('id') + ' > .pl__title ').each(function(i) {
 
         var e = $(this);
+        // 忽略大小写后进行比较
         if (e.text().toLowerCase().contains(search_val)) {
-            
+            // 设置延迟10ms并且渐变显示出来
             e.parent().delay(10).fadeIn(15);
         }
 
