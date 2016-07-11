@@ -26,7 +26,7 @@ kill_jekyll_service(){
 }
 
 start_jekyll_service(){
-  jekyll server >output.log 2>&1 &
+  jekyll server --port 3131 >output.log 2>&1 &
 }
 
 gulp_start(){
@@ -53,6 +53,7 @@ while true; do
       ;;
 
     (-g|--gulp)
+      kill_jekyll_service
       gulp_start
       exit 0
       ;;

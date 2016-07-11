@@ -2,14 +2,11 @@ permalink: /:year/:month/:day/:title.html
 markdown: kramdown
 highlighter: rouge
 
+gems:
+  - jekyll-feed
+
 kramdown:
   syntax_highlighter: rouge
-
-# markdown: redcarpet2
-# redcarpet:
-#   extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript"]
-
-kramdown:
   input: GFM
 
 exclude:
@@ -19,11 +16,16 @@ exclude:
   - bower_components
   - node_modules
   - gulpfile.js
-
+  - "*.sublime-project"
+  - "*.sublime-workspace"
+  - bower.json
+  - "*.log"
+  - package.json
+  
 # 作者信息
 author: 
-  name: 李聪
-  email: spritemoss@gmail.com
+  name: moss.licong
+  email: ziyu0123456789@gmail.com
   link: http://
   weibo: http://weibo.com/aiziyuer
   github: http://github.com/aiziyuer
