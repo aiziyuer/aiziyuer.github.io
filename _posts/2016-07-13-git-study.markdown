@@ -1,0 +1,63 @@
+---
+title: 如何不换PC使用多个github账号
+layout: post
+categories: [生活]
+tags: [git, ssh]
+published: True
+---
+
+
+最近博客上的几个类库的cdn服务都在国外,速度很慢,想来想去,最好自己弄个cdn的仓库做服务,所以就需要有两个
+`github`的账号. 本来用起来没有问题, 但是在`git push`的时候发现没法`push`,
+`ssh key`在github上不能重复. 么有办法了, 不可能
+
+
+## 原理
+
+相当于ssh的时候, 让ssh根据hosts的url来选择不同的密钥文件(当然你也可以设置不同仓库使用不同邮箱提交),
+懒人配置如下:
+
+``` bash
+cd ~/.ssh/
+touch config
+```
+
+```bash
+# 默认就是不配置, 走默认的密钥文件
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa
+
+# 第二个选择, 如果你的仓库url是形如git@two.github.com:hello/hello.git就会默认走这个配置
+Host two.github.com  # 前缀名可以任意设置
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa1
+
+```
+
+## 测试一下
+
+每个密钥文件都是`ssh-keygen -t rsa -b 4096 -C "ziyu0123456789@gmail.com"`这样生成的, 
+而生成的公钥又会配置到`github`上面, 所以我们如果使用了不同的密钥文件, github应该可以通过密钥的不同
+区分出我们来.以下是我的测试及回显:
+
+``` bash
+ssh -T git@github.com
+#Hi aiziyuer! You've successfully authenticated, but GitHub does not provide shell access.
+# 上面可以看出, github已经认出我是aiziyuer, 说明我使用的是默认密钥
+
+ssh -T git@two.github.com
+#Hi aiziyuer-cdn! You've successfully authenticated, but GitHub does not provide shell access.
+# 上面识别出我是aiziyuer-cdn, 说明我使用的第二密钥
+```
+
+## 设置仓库使用第二密钥
+
+因为我的默认的仓库地址是`git@github.com:aiziyuer-cdn/aiziyuer-cdn.github.io.git`, 所以修改如下:
+
+``` bash
+git remote rm origin
+git remote add origin git@two.github.com::aiziyuer-cdn/aiziyuer-cdn.github.io.git
+```
