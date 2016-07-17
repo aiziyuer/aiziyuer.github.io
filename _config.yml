@@ -33,9 +33,10 @@ author:
 # 站点信息
 title: Moss's Blog
 description: Moss's Blog
-url: http://aiziyuer.github.io/Blog/
+url: https://blog.aiziyuer.com/
 rss_url: feed.xml
 
+# 评论信息
 disqus:
   shortname: aiziyuer
 
