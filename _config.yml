@@ -34,7 +34,10 @@ author:
 title: Moss's Blog
 description: Moss's Blog
 url: http://aiziyuer.github.io/Blog/
-#rss_url: /pages/atom.xml
+rss_url: feed.xml
+
+disqus:
+  shortname: aiziyuer
 
 # avatar头像及Favicon
 avatar:  /assets/img/butterflies_800x800.jpg
