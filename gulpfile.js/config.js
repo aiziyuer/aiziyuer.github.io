@@ -34,6 +34,6 @@ module.exports = () => {
     return {
         root: root_path, //项目根目录
         site: site, // 站点目录
-        src: assetSrc, // asset源码目录
+        src: assetSrc // asset源码目录
     };
 };

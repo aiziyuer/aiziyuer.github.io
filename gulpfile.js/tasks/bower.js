@@ -7,9 +7,9 @@ var mainBowerFiles = require('main-bower-files');
 
 gulp.task('bower:js', function() {
 
-    const fillterJS = $.filter('**/*.js', { restore: true });
+    const filterJS = $.filter('**/*.js', { restore: true });
     gulp.src(mainBowerFiles())
-        .pipe(fillterJS)
+        .pipe(filterJS)
         .pipe(gulp.dest('assets/js'));
 
 });
