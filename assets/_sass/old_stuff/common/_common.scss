@@ -1,0 +1,108 @@
+//------- {{ post__share }} -------//
+
+#post__share {
+  height: 21px;
+  margin-top: 2.5em;
+  margin-bottom: 19px;
+  border-bottom: 2px solid $share-bd;
+  position: relative;
+  > .fontello {
+    display: block;
+    width: 40px;
+    height: 40px;
+    color: $share-fg;
+    font-size: 20px;
+    text-align: center;
+    line-height: 36px;
+    background: $post-bg;
+    border: 2px solid $share-bd;
+    box-shadow: 0 0 7px 7px transparent;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    -webkit-transition: color .35s, box-shadow .35s;
+    -moz-transition: color .35s, box-shadow .35s;
+    -ms-transition: color .35s, box-shadow .35s;
+    -o-transition: color .35s, box-shadow .35s;
+    transition: color .35s, box-shadow .35s;
+    &:hover {
+      box-shadow: 0 0 0 2px transparentize($grey, .85);
+    }
+  }
+}
+#icon-twitter {
+  margin-left: -90px;
+  &:hover {
+    color: #4099ff;
+  }
+  &:before {
+    content: "\e805";
+  }
+}
+#icon-cc {
+  margin-left: -20px;
+  &:hover {
+    color: #f8ce5e;
+  }
+  &:before {
+    content: "\e803";
+  }
+}
+#icon-weibo {
+  margin-left: 50px;
+  &:hover {
+    color: #d40220;
+  }
+  &:before {
+    content: "\e804";
+  }
+}
+
+#icon-arrow {
+  padding: 10px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: -webkit-transform .5s $time-function;
+  -moz-transition: -moz-transform .5s $time-function;
+  -ms-transition: -ms-transform .5s $time-function;
+  -o-transition: -o-transform .5s $time-function;
+  transition: transform .5s $time-function;
+  display: block;
+  &:before {
+    content: "\e801";
+    margin-left: -1px;
+    font-size: 20px;
+    line-height: 1;
+  }
+  &.fullscreen {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  @media screen and (max-width: $sidebar-width) {
+    padding: 15px;
+  }
+}
+
+//------- {{ copyright }} -------//
+
+#copyright {
+  margin: 0;
+  padding-top: 1em;
+  font-size: .9em;
+  text-align: center;
+  border-top: 2px solid $share-bd;
+  > a {
+    color: $green;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+

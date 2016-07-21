@@ -1,0 +1,30 @@
+/*---------------------------------*\
+   Fullscreen Style
+\*---------------------------------*/
+
+#sidebar.fullscreen {
+  @media screen and (min-device-width: 1281px) {
+    margin-left: -$sidebar-width;
+  }
+  @media screen and (max-device-width: 1280px) {
+    -webkit-transform: translateX(-$sidebar-width);
+    -moz-transform: translateX(-$sidebar-width);
+    -ms-transform: translateX(-$sidebar-width);
+    -o-transform: translateX(-$sidebar-width);
+    transform: translateX(-$sidebar-width);
+  }
+}
+
+#pjax.fullscreen {
+  max-width: $fullscreen-width;
+  margin: 0 auto;
+}
+
+%fixed-btn-size {
+  width: 40px;
+  height: 40px;
+}
+%fixed-btn-positon {
+  top: 12px;
+  right: 20px;
+}

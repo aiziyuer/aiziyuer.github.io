@@ -1,0 +1,246 @@
+/*---------------------------------*\
+   Posts List
+\*---------------------------------*/
+
+#posts-list {
+  width: $pl-width;
+  height: 100%;
+  background: transparentize($pl-bg, 0.05);
+  border-right: 1px solid $border;
+  float: left;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  @media screen and (max-width: $sidebar-width) {
+    width: 100%;
+  }
+}
+
+/*---------------------------------*\
+   Post
+\*---------------------------------*/
+
+#post {
+  height: 100%;
+  color: $post-fg;
+  font-size: 18px;
+  line-height: 1.5;
+  background: $post-bg;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  ::selection {
+    color: $selection-fg;
+    background:  $selection-bg;
+    text-shadow: none;
+  }
+  ::-moz-selection {
+    color: $selection-fg;
+    background:  $selection-bg;
+    text-shadow: none;
+  }
+  @media screen and (max-width: $sidebar-width) {
+    font-size: 14px;
+  }
+}
+
+#pjax {
+  padding: 0 5% 30px;
+  &.fadeIn {
+    -webkit-animation: fadeIn .3s;
+    -moz-animation: fadeIn .3s;
+    -ms-animation: fadeIn .3s;
+    -o-animation: fadeIn .3s;
+    animation: fadeIn .3s;
+  }
+  &.fadeOut {
+    -webkit-animation: fadeOut .2s;
+    -moz-animation: fadeOut .2s;
+    -ms-animation: fadeOut .2s;
+    -o-animation: fadeOut .2s;
+    animation: fadeOut .2s;
+  }
+  @media screen and (min-width: 1281px) {
+    max-width: 100%;
+  }
+  @media screen and (max-width: 1280px) {
+    max-width: $fullscreen-width;
+    margin: 0 auto;
+  }
+}
+
+//------- {{ post__content }} -------//
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+}
+
+#post__title {
+  margin: 0;
+  padding-top: 1.1em;
+  font-size: 2em;
+}
+
+#post__content {
+  > p, > ul, > ol {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+  }
+  > ol > li {
+    margin: .5em 0;
+  }
+  li > p {
+    margin: 0;
+  }
+  a {
+    color: $post-link;
+    word-break: break-all;
+    &:hover {
+      // color: $post-hover;
+      text-decoration: underline;
+    }
+  }
+  img {
+    max-width: 100%;
+    max-height: 500px;
+    border: 2px solid $img-bd;
+    border-radius: 5px;
+  }
+}
+
+
+strong {
+  font-weight: 600;
+}
+blockquote {
+  margin: 1.5em 0 1.5em 2em;
+  padding-left: .5em;
+  border-left: 5px solid $blockquote-bd;
+}
+kbd {
+  padding: .2em .3em .1em;
+  font-size: .75em;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  background: white;
+  background: -webkit-linear-gradient(left, #f6f4f4, white, #f6f4f4);
+  background: -moz-linear-gradient(left, #f6f4f4, white, #f6f4f4);
+  background: -ms-linear-gradient(left, #f6f4f4, white, #f6f4f4);
+  background: -o-linear-gradient(left, #f6f4f4, white, #f6f4f4);
+  background: linear-gradient(left, #f6f4f4, white, #f6f4f4);
+  border-color: #fbfaf9 #f0eeed #e1dfdf;
+  border-width: .25em .3em .4em;
+  border-style: solid;
+  border-radius: .25em;
+  vertical-align: .3em;
+}
+iframe {
+  margin-top: 1.5em;
+  @media screen and (max-width: $sidebar-width) {
+    height: 260px;
+  }
+}
+
+
+//------- {{ post__toc }} -------//
+
+#post__toc-trigger {
+  width: 300px;
+  padding-left: 40px;
+  position: fixed;
+  top: $search-height - 1;
+  bottom: 0;
+  right: 0;
+  z-index: 98;
+  -webkit-transform: translateX(260px);
+  -moz-transform: translateX(260px);
+  -ms-transform: translateX(260px);
+  -o-transform: translateX(260px);
+  transform: translateX(260px);
+  -webkit-transition: -webkit-transform .35s ease-in-out .1s;
+  -moz-transition: -moz-transform .35s ease-in-out .1s;
+  -ms-transition: -ms-transform .35s ease-in-out .1s;
+  -o-transition: -o-transform .35s ease-in-out .1s;
+  transition: transform .35s ease-in-out .1s;
+  &:hover {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+  }
+  @media screen and (max-device-width: 1280px) {
+    display: none;
+  }
+}
+#post__toc {
+  width: 260px;
+  height: 100%;
+  padding-top: 30px;
+  background: transparentize($pl-bg, 0.1);
+  border-top: 1px solid $border;
+  border-left: 1px solid $border;
+  border-radius: 10px 0 0 0;
+  display: block;
+  overflow-y: scroll;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+#post__toc-title {
+  padding: 0 0 5px 11px;
+  color: $post-fg;
+  font-size: 1em;
+  display: block;
+}
+
+#post__toc-ul {
+  margin: 0;
+  padding: 0 10px 20px 15px;
+  line-height: 1.6;
+}
+.post__toc-li {
+  color: $post-link;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
+  &:before {
+    content: "\e806";
+    @extend .fontello;
+    margin-right: 5px;
+  }
+  > a:hover {
+    color: $post-hover;
+  }
+}
+.post__toc-h1 {
+  font-size: 1em;
+  list-style: none;
+}
+.post__toc-h2 {
+  font-size: .95em;
+}
+.post__toc-h3 {
+  margin-left: 12px;
+  font-size: .9em;
+  & + .post__toc-h2 {
+    padding-top: .25em;
+  }
+}
+
+// smooth scolling flash effects
+.flash {
+  -webkit-animation: flash .6s;
+  -moz-animation: flash .6s;
+  -ms-animation: flash .6s;
+  -o-animation: flash .6s;
+  animation: flash .6s;
+}
+
+

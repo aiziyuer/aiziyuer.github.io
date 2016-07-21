@@ -1,0 +1,35 @@
+/*---------------------------------*\
+   Sidebar => Tags & Posts List
+\*---------------------------------*/
+
+#sidebar {
+  width: $sidebar-width;
+  height: 100%;
+  float: left;
+  @media screen and (min-device-width: 1281px) {
+    -webkit-transition: margin-left .5s $time-function;
+    -moz-transition: margin-left .5s $time-function;
+    -ms-transition: margin-left .5s $time-function;
+    -o-transition: margin-left .5s $time-function;
+    transition: margin-left .5s $time-function;
+  }
+  @media screen and (max-width: 1280px) {
+    position: absolute;
+    z-index: 97;
+  }
+  @media screen and (max-device-width: 1280px) {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+    -webkit-transition: -webkit-transform .5s $time-function;
+    -moz-transition: -moz-transform .5s $time-function;
+    -ms-transition: -ms-transform .5s $time-function;
+    -o-transition: -o-transform .5s $time-function;
+    transition: transform .5s $time-function;
+  }
+  @media screen and (max-width: $sidebar-width) {
+    width: 100%;
+  }
+}

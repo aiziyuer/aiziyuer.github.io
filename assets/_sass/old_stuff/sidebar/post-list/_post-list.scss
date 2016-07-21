@@ -1,0 +1,79 @@
+//------- {{ pl__container }} -------//
+
+#pl__container {
+  padding-top: 7px;
+  padding-bottom: 10px;
+  color: $pl-link-fg;
+  text-shadow: -1px 1px 0 transparentize($grey, 0.9);
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  top: $search-height;
+  bottom: 0;
+  left: 0;
+  right: -1px;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    width: 1px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    background: darken($border, 10%);
+  }
+  @media screen and (max-width: $sidebar-width) {
+    font-size: 15px;
+    top: 50px;
+  }
+}
+
+//------- {{ pl__all }} -------//
+
+.pl__all {
+  margin: 4px 12px;
+  padding: 4px 8px 3px;
+  border-radius: 4px;
+  display: block;
+  &:hover {
+    background: $pl-hover-bg;
+  }
+  &:visited > .pl__circle {
+    background: $pl-bg;
+  }
+  &:visited:hover > .pl__circle {
+    background: $pl-hover-bg;
+  }
+  &.active {
+    color: $pl-active-fg;
+    background: $pl-hover-bg;
+    box-shadow: -1px 1px transparentize($border, 0.1);
+    > .pl__circle {
+      background: $pl-hover-bg;
+      border-color: $pl-active-fg;
+    }
+  }
+  @media screen and (max-width: $sidebar-width) {
+    margin: 4px 0;
+    border-radius: 0;
+  }
+}
+.pl__circle {
+  width: .75em;
+  height: .75em;
+  margin-right: 5px;
+  background: lighten($pl-link-fg, 20%);
+  border: 2px solid lighten($pl-link-fg, 20%);
+  border-radius: 50%;
+  display: inline-block;
+  -webkit-transition: border-color .35s;
+  -moz-transition: border-color .35s;
+  -ms-transition: border-color .35s;
+  -o-transition: border-color .35s;
+  transition: border-color .35s;
+}
+.pl__date {
+  color: lighten($pl-link-fg, 20%);
+  font-size: 14px;
+  float: right;
+}

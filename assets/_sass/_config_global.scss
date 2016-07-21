@@ -1,0 +1,71 @@
+//------- {{ colours }} -------//
+
+$red:             #F8645A;
+$green:           #2EB695;
+$grey:            #7D8B99;
+$black:           #020202;
+
+$border:          #e5e8ec;
+
+$tags-fg:         #A6A6A7;
+$tags-hover-fg:   #F7F7F7;
+$tags-active-fg:  $black;
+$tags-bg:         #474D57;
+
+$pl-bg:           #fafafa; // pl: posts-list
+
+$pl-input-fg:     $green;
+$pl-input-ph:     #cbcbcb; // input placeholder foreground colour
+$pl-input-bg:     darken($pl-bg, 1%);
+
+$pl-link-fg:      darken($grey, 10%);
+$pl-hover-bg:     transparentize(darken($pl-bg, 3%), .5);
+$pl-active-fg:    darken($green, 5%);
+
+$post-fg:         #2C353D;
+$post-bg:         #fff;
+$post-link:       $grey;
+$post-hover:      $green;
+
+$img-bd:          $border;
+$blockquote-bd:   $border;
+
+$inline-code-bd:  $border;
+$inline-code-fg:  #000;
+$inline-code-bg:  #fafafa;
+
+$selection-fg:    #fff;
+$selection-bg:    lighten($green, 5%);
+
+$flash:           $red;
+
+$share-fg:        $grey;
+$share-bd:        transparentize($border, .5);
+
+$fs-fg:           $grey; // fs: fullscreen
+$fs-hover:        $green;
+$fs-bg:           transparentize($border, .5);
+
+//------- {{ dimensions }} -------//
+
+$tags-width:      165px;
+$pl-width:        420px;
+$sidebar-width:   $tags-width + $pl-width;
+
+$search-height:   65px;
+
+$fullscreen-width:800px;
+
+//------- {{ nprogress-colour }} -------//
+
+$nprogress:       $red;
+
+//------- {{ pygments-colours }} -------//
+
+$pygments-bd:        $border;
+$pygments-odd:       rgba(69, 142, 209, 0.04);
+$pygments-even:      #fdfdfd;
+
+//------- {{ time-function }} -------//
+
+$time-function:   cubic-bezier(0.770, 0.000, 0.175, 1.000);
