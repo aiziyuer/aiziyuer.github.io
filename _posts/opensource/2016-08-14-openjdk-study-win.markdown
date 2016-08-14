@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Win下OpenJDK学习
-categories: [生活]
+categories: [开源]
 tags: [语言]
 published: True
 ---
