@@ -1,0 +1,38 @@
+---
+layout: post
+title: 2016阅读书单
+category: [读书]
+keywords: [阅读,书单,2016]
+---
+
+
+## 杨澜访谈录
+
+- status: 浅读了一遍
+- author: 杨澜(央视主持人)
+- publisher: 新星出版社
+- language: 中文
+- link: https://book.douban.com/subject/2050244/
+- cover: https://img3.doubanio.com/mpic/s2367635.jpg
+- description: 2016年, 这本书让我养成了每天早上半小时投入看书的习惯, 每一章基本上是一个风云人物的访谈纪要, 通过文字向我们展示每个风云人物的生活和做人态度, 我觉得对我的启发挺大的
+
+## HotSpot实战
+
+- status: 当前值看到一半, 平时还在同步进行一些源码的调试
+- author: 陈涛
+- publisher: 人民邮电出版社
+- language: 中文
+- link: https://book.douban.com/subject/25847620/
+- cover: https://img1.doubanio.com/mpic/s27458238.jpg
+- description: 这本书我买的是实体书, 我同时也买了电子版的<<深入理解Java虚拟机>>, 就我个人感觉来说, 前者对我来说看起来更加轻松一下(后者是我先开始阅读的), 所以现在作为我每天早上的读物, 另外私下里我也在同步进行一些摸索, 并且在我的博客中进行一些记录
+
+
+## 深入理解Java虚拟机（第2版）
+
+- status: 我买的电子版, 应该只能算开了个扉页, 计划是配合hotspot实战一起看
+- author: 周志明
+- publisher: 机械工业出版社
+- language: 中文
+- link: https://book.douban.com/subject/24722612/
+- cover: https://img3.doubanio.com/mpic/s27458236.jpg
+- description: 我买的是电子版, 感觉很理论的一本书, 现在还在研读hotspot实战, 可能我的基础还是太普通, 等看完hotspot再看这本吧
