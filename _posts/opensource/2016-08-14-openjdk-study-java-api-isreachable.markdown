@@ -241,7 +241,7 @@ ping: icmp open socket: Operation not permitted
 
 ### 那有没有不开启`suid`的方式来是`ping`工作的方法吗?
 
-有, 在 root 用户下，用 setcap 命令给 /bin/ping 这个可执行文件加上 “cap_net_admin,cap_net_raw+ep” 权限，普通用户即可使用`ping`;
+有, 在`root`用户下，用`setcap`命令给`/bin/ping`这个可执行文件加上 “cap_net_admin,cap_net_raw+ep” 权限，普通用户即可使用`ping`;
 
 ```bash
 ➜  ~  sudo setcap 'cap_net_admin,cap_net_raw+ep' /bin/ping
