@@ -1,5 +1,5 @@
 ---
-title: 支持Xposed框架的模拟器
+title: 模拟器Android6安装Xposed框架
 layout: post
 categories: [移动]
 tags: [android,生活,效率]
@@ -43,8 +43,39 @@ published: True
 这个方法其实是4.0就有的方法, 但是现在看起来在6.0上依然生效. 依次拖入模拟器就可以安装,
 全部安装后重启模拟器.
 
-![image](/image/genmotion-tips/QQ20160826-0.png)
+![image](/image/genmotion-tips/QQ20160827-0.png)
 
 
 ### 必备软件包
 
+Xposed插件
+
+- 绿色守护: 不用解释
+- 阻止运行: 让android想IOS一样工作
+- Fake My GPS: 模拟GPS的
+- GravityBox: 小工具合集
+- Inspeckage: app调试很有用
+- RootCloak: 伪装Root
+
+普通App
+
+- SuperSU 这个装起来还有些复杂
+
+![image](/image/genmotion-tips/QQ20160827-1.png)
+
+## 必要的命令
+
+### 修改文件系统权限
+
+```bash
+## 可写
+adb shell mount -o rw,remount /
+adb shell mount -o rw,remount /system
+
+## 修改hosts
+adb push /etc/hosts /etc/hosts
+
+## 只读
+adb shell mount -o ro,remount /
+adb shell mount -o ro,remount /system
+```
