@@ -1,5 +1,5 @@
 ---
-title: 支持xposed框架的模拟器
+title: 支持Xposed框架的模拟器
 layout: post
 categories: [移动]
 tags: [android,生活,效率]
@@ -37,7 +37,7 @@ published: True
 - [ARM Translation 1.1](https://docs.google.com/uc?authuser=0&id=0B2wvlvvQ2cX3OUVKcnpjRmxyOGs&export=download)
 - [Google Apps](https://docs.google.com/uc?authuser=0&id=0B2wvlvvQ2cX3a1dhcXV5SDd4TXc&export=download)
 - [SuperSU v2.46](https://docs.google.com/uc?authuser=0&id=0B2wvlvvQ2cX3WUtoTW1lNW5heW8&export=download)
-- [xposed-v86-sdk23-x86](http://dl-xda.xposed.info/framework/sdk23/x86/xposed-v86-sdk23-x86.zip)
+- [Xposed-v86-sdk23-x86](http://dl-xda.xposed.info/framework/sdk23/x86/xposed-v86-sdk23-x86.zip)
 - [Xposed Installer 3.0 alpha4](https://docs.google.com/uc?authuser=0&id=0B2wvlvvQ2cX3ak9WWXY0cGdCSVk&export=download)
 
 这个方法其实是4.0就有的方法, 但是现在看起来在6.0上依然生效. 依次拖入模拟器就可以安装,
