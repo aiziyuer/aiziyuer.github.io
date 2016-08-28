@@ -25,3 +25,11 @@ published: True
 然后插件会扫描你选中的layout对应的xml文件, 找到里面的id, 然后会在对话框中让你选择自动生成哪些代码:
 
 ![image](/image/android-develop-plugins/QQ20160828-0.png)
+
+
+To Be Continus ... 
+
+## 参考文献
+---
+
+- [Butter Knife项目主页](https://jakewharton.github.io/butterknife/)
