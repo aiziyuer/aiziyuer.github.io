@@ -72,6 +72,23 @@ android {
 ![image](/image/android-develop-goods/QQ20160904-0.png)
 
 
+## Material Design Icon Generator
+
+可以直接搜索使用google的官方logo, 妈妈再也不用填担心我找不到图片了.
+
+![image](/image/android-develop-goods/capture.gif)
+
+
+## android-postfix-plugin
+
+这个的作用文字不好叙述, 直接贴图:
+
+![image](/image/android-develop-goods/8d45e898-64a6-11e5-8c32-8f38b0105177.gif)
+
+![image](/image/android-develop-goods/3c131392-f4ad-11e4-98a0-e56dbfab8c69.gif)
+
+![image](/image/android-develop-goods/c8f2ceb6-f24a-11e4-8711-c5f2a5d205d4.gif)
+
 To Be Continus ... 
 
 ## 参考文献
@@ -79,3 +96,11 @@ To Be Continus ...
 
 - [Butter Knife项目主页](https://jakewharton.github.io/butterknife/)
 - [Retrolambda项目主页](https://github.com/evant/gradle-retrolambda)
+- [Android Material Design Icon Generator项目主页](https://github.com/konifar/android-material-design-icon-generator-plugin)
+- [android-postfix-plugin](https://github.com/takahirom/android-postfix-plugin)
+
+
+
+
+
+
