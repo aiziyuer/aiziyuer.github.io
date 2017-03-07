@@ -21,9 +21,9 @@ exclude:
   - bower.json
   - "*.log"
   - package.json
-  
+
 # 作者信息
-author: 
+author:
   name: moss.licong
   email: ziyu0123456789@gmail.com
   link: http://
@@ -43,3 +43,16 @@ disqus:
 # avatar头像及Favicon
 avatar:  /assets/img/butterflies_800x800.jpg
 favicon: /assets/img/butterflies_favor.ico
+
+
+atom:
+  buildCommand:
+    - jekyll
+    - build
+    - --option
+    - --this
+  buildEnv:
+    JEKYLL_ENV: development
+  postDirs:
+    - _post
+  defaultPostDir: _drafts
