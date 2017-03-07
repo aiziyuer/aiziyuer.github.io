@@ -47,3 +47,13 @@ Warning		|	`BBB529`
 最后的配置效果如下:
 
 ![image](/image/android-develop-base-action/QQ20160829-0.png)
+
+## AndroidStudio使用中的一些配置
+
+因为以前我的主力开发`IDE`还是`Eclipse`, 一下子切换到`AndroidStudio`还有些不适应,有些用得特别顺的功能还是想要在AndroidStudio上找到影子.
+
+### 设置格式化的时候自动换行
+
+不知道为什么AndroidStudio的设计会不考虑这点, 修改点: Preferences->Editor->Code Style->Java->Wrapping and Braces
+->Ensure right margin  is not exceeded 勾选上, 这样在每次格式化的时候就会代码自动换行, 非常美观, 强迫症必备
+
