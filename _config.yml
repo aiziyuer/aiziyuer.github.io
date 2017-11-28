@@ -21,6 +21,7 @@ exclude:
   - bower.json
   - "*.log"
   - package.json
+  - vendor
 
 # 作者信息
 author:

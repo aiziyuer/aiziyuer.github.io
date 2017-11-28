@@ -10,3 +10,5 @@ _site
 bower_components
 node_modules
 .idea/
+vendor
+GemFile.lock

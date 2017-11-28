@@ -1,5 +1,7 @@
-# frozen_string_literal: true
-# A sample Gemfile
+source "https://rubygems.org"
 
-gem "compass"
+gem 'compass'
 gem "sass"
+
+gem 'jekyll'
+gem 'jekyll-feed'
