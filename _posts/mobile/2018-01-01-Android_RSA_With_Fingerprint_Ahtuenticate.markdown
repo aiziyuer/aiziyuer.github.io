@@ -109,3 +109,4 @@ RxFingerprint.encrypt(EncryptionMethod.RSA, this, keyAliasName, toEncryptString)
 
 -   [KeyGenParameterSpec API](https://developer.android.com/reference/android/security/keystore/KeyGenParameterSpec.html)
 -   [KeyProtection API](https://developer.android.com/reference/android/security/keystore/KeyProtection.html)
+-   [RxFingerprint Project](https://github.com/Mauin/RxFingerprint)
