@@ -82,7 +82,7 @@ RxFingerprint.encrypt(EncryptionMethod.RSA, this, keyAliasName, toEncryptString)
                     Log.d(TAG, "encrypted data: " + encryptionResult.getEncrypted());
 
                     // 开始解密过程, 这个过程中需要输入指纹才可以下一步
-                    RxFingerprint.decrypt(EncryptionMethod.RSA, this, "licong", encryptionResult.getEncrypted()).subscribe(decryptionResult -> {
+                    RxFingerprint.decrypt(EncryptionMethod.RSA, this, keyAliasName, encryptionResult.getEncrypted()).subscribe(decryptionResult -> {
                         switch (decryptionResult.getResult()) {
                             case FAILED:
                                 Log.d(TAG, "Fingerprint not recognized, try again!");
