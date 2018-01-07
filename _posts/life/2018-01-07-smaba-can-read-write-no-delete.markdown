@@ -36,9 +36,13 @@ groupadd apache_group
 
 # 创建文件所有用户, apache_own是文件的真实所有者, samba是通过同组的用户进行访问的
 useradd -G apache_group apache_own
+# 查看 apache_own的属组应该可以看到除了跟用户名一样的apache_own,还会多个apache_group
+id apache_own
 
 # 创建文件使用用户, apache和apache_own是一个组的,所以samba登录后是可以访问的
-useradd -G apache_group apache_own
+useradd -G apache_group apache
+# 查看 apache的属组应该可以看到除了跟用户名一样的apache,还会多个apache_group
+id apache_own
 
 # 假设我们需要共享的目录是/opt/apache
 mkdir -p /opt/apache
@@ -77,3 +81,4 @@ EOF
 
 -   [Read/Write but Don’t Delete](https://community.wd.com/t/solved-read-write-but-dont-delete/56393)
 -   [linux实现只能创建不能删除文件](https://wenku.baidu.com/view/aecb7271168884868762d6de.html?re=view)
+-   [linux s权限位](http://blog.csdn.net/robertaqi/article/details/7341565)
