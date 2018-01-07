@@ -24,9 +24,9 @@ date: "2018-01-07 22:00:21 +0800"
 所有者和root才有权限删除。
 
 ## 实现原理
-1.  创建两个用户属于同一个组, apache, apache_own, 都属于组apache_group;
-1.  创建一个带粘滞位的入口目录(samba里面映射地址), own是apache_own;
-2.  配置samba创建文件或者文件夹时权限分别是1770,3770, 并且支持从父目录继承属组;
+1.  创建两个用户属于同一个组, `apache`, `apache_own`, 都属于组`apache_group`;
+1.  创建一个带粘滞位的入口目录(`samba`里面映射地址), own是`apache_own`;
+2.  配置samba从父目录继承文件属组和权限等信息;
 
 ## 实现过程
 
@@ -50,31 +50,40 @@ mkdir -p /opt/apache
 # 设置父类粘滞位和真实文件所有属组
 chmod 0770 /opt/apache
 chown apache_own:apache_group /opt/apache
-chmod g+s /opt/apache
-chmod +t /opt/apache # 增加粘滞位
+chmod g+s /opt/apache # 目录内建立的文件或者目录用户组都会继承该用户组
+chmod +t /opt/apache # 增加粘滞位, 当前目录和目录中的文件不能删除
 
 cat <EOF>>/etc/samba/smb.conf
 [apache]
     path=/opt/apache
     browseable = yes
-    #create mask = 1770 # samba支持继承, 这里是写死文件增加粘滞位
-    #directory mode = 3770 # samba支持继承, 这里是写死文件夹增加粘滞位
-    #force directory mode = 3770 # samba支持继承, 这里是写死文件夹增加粘滞位
-    inherit permissions = yes # 从父文件夹继承权限
-    inherit acls = yes # 从父文件夹继承acl
-    inherit owner = yes # 从父文件夹继承文件所有者
+    writable=yes
+    read only = no
+    # samba支持继承, 这里是写死文件增加粘滞位
+    # create mask = 0770
+    # samba支持继承, 这里是写死文件夹增加粘滞位
+    # directory mode = 3770
+    # samba支持继承, 这里是写死文件夹增加粘滞位
+    # force directory mode = 3770
+    # 从父文件夹继承权限
+    inherit permissions = yes
+    # 从父文件夹继承acl
+    inherit acls = yes
+    # 文件的所有者从父文件夹继承文件所有者
+    inherit owner = yes
+    # 强调samba访问对linux系统来说是哪个用户
     force user = apache
+    # samba访问的有效账户
     valid users = apache
 EOF
 ```
 
 ## 使用过程
 
-用户通过apache用户访问samba提供的文件服务,当创建文件时, 文件父目录是有粘滞位的,
-新的文件夹应该也是带粘滞位的(不能被非所有者删除),而samba这里开启了继承文件所有者,
-所以新的文件虽然是apache用户加入的,但是文件所有者会是apache_own, 所以apache用户
-访问是无法删除的,但是因为apache和apache_own属于同一个组,所以对文件的增改查是可以的
-
+用户通过`apache`用户访问`samba`提供的文件服务,当创建文件时, 文件父目录是有粘滞位的,
+新的文件夹应该也是带粘滞位的(不能被非所有者删除),而`samba`这里开启了继承文件所有者,
+所以新的文件虽然是`apache`用户加入的,但是文件所有者会是`apache_own`, 所以`apache`用户
+访问是无法删除的,但是因为`apache`和`apache_own`属于同一个组,所以对文件的增改查是可以的
 
 
 ## 参考文献
