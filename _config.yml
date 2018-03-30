@@ -2,7 +2,7 @@ permalink: /:year/:month/:day/:title.html
 markdown: kramdown
 highlighter: rouge
 
-gems:
+plugins:
   - jekyll-feed
 
 kramdown:
