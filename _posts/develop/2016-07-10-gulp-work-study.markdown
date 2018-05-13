@@ -1,7 +1,7 @@
 ---
 layout: post
 title: gulp学习笔记
-categories: [生活]
+categories: [开发]
 tags: [nodejs,自动化]
 published: True
 ---

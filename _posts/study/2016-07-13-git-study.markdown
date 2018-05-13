@@ -1,7 +1,7 @@
 ---
 title: 如何不换PC使用多个github账号
 layout: post
-categories: [生活]
+categories: [学习]
 tags: [git, ssh]
 published: True
 ---
@@ -39,7 +39,7 @@ IdentityFile ~/.ssh/id_rsa1
 
 ## 测试一下
 
-每个密钥文件都是`ssh-keygen -t rsa -b 4096 -C "ziyu0123456789@gmail.com"`这样生成的, 
+每个密钥文件都是`ssh-keygen -t rsa -b 4096 -C "ziyu0123456789@gmail.com"`这样生成的,
 而生成的公钥又会配置到`github`上面, 所以我们如果使用了不同的密钥文件, github应该可以通过密钥的不同
 区分出我们来.以下是我的测试及回显:
 

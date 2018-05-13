@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何高效地管理博客
-categories: [博客]
+categories: [网页]
 tags: [blog, bash]
 published: True
 ---
@@ -38,7 +38,7 @@ published: True
 
 > talk's cheap, show u the code.
 
-``` javascript 
+``` javascript
 
 // gulpfile.js/tasks/css.js 定义编译的任务
 gulp.task('css', () => {
@@ -63,7 +63,7 @@ gulp.task('watch:css', () => {
 
 因为`jekyll`是使用`ruby`语言开发的一个小的服务器,所以需要使用`nodejs`提供的`chind.spawn`的方式来多进程运行:
 
-``` javascript 
+``` javascript
 
 // gulpfile.js/tasks/jekyll.js 使用child.spawn来完成jekyll进程的启动
 gulp.task('jekyll', () => {
@@ -105,7 +105,7 @@ gulp.task('server', ['css'], () => {
             baseDir: config.site.root
         }
     });
-   
+
 });
 ```
 
@@ -137,7 +137,7 @@ Options
 [-h|--help] 显示帮助
 
 [-g|--gulp] gulp的方式运行
-	
+
 "
 }
 
@@ -185,4 +185,3 @@ while true; do
   esac
 done
 ```
-

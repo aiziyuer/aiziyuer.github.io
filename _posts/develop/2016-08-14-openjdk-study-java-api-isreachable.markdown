@@ -1,7 +1,7 @@
 ---
 layout: post
 title: InetAddress.isReachable源码学习
-categories: [开源]
+categories: [开发]
 tags: [语言, 源码, 学习]
 published: True
 ---
@@ -10,7 +10,7 @@ published: True
 
 ## 背景
 
-这个问题是因为我在工作中发现的, 现象就是程序使用普通用户运行, 有个局域网的地址死活不通, 
+这个问题是因为我在工作中发现的, 现象就是程序使用普通用户运行, 有个局域网的地址死活不通,
 但是使用root用户运行程序后, 地址就可以访问, 看了内部的java代码,发现就是一下这个接口:
 
 ```java
@@ -50,7 +50,7 @@ public boolean isReachable(int timeout) throws IOException {
 import java.net.InetAddress;
 
 public class Hello {
-			
+
 	public static void main(String[] args) throws Exception {
 		InetAddress ia = InetAddress.getByName(args[0]);
 		System.out.println(ia.isReachable(Integer.parseInt(args[1])));
@@ -77,13 +77,13 @@ Hello 192.168.1.109 300
 ```bash
 # 查看网卡获得对外的服务ip
 ➜  ~ ifconfig eth0
-eth0      Link encap:以太网  硬件地址 08:00:27:93:c3:0b  
+eth0      Link encap:以太网  硬件地址 08:00:27:93:c3:0b
           inet 地址:192.168.1.105  广播:192.168.1.255  掩码:255.255.255.0
           inet6 地址: fe80::a00:27ff:fe93:c30b/64 Scope:Link
           UP BROADCAST RUNNING MULTICAST  MTU:1500  跃点数:1
           接收数据包:1054 错误:0 丢弃:0 过载:0 帧数:0
           发送数据包:161 错误:0 丢弃:0 过载:0 载波:0
-          碰撞:0 发送队列长度:1000 
+          碰撞:0 发送队列长度:1000
           接收字节:193036 (193.0 KB)  发送字节:24001 (24.0 KB)
 
 # 查看当前防火墙, 这里没有任何规则
@@ -207,8 +207,8 @@ if (fd != -1) {
 }
 ```
 
-代码的注释就靠谱多了, 说是需要`root`权限进行`RAW Socket`(这个不属于`tcp`了), 只有得到后才会进行`ping`的方式来检测服务可达, 
-所以`ping`这个操作是也需要"`root`"权限才能做的. 
+代码的注释就靠谱多了, 说是需要`root`权限进行`RAW Socket`(这个不属于`tcp`了), 只有得到后才会进行`ping`的方式来检测服务可达,
+所以`ping`这个操作是也需要"`root`"权限才能做的.
 
 ## 后记
 ---
@@ -229,9 +229,9 @@ PING www.google.com.hk (220.255.2.153) 56(84) bytes of data.
 
 ```bash
 ➜  ~ sudo chmod -s /bin/ping
-➜  ~ ls -l /bin/ping        
+➜  ~ ls -l /bin/ping
 -rwxr-xr-x 1 root root 44168  5月  8  2014 /bin/ping
-➜  ~ ping www.google.com.hk 
+➜  ~ ping www.google.com.hk
 ping: icmp open socket: Operation not permitted
 ```
 
@@ -247,7 +247,7 @@ ping: icmp open socket: Operation not permitted
 ➜  ~  sudo setcap 'cap_net_admin,cap_net_raw+ep' /bin/ping
 ➜  ~ getcap /bin/ping
 /bin/ping = cap_net_admin,cap_net_raw+ep
-➜  ~ ls -l /bin/ping 
+➜  ~ ls -l /bin/ping
 -rwxr-xr-x 1 root root 44168  5月  8  2014 /bin/ping
 ➜  ~ ping www.google.com.hk
 PING www.google.com.hk (220.255.2.153) 56(84) bytes of data.
@@ -260,12 +260,3 @@ Done
 ---
 
 - [对 Capabilities (libcap, getcap, setcap) 的基本了解](http://feichashao.com/capabilities_basic/)
-
-
-
-
-
-
-
-
-

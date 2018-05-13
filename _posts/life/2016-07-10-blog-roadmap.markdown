@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 博客的RoadMap
-categories: [博客]
+categories: [生活]
 tags: [技术]
 published: true
 ---
@@ -26,4 +26,3 @@ published: true
 - [ ] 实现博客的暗色主题化, 我大部分的工作都是在夜晚进行的
 - [x] 博客支持`https`访问
 - [x] 博客使用`cdn`进行访问加速
-

@@ -1,7 +1,7 @@
 ---
 title: Mac下的工具使用备忘
 layout: post
-categories: [工具]
+categories: [生活]
 tags: [mac, 效率]
 published: True
 ---
@@ -64,13 +64,3 @@ ps -ef | grep jekyll | grep -v grep | awk '{print $2}' | xargs kill -9
 2. IDE支持
 
 基本你可以想到的IDE都支持Dash, AndroidStudio插件仓库中直接搜索即可
-
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何实现博客的搜索
-categories: [博客]
+categories: [网页]
 tags: [blog, javascript]
 published: True
 ---

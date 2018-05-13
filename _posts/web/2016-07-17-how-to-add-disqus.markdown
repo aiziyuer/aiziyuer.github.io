@@ -1,7 +1,7 @@
 ---
 title: 怎样为你的博客增加评论功能
 layout: post
-categories: [博客]
+categories: [网页]
 tags: [技术]
 published: true
 ---

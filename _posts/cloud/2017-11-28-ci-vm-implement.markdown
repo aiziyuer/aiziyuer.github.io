@@ -2,7 +2,7 @@
 layout: post
 title: CI持续集成-初步尝试
 
-categories: [开源]
+categories: [云计算]
 tags: [java,keytool]
 published: True
 
