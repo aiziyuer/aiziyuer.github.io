@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "跨CPU架构运行容器"
+title: "跨CPU架构运行容器  "
 categories: [云计算]
 tags: [语言, 源码, 学习]
 layout: post
@@ -54,6 +54,14 @@ cpu架构单独搞一批机器来编译镜像吧~, 这里提供一种基于`qemu
 
 ``` bash
 docker run --rm --privileged multiarch/qemu-user-static:register
+# 如果注册成功可以查询到aarch64对应的解释器
+cat /proc/sys/fs/binfmt_misc/qemu-aarch64
+# enabled
+# interpreter /usr/bin/qemu-aarch64-static
+# flags:
+# offset 0
+# magic 7f454c460201010000000000000000000200b700
+# mask ffffffffffffff00fffffffffffffffffeffffff
 ```
 
 如果想回退
@@ -85,3 +93,4 @@ docker run --rm -ti -v /usr/bin/qemu-aarch64-static:/usr/bin/qemu-aarch64-static
 
 -   [Docker Official Images](https://github.com/docker-library/official-images#docker-official-images)
 -   [qemu-user-static](https://github.com/multiarch/qemu-user-static)
+-   [在 x86 下 chroot 到 ARM 平台的 rootfs](https://coldnew.github.io/1ad4bf6d/)
