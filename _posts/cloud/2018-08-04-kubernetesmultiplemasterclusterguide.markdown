@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "kubernetes-multiple-master-cluster-guide"
+title: "多master高可用kubernets集群搭建"
 date: "2018-08-04 08:56:45 +0800"
 categories: [云计算]
 tags: [学习]
