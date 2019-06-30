@@ -129,7 +129,7 @@ export https_proxy=http://127.0.0.1:3128;
 export no_proxy=192.168.200.10,192.168.200.20,192.168.200.30;
 
 # 安装kubeadm等工具
-yum -y install kubeadm-1.9.2 kubectl-1.9.2 kubelet-1.9.2
+yum -y install kubeadm-1.9.2 kubectl-1.9.2 kubelet-1.9.2 kubernetes-cni-0.6.0
 systemctl enable kubelet
 systemctl start kubelet
 
