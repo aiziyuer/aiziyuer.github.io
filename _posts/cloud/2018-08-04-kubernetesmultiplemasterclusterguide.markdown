@@ -166,7 +166,7 @@ apiServerExtraArgs:
 EOF
 
 # 这一步会下载k8的镜像会稍微慢一点
-kubeadm init --ignore-preflight-errors=cri --config=config.yaml
+kubeadm init --ignore-preflight-errors=all --config=config.yaml
 
 # 首节点初始化后靠背一份配置到本地方便用kubectl来访问集群
 mkdir -p $HOME/.kube
