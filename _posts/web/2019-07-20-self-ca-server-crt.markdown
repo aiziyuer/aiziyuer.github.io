@@ -19,11 +19,11 @@ published: True
 ``` bash
 
 # 根CA
-export ROOT_CA_DIR=`pwd`/CA/ROOT-CA
+export ROOT_CA_DIR=/opt/CA/ROOT-CA
 # 中级CA
-export SUB_CA_DIR=`pwd`/CA/SUB-CA
+export SUB_CA_DIR=/opt/CA/SUB-CA
 # 应用证书
-export APP_CERTS_DIR=`pwd`/CA/APP-CERTS
+export APP_CERTS_DIR=/opt/CA/APP-CERTS
 # 创建目录
 mkdir -p $ROOT_CA_DIR $SUB_CA_DIR $APP_CERTS_DIR
 
@@ -34,7 +34,7 @@ mkdir -p $ROOT_CA_DIR $SUB_CA_DIR $APP_CERTS_DIR
 ``` bash
 
 # 根CA
-export ROOT_CA_DIR=`pwd`/CA/ROOT-CA
+export ROOT_CA_DIR=/opt/CA/ROOT-CA
 
 # 1. 生成openssl.conf的配置
 mkdir -p $ROOT_CA_DIR $SUB_CA_DIR $APP_CERTS_DIR
@@ -129,9 +129,9 @@ openssl x509 -text -in $ROOT_CA_DIR/cacert.pem
 ``` bash
 
 # 根CA
-export ROOT_CA_DIR=`pwd`/CA/ROOT-CA
+export ROOT_CA_DIR=/opt/CA/ROOT-CA
 # 中级CA
-export SUB_CA_DIR=`pwd`/CA/SUB-CA
+export SUB_CA_DIR=/opt/CA/SUB-CA
 
 # 1. 生成openssl.conf的配置
 # 基本上配置一样, 只有'usr_cert'中的'basicConstraints'发生了变化
@@ -222,11 +222,11 @@ openssl x509 -text -in $SUB_CA_DIR/cacert.pem
 ``` bash
 
 # 根CA
-export ROOT_CA_DIR=`pwd`/CA/ROOT-CA
+export ROOT_CA_DIR=/opt/CA/ROOT-CA
 # 中级CA
-export SUB_CA_DIR=`pwd`/CA/SUB-CA
+export SUB_CA_DIR=/opt/CA/SUB-CA
 # 应用证书
-export APP_CERTS_DIR=`pwd`/CA/APP-CERTS
+export APP_CERTS_DIR=/opt/CA/APP-CERTS
 
 # 生成应用证书
 rm -rf $APP_CERTS_DIR
