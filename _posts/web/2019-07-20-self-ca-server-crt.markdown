@@ -111,7 +111,7 @@ openssl req -new -config $ROOT_CA_DIR/openssl.conf \
 -key $ROOT_CA_DIR/private/cakey.pem -out $ROOT_CA_DIR/private/ca.csr
 
 # 证书签名
-openssl ca -config $ROOT_CA_DIR/openssl.conf \
+openssl ca -batch -config $ROOT_CA_DIR/openssl.conf \
 -in  $ROOT_CA_DIR/private/ca.csr -out $ROOT_CA_DIR/cacert.pem
 
 # # 4. 生成证书公钥
@@ -209,7 +209,7 @@ openssl req -new -config $SUB_CA_DIR/openssl.conf \
 -key $SUB_CA_DIR/private/cakey.pem -out $SUB_CA_DIR/private/ca.csr
 
 # 5. 证书签名
-openssl ca -config $ROOT_CA_DIR/openssl.conf -extensions v3_ca \
+openssl ca -batch -config $ROOT_CA_DIR/openssl.conf -extensions v3_ca \
 -in  $SUB_CA_DIR/private/ca.csr -out $SUB_CA_DIR/cacert.pem
 
 # 6. 查看证书
@@ -264,7 +264,7 @@ EOF
 )
 
 # 使用二级CA进行签发
-openssl ca -config $SUB_CA_DIR/openssl.conf \
+openssl ca -batch -config $SUB_CA_DIR/openssl.conf \
 -in $APP_CERTS_DIR/server-csr.pem -out  $APP_CERTS_DIR/server-crt.pem
 
 # 证书聚合分发, 由于是二级CA颁发的证书，所以，服务器需要把根CA、二级CA等证书都要发送给浏览器
