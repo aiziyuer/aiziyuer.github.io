@@ -102,18 +102,13 @@ echo 0100 > $ROOT_CA_DIR/crlnumber
 # 3. 根CA私钥生成
 openssl genrsa -out $ROOT_CA_DIR/private/cakey.pem 2048
 
-
-# 根CA证书请求文件生成
+# 4. 根CA证书请求文件生成
 openssl req -new -config $ROOT_CA_DIR/openssl.conf \
 -key $ROOT_CA_DIR/private/cakey.pem -out $ROOT_CA_DIR/private/ca.csr
 
-# 证书签名
+# 5. 证书签名
 openssl ca -batch -config $ROOT_CA_DIR/openssl.conf \
 -in  $ROOT_CA_DIR/private/ca.csr -out $ROOT_CA_DIR/cacert.pem
-
-# # 4. 生成证书公钥
-# openssl req -x509 -new -config  $ROOT_CA_DIR/openssl.conf \
-# -key $ROOT_CA_DIR/private/cakey.pem -out $ROOT_CA_DIR/cacert.pem
 
 # 6. 查看证书
 openssl x509 -text -in $ROOT_CA_DIR/cacert.pem
@@ -222,12 +217,12 @@ export SUB_CA_DIR=/opt/CA/SUB-CA
 # 应用证书
 export APP_CERTS_DIR=/opt/CA/APP-CERTS
 
-# 生成应用证书
+# 1. 生成应用证书
 rm -rf $APP_CERTS_DIR
 mkdir -p $ROOT_CA_DIR $SUB_CA_DIR $APP_CERTS_DIR
 openssl genrsa -out $APP_CERTS_DIR/server-key.pem 2048
 
-# 生成证书请求文件（csr文件）
+# 2. 生成证书请求文件（csr文件）
 openssl req -new -days 365 \
 -key $APP_CERTS_DIR/server-key.pem -out $APP_CERTS_DIR/server-csr.pem \
 -config <(
@@ -257,18 +252,18 @@ DNS.1                        = ziyu0123456789.cn
 EOF
 )
 
-# 使用二级CA进行签发
+# 3. 使用二级CA进行签发
 openssl ca -batch -config $SUB_CA_DIR/openssl.conf \
 -in $APP_CERTS_DIR/server-csr.pem -out  $APP_CERTS_DIR/server-crt.pem
 
-# 证书聚合分发, 由于是二级CA颁发的证书，所以，服务器需要把根CA、二级CA等证书都要发送给浏览器
+# 4. 证书聚合分发, 由于是二级CA颁发的证书，所以，服务器需要把根CA、二级CA等证书都要发送给浏览器
 cat  $APP_CERTS_DIR/server-crt.pem $SUB_CA_DIR/cacert.pem $ROOT_CA_DIR/cacert.pem \
 | tee $APP_CERTS_DIR/server-all.crt
 
-# 拷贝根CA的CRT证书
+# 5. 拷贝根CA的CRT证书
 cp $ROOT_CA_DIR/cacert.pem $APP_CERTS_DIR/root-ca.crt
 
-# 查看应用目录
+# 6. 查看应用目录
 tree $APP_CERTS_DIR
 ```
 
