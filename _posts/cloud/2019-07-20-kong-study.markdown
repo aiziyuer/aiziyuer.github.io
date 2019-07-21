@@ -108,7 +108,7 @@ curl -s -X GET \
 
 ### 常用的查询指令
 
-```
+``` bash
 # 列出所有service
 curl -sX GET \
 --url http://localhost:8001/services \
