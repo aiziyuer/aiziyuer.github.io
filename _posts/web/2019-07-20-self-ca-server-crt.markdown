@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "学会全流程颁发https证书"
+title: "全流程颁发https证书"
 date: "2019-07-20 21:09:31 +0800"
 categories: [网页]
 tags: [openssl,ca]
@@ -17,7 +17,6 @@ published: True
 ### 初始化环境变量
 
 ``` bash
-
 # 根CA
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 # 中级CA
@@ -26,13 +25,11 @@ export SUB_CA_DIR=/opt/CA/SUB-CA
 export APP_CERTS_DIR=/opt/CA/APP-CERTS
 # 创建目录
 mkdir -p $ROOT_CA_DIR $SUB_CA_DIR $APP_CERTS_DIR
-
 ```
 
 ### 根CA
 
 ``` bash
-
 # 根CA
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 
@@ -127,7 +124,6 @@ openssl x509 -text -in $ROOT_CA_DIR/cacert.pem
 ### 二级CA
 
 ``` bash
-
 # 根CA
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 # 中级CA
@@ -192,7 +188,6 @@ basicConstraints             = CA:TRUE
 [ req_attributes ]
 EOF
 
-
 # 2.初始化目录
 mkdir -p $SUB_CA_DIR/{certs,crl,private,newcerts}
 true > $SUB_CA_DIR/index.txt
@@ -220,7 +215,6 @@ openssl x509 -text -in $SUB_CA_DIR/cacert.pem
 ### 应用证书
 
 ``` bash
-
 # 根CA
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 # 中级CA
@@ -283,7 +277,6 @@ tree $APP_CERTS_DIR
 以上步骤做完了应用目录应该是如下样子:
 
 ```bash
-
 # tree $APP_CERTS_DIR
 /opt/CA/APP-CERTS
 ├── root-ca.crt     -- 需要让浏览器加入信任的根颁发机构
