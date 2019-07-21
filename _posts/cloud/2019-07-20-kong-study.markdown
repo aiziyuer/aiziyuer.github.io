@@ -4,7 +4,7 @@ title: "kong学习"
 date: "2019-07-20 21:09:31 +0800"
 categories: [云计算]
 tags: [学习]
-published: False
+published: True
 ---
 
 ## 系统要求
@@ -15,8 +15,9 @@ yum install -y jq
 
 ```
 
+## 基本API研究
 
-## 反代某个https的网站资源
+### 简单https反代
 
 ``` bash
 
@@ -64,7 +65,45 @@ curl -sk -X GET \
 --header 'Host: ziyu0123456789.cn' \
  | base64 | head -n 1
 
+```
 
+### 处理https证书
+
+``` bash
+
+# 创建证书
+export CERT_ID=`
+curl -sX POST \
+--url http://localhost:8001/certificates/ \
+-F 'cert=@/opt/CA/APP-CERTS/server-all.crt' \
+-F 'key=@/opt/CA/APP-CERTS/server-key.pem' \
+| jq --raw-output '.id'
+`
+echo "CERT_ID: $CERT_ID"
+
+# 创建前清除已有的SNI
+curl -X DELETE \
+--url http://localhost:8001/snis/ziyu0123456789.cn
+# 创建SNI
+curl -sX POST \
+--url http://localhost:8001/snis/ \
+--data 'name=ziyu0123456789.cn' \
+--data "certificate.id=$CERT_ID" \
+| jq --raw-output '.'
+
+# 测试路由是否正常
+# 原始站点
+curl -s -X GET \
+https://mirrors.huaweicloud.com/favicon.ico \
+| base64 | head -n 1
+ # 伪装代理
+curl -s -X GET \
+--url https://ziyu0123456789.cn/favicon.ico \
+ | base64 | head -n 1
+
+# 这里因为我们的域名已经颁发自颁发了域名,
+# 参考我前一篇: http://aiziyuer.github.io/2019/07/20/self-ca-server-crt.html
+# 所以这curl就可以直接访问, 证书已经完整
 ```
 
 ### 常用的查询指令
@@ -78,6 +117,16 @@ curl -sX GET \
 # 列出所有路由
 curl -sX GET \
 --url http://localhost:8001/routes \
+| jq '.'
+
+# 列出所有证书
+curl -sX GET \
+--url http://localhost:8001/certificates \
+| jq '.'
+
+# 列出所有sni
+curl -sX GET \
+--url http://localhost:8001/snis \
 | jq '.'
 
 ```
