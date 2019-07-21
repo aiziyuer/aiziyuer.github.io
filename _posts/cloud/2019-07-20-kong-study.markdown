@@ -29,19 +29,19 @@ curl -sX GET \
 
 # 删除service
 curl -sX DELETE \
---url http://localhost:8001/services/https_mirrors_huaweicloud_com \
+--url http://localhost:8001/services/ssl_mirrors_huaweicloud_com \
 | jq '.'
 
 # 创建service
 curl -sX POST \
 --url http://localhost:8001/services/ \
---data 'name=https_mirrors_huaweicloud_com' \
+--data 'name=ssl_mirrors_huaweicloud_com' \
 --data 'url=https://mirrors.huaweicloud.com' \
 | jq '.'
 
 export SERVICE_ID=`
  curl -sX GET \
- --url http://localhost:8001/services/https_mirrors_huaweicloud_com \
+ --url http://localhost:8001/services/ssl_mirrors_huaweicloud_com \
  | jq --raw-output '.id'
 `
 echo "SERVICE_ID: $SERVICE_ID"
@@ -84,7 +84,7 @@ echo "CERT_ID: $CERT_ID"
 # 创建前清除已有的SNI
 curl -X DELETE \
 --url http://localhost:8001/snis/ziyu0123456789.cn
-# 创建SNI
+# 创建SNI, name是hostname
 curl -sX POST \
 --url http://localhost:8001/snis/ \
 --data 'name=ziyu0123456789.cn' \
@@ -128,6 +128,33 @@ curl -sX GET \
 curl -sX GET \
 --url http://localhost:8001/snis \
 | jq '.'
+
+
+```
+
+
+## 插件研究
+
+### request-transformer-advanced
+
+``` bash
+
+# 列出所有插件
+curl -sX GET \
+--url http://localhost:8001/plugins \
+| jq '.'
+
+# 为ssl_mirrors_huaweicloud_com服务打开插件
+curl -X POST \
+--url http://localhost:8001/services/ssl_mirrors_huaweicloud_com/plugins \
+--data "name=request-transformer" \
+| jq '.'
+
+
+# 需要实现 转换: TODO /static_favicon.ico -> /favicon.ico
+curl -X PUT \
+--url http://localhost:8001/services/ssl_mirrors_huaweicloud_com/plugins \
+--data ""
 
 ```
 
