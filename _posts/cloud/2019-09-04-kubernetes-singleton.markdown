@@ -147,3 +147,7 @@ kubectl expose deployment nginx --port=88 --target-port=80 --type=NodePort
 # 查看服务信息
 kubectl get service
 ```
+
+## FAQ
+
+- [kubeadm安装单机版kubernetes（简单快速）](https://blog.csdn.net/u013355826/article/details/82801482)
