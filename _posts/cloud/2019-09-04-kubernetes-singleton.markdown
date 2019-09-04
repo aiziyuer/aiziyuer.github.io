@@ -133,3 +133,17 @@ kubectl logs -f kube-flannel-ds-amd64-rvmg6 -n kube-system kube-flannel
 ### 查询Pod状态
 watch kubectl get pod --all-namespaces -o wide
 ```
+
+
+## 测试
+
+``` bash
+# 创建一个三副本的应用
+kubectl run nginx --image=nginx --replicas=3
+
+# 公开服务端口
+kubectl expose deployment nginx --port=88 --target-port=80 --type=NodePort
+
+# 查看服务信息
+kubectl get service
+```
