@@ -35,3 +35,4 @@ Get-VM -Name CentOS7 | Get-VMNetworkAdapter | Connect-VMNetworkAdapter -SwitchNa
 ## FAQ
 
 - [Windows 10: How to setup NAT network for Hyper-V guests](https://anandthearchitect.com/2018/01/06/windows-10-how-to-setup-nat-network-for-hyper-v-guests/)
+- [Remove-NetNat](https://docs.microsoft.com/en-us/powershell/module/netnat/remove-netnat?view=win10-ps)
