@@ -99,7 +99,7 @@ sysctl --system
 # 配置代理, 我这里访问google时要走代理的,不然网络不通
 export http_proxy=http://127.0.0.1:3128;
 export https_proxy=http://127.0.0.1:3128;
-export no_proxy=192.168.200.10,192.168.200.20,192.168.200.30;
+export no_proxy=192.168.200.254;
 
 # 安装kubeadm等工具
 yum install -y kubelet-1.10.3 kubeadm-1.10.3 kubectl-1.10.3 kubernetes-cni-0.6.0

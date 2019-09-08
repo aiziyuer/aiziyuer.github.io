@@ -24,6 +24,7 @@ Get-NetAdapter -Name "*NAT-Switch*" | Format-List -Property "InterfaceIndex"
 New-NetIPAddress -IPAddress 192.168.200.1 -PrefixLength 24 -InterfaceIndex (Get-NetAdapter -Name "*NAT-Switch*").InterfaceIndex -Verbose
 
 # 创建一个NAT网络(关键在这里!)
+# Remove-NetNat -Name NATNetwork
 New-NetNat -Name NATNetwork -InternalIPInterfaceAddressPrefix 192.168.200.0/24 -Verbose
 
 # 给名称是"CentOS7"的VM设置使用这个交换机, 也可以通过hyper-v管理器操作
