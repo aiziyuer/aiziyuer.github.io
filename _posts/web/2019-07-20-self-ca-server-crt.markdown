@@ -107,7 +107,7 @@ openssl req -new -config $ROOT_CA_DIR/openssl.conf \
 -key $ROOT_CA_DIR/private/cakey.pem -out $ROOT_CA_DIR/private/ca.csr
 
 # 5. 证书签名
-openssl ca -batch -config $ROOT_CA_DIR/openssl.conf \
+openssl ca -selfsign -batch -config $ROOT_CA_DIR/openssl.conf \
 -in  $ROOT_CA_DIR/private/ca.csr -out $ROOT_CA_DIR/cacert.pem
 
 # 6. 查看证书
