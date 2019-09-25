@@ -17,7 +17,7 @@ published: True
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 
 # 1. 生成openssl.conf的配置
-mkdir -p $ROOT_CA_DIR $APP_CERTS_DIR
+mkdir -p $ROOT_CA_DIR $DOCKER_CERTS_DIR
 cat <<-EOF>$ROOT_CA_DIR/openssl.conf
 [ ca ]
 default_ca     = CA_default
@@ -107,16 +107,16 @@ openssl x509 -text -in $ROOT_CA_DIR/cacert.pem
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 
 # 应用证书
-export APP_CERTS_DIR=/opt/CA/APP-CERTS
+export DOCKER_CERTS_DIR=/opt/CA/DOCKER-CERTS
 
 # 1. 生成应用证书
-rm -rf $APP_CERTS_DIR
-mkdir -p $ROOT_CA_DIR $APP_CERTS_DIR
-openssl genrsa -out $APP_CERTS_DIR/key.pem 2048
+rm -rf $DOCKER_CERTS_DIR
+mkdir -p $ROOT_CA_DIR $DOCKER_CERTS_DIR
+openssl genrsa -out $DOCKER_CERTS_DIR/key.pem 2048
 
 # 2. 生成证书请求文件（csr文件）
 openssl req -new -days 365 \
--key $APP_CERTS_DIR/key.pem -out $APP_CERTS_DIR/csr.pem \
+-key $DOCKER_CERTS_DIR/key.pem -out $DOCKER_CERTS_DIR/csr.pem \
 -config <(
 cat <<-EOF
 [ req ]
@@ -150,17 +150,17 @@ EOF
 
 # 3. 使用CA进行签发
 openssl ca -batch -config $ROOT_CA_DIR/openssl.conf \
--in $APP_CERTS_DIR/csr.pem -out  $APP_CERTS_DIR/cert.pem
+-in $DOCKER_CERTS_DIR/csr.pem -out  $DOCKER_CERTS_DIR/cert.pem
 
 # # 4. 证书聚合分发, 服务器需要把根CA发送给浏览器
-# cat  $APP_CERTS_DIR/cert.pem $ROOT_CA_DIR/cacert.pem \
-# | tee $APP_CERTS_DIR/cert.pem
+# cat  $DOCKER_CERTS_DIR/cert.pem $ROOT_CA_DIR/cacert.pem \
+# | tee $DOCKER_CERTS_DIR/cert.pem
 
 # 5. 拷贝根CA的CRT证书
-cp $ROOT_CA_DIR/cacert.pem $APP_CERTS_DIR/ca.pem
+cp $ROOT_CA_DIR/cacert.pem $DOCKER_CERTS_DIR/ca.pem
 
 # 6. 查看应用目录
-tree $APP_CERTS_DIR
+tree $DOCKER_CERTS_DIR
 
 # 你可以压缩一下证书目录归档了以后再用
 # tar czvf CA.tar.gz /opt/CA/
@@ -171,8 +171,8 @@ tree $APP_CERTS_DIR
 以上步骤做完了应用目录应该是如下样子:
 
 ```bash
-# tree $APP_CERTS_DIR
-/opt/CA/APP-CERTS
+# tree $DOCKER_CERTS_DIR
+/opt/CA/DOCKER-CERTS
 ├── ca.pem     -- 需要让浏览器加入信任的根颁发机构
 ├── cert.pem   -- 应用服务器/客户端用于发送给浏览器的crt证书
 ├── csr.pem
@@ -186,9 +186,9 @@ tree $APP_CERTS_DIR
 cat <<'EOF'>/etc/docker/daemon.json
 {
   "tlsverify": true,
-  "tlscert": "/opt/CA/APP-CERTS/cert.pem",
-  "tlskey": "/opt/CA/APP-CERTS/key.pem",
-  "tlscacert": "/opt/CA/APP-CERTS/ca.pem",
+  "tlscert": "/opt/CA/DOCKER-CERTS/cert.pem",
+  "tlskey": "/opt/CA/DOCKER-CERTS/key.pem",
+  "tlscacert": "/opt/CA/DOCKER-CERTS/ca.pem",
   "hosts": [
     "tcp://0.0.0.0:2376",
     "unix:///var/run/docker.sock"
@@ -200,20 +200,20 @@ systemctl restart docker
 # 测试可用性
 docker \
     --tlsverify \
-    --tlscacert=/opt/CA/APP-CERTS/ca.pem \
-    --tlscert=/opt/CA/APP-CERTS/cert.pem \
-    --tlskey=/opt/CA/APP-CERTS/key.pem \
+    --tlscacert=/opt/CA/DOCKER-CERTS/ca.pem \
+    --tlscert=/opt/CA/DOCKER-CERTS/cert.pem \
+    --tlskey=/opt/CA/DOCKER-CERTS/key.pem \
     -H 192.168.200.254:2376 info
 ```
 
 ## docker客户端配置
 
 ``` bash
-# 将最上面生成的/opt/CA/APP-CERTS下的证书全部拷贝到~/.docker目录下即可
+# 将最上面生成的/opt/CA/DOCKER-CERTS下的证书全部拷贝到~/.docker目录下即可
 # 应用证书
-export APP_CERTS_DIR=/opt/CA/APP-CERTS
+export DOCKER_CERTS_DIR=/opt/CA/DOCKER-CERTS
 mkdir -p ~/.docker
-cp $APP_CERTS_DIR/* ~/.docker
+cp $DOCKER_CERTS_DIR/* ~/.docker
 
 # tree ~/.docker
 ~/.docker
