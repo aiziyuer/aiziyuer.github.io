@@ -7,10 +7,12 @@ tags: [学习]
 published: True
 ---
 
+默认的`docker`都是通过`unix port`来与`server`进行通信, 但是如果是想通过`windows`远程管理`linux上`面的`docker`就不太方便了。
+当然你可以说直接开启非安全的连接就好了,但是那不安全啊~~, 下面介绍一个傻瓜式的开启安全远程api的tls认证的方法。
+
 ### 根CA
 
 ``` bash
-
 # 根CA
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 
@@ -96,7 +98,6 @@ openssl ca -selfsign -batch -config $ROOT_CA_DIR/openssl.conf \
 
 # 6. 查看证书
 openssl x509 -text -in $ROOT_CA_DIR/cacert.pem
-
 ```
 
 ### 应用证书
@@ -176,7 +177,6 @@ tree $APP_CERTS_DIR
 ├── cert.pem   -- 应用服务器/客户端用于发送给浏览器的crt证书
 ├── csr.pem
 └── key.pem    -- 应用服务器/客户端私钥
-
 ```
 
 
@@ -204,7 +204,6 @@ docker \
     --tlscert=/opt/CA/APP-CERTS/cert.pem \
     --tlskey=/opt/CA/APP-CERTS/key.pem \
     -H 192.168.200.254:2376 info
-
 ```
 
 ## docker客户端配置
