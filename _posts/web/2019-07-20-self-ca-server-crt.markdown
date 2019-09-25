@@ -243,12 +243,14 @@ emailAddress                 = ziyu0123456789@gmail.com
 commonName                   = ziyu0123456789.cn
 [ v3_req ]
 basicConstraints             = CA:FALSE
-keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+keyUsage 					 = nonRepudiation, digitalSignature, keyEncipherment
+extendedKeyUsage             =serverAuth,clientAuth
 [ req_attributes ]
 [ req_ext ]
 subjectAltName               = @alternate_names
 [ alternate_names ]
 DNS.1                        = ziyu0123456789.cn
+IP.1                         = 192.168.200.254
 EOF
 )
 
