@@ -2,37 +2,15 @@
 layout: post
 title: 如何优雅开启docker的remoteAPI功能
 date: 2019-09-25 09:45
-category: 
-author: 
-tags: []
-summary: 
+categories: [云计算]
+tags: [学习]
+published: True
 ---
-
-# 环境准备
-
-``` bash
-# 启动一个干净的容器
-docker run --rm -ti centos:7 bash
-
-yum install -y lrzsz openssl tree
-
-```
-
-# 创建必要的目录
-
-``` bash
-# 根CA
-export ROOT_CA_DIR=/opt/CA/ROOT-CA
-
-# 应用证书
-export APP_CERTS_DIR=/opt/CA/APP-CERTS
-# 创建目录
-mkdir -p $ROOT_CA_DIR $APP_CERTS_DIR
-```
 
 ### 根CA
 
 ``` bash
+
 # 根CA
 export ROOT_CA_DIR=/opt/CA/ROOT-CA
 
@@ -88,11 +66,13 @@ organizationalUnitName       = Root CA
 emailAddress                 = ziyu0123456789@gmail.com
 commonName                   = Global Aiziyuer CA Inc
 [ usr_cert ]
-basicConstraints             = CA:FALSE
+basicConstraints             = CA:TRUE
 [ v3_ca ]
 basicConstraints             = CA:TRUE
 [ req_attributes ]
 EOF
+
+# ps. 上面的usr_cert中CA:TRUE代表它还可以用作其他CA的签发而不仅仅是作为一个普通的根证书颁发机构
 
 # 2.初始化目录
 mkdir -p $ROOT_CA_DIR/{certs,crl,private,newcerts}
@@ -203,14 +183,12 @@ tree $APP_CERTS_DIR
 ## docker服务器端配置
 
 ``` bash
-# 拷贝APP-CERTS目录下的证书到/etc/docker/certs(没有目录就创建一个)
-
 cat <<'EOF'>/etc/docker/daemon.json
 {
   "tlsverify": true,
-  "tlscert": "/etc/docker/certs/cert.pem",
-  "tlskey": "/etc/docker/certs/key.pem",
-  "tlscacert": "/etc/docker/certs/ca.pem",
+  "tlscert": "/opt/CA/APP-CERTS/cert.pem",
+  "tlskey": "/opt/CA/APP-CERTS/key.pem",
+  "tlscacert": "/opt/CA/APP-CERTS/ca.pem",
   "hosts": [
     "tcp://0.0.0.0:2376",
     "unix:///var/run/docker.sock"
@@ -222,9 +200,9 @@ systemctl restart docker
 # 测试可用性
 docker \
     --tlsverify \
-    --tlscacert=/etc/docker/certs/ca.pem \
-    --tlscert=/etc/docker/certs/cert.pem \
-    --tlskey=/etc/docker/certs/key.pem \
+    --tlscacert=/opt/CA/APP-CERTS/ca.pem \
+    --tlscert=/opt/CA/APP-CERTS/cert.pem \
+    --tlskey=/opt/CA/APP-CERTS/key.pem \
     -H 192.168.200.254:2376 info
 
 ```
@@ -233,6 +211,10 @@ docker \
 
 ``` bash
 # 将最上面生成的/opt/CA/APP-CERTS下的证书全部拷贝到~/.docker目录下即可
+# 应用证书
+export APP_CERTS_DIR=/opt/CA/APP-CERTS
+mkdir -p ~/.docker
+cp $APP_CERTS_DIR/* ~/.docker
 
 # tree ~/.docker
 ~/.docker
@@ -241,6 +223,7 @@ docker \
 ├── csr.pem
 └── key.pem    -- 应用服务器/客户端私钥
 
+# 测试联通性
 export DOCKER_HOST=tcp://192.168.200.254:2376
 export DOCKER_TLS_VERIFY=1
 docker info
