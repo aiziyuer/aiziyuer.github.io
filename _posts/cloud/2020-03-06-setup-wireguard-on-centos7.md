@@ -5,7 +5,7 @@ date: 2020-03-06 13:45
 category: [云计算]
 author: 李聪
 tags: [学习]
-published: False
+published: True
 summary: 
 ---
 
@@ -18,7 +18,7 @@ yum install -y \
 
 # 安装lts的4.x内核
 yum --enablerepo="elrepo-kernel" install -y \
-        kernel-lt kernel-lt-headers kernel-lt-devel
+        kernel-lt kernel-lt-devel kernel-lt-headers 
 
 # 切换内核
 grub2-set-default 0
@@ -58,30 +58,37 @@ yum install -y wireguard-dkms wireguard-tools
 
 # 生成私钥
 mkdir -p /etc/wireguard
-wg genkey >/etc/wireguard/server-key
-wg genkey >/etc/wireguard/client1-key
-wg genkey >/etc/wireguard/client2-key
+wg genkey >/etc/wireguard/10.10.8.0
+wg genkey >/etc/wireguard/10.10.8.1
+wg genkey >/etc/wireguard/10.10.8.2
+wg genkey >/etc/wireguard/10.10.8.3
 # ...
 
 systemctl stop wg-quick@wg0.service
+
 # 生成配置
 cat << EOF >/etc/wireguard/wg0.conf
 [Interface]
-PrivateKey = $(cat /etc/wireguard/server-key)
-Address = 10.8.0.254/24
+PrivateKey = $(cat /etc/wireguard/10.10.8.0)
+Address = 10.10.8.0/24
 ListenPort = 57000
 SaveConfig = true
 PostUp = iptables -t nat -A POSTROUTING -j MASQUERADE
 PostDown = iptables -t nat -D POSTROUTING -j MASQUERADE
 
 [Peer]
-PublicKey = $(wg pubkey </etc/wireguard/client1-key)
-AllowedIPs = 10.8.0.1/32
+PublicKey = $(wg pubkey </etc/wireguard/10.10.8.1)
+AllowedIPs = 10.10.8.1/32
 PersistentKeepalive = 25
 
 [Peer]
-PublicKey = $(wg pubkey </etc/wireguard/client2-key)
-AllowedIPs = 10.8.0.2/32
+PublicKey = $(wg pubkey </etc/wireguard/10.10.8.2)
+AllowedIPs = 10.10.8.2/32
+PersistentKeepalive = 25
+
+[Peer]
+PublicKey = $(wg pubkey </etc/wireguard/10.10.8.3)
+AllowedIPs = 10.10.8.3/32
 PersistentKeepalive = 25
 
 # ...
@@ -95,16 +102,17 @@ systemctl start wg-quick@wg0.service
 # 生成客户端配置
 cat << EOF
 [Interface]
-PrivateKey = $(cat /etc/wireguard/client1-key)
-Address = 10.8.0.1/32
+PrivateKey = $(cat /etc/wireguard/10.10.8.1)
+Address = 10.10.8.1/32
 DNS = 8.8.8.8
 
 [Peer]
-PublicKey = $(wg pubkey </etc/wireguard/server-key)
+PublicKey = $(wg pubkey </etc/wireguard/10.10.8.0)
 Endpoint = $(curl icanhazip.com):57000
-AllowedIPs = 0.0.0.0/5, 8.0.0.0/7, 11.0.0.0/8, 12.0.0.0/6, 16.0.0.0/4, 32.0.0.0/3, 64.0.0.0/2, 128.0.0.0/3, 160.0.0.0/5, 168.0.0.0/6, 172.0.0.0/12, 172.32.0.0/11, 172.64.0.0/10, 172.128.0.0/9, 173.0.0.0/8, 174.0.0.0/7, 176.0.0.0/4, 192.0.0.0/9, 192.128.0.0/11, 192.160.0.0/13, 192.169.0.0/16, 192.170.0.0/15, 192.172.0.0/14, 192.176.0.0/12, 192.192.0.0/10, 193.0.0.0/8, 194.0.0.0/7, 196.0.0.0/6, 200.0.0.0/5, 208.0.0.0/4, 8.8.8.8/32
+AllowedIPs = 10.10.8.0/32, 0.0.0.0/5, 8.0.0.0/7, 11.0.0.0/8, 12.0.0.0/6, 16.0.0.0/4, 32.0.0.0/3, 64.0.0.0/2, 128.0.0.0/3, 160.0.0.0/5, 168.0.0.0/6, 172.0.0.0/12, 172.32.0.0/11, 172.64.0.0/10, 172.128.0.0/9, 173.0.0.0/8, 174.0.0.0/7, 176.0.0.0/4, 192.0.0.0/9, 192.128.0.0/11, 192.160.0.0/13, 192.169.0.0/16, 192.170.0.0/15, 192.172.0.0/14, 192.176.0.0/12, 192.192.0.0/10, 193.0.0.0/8, 194.0.0.0/7, 196.0.0.0/6, 200.0.0.0/5, 208.0.0.0/4, 8.8.8.8/32
 PersistentKeepalive = 25
 EOF
 
 # ...
+
 ```
