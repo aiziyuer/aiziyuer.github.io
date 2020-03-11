@@ -16,9 +16,12 @@ rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
 yum install -y \
     https://www.elrepo.org/elrepo-release-7.0-4.el7.elrepo.noarch.rpm
 
-# 安装lts的4.x内核
+# 安装ml内核(如果不需要bbr想稳定点就: lts的4.x内核)
 yum --enablerepo="elrepo-kernel" install -y \
-        kernel-lt kernel-lt-devel kernel-lt-headers 
+        kernel-ml kernel-ml-devel
+
+# 查看可用的版本
+egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
 
 # 切换内核
 grub2-set-default 0
