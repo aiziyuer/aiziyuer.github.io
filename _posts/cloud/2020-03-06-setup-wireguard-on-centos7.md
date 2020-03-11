@@ -20,8 +20,11 @@ yum install -y \
 yum --enablerepo="elrepo-kernel" install -y \
         kernel-ml kernel-ml-devel
 
-# 查看可用的版本
+# 查看可用引导版本
 egrep ^menuentry /etc/grub2.cfg | cut -f 2 -d \'
+
+# 如果是UEFI系统用一下命令查看可用引导版本
+awk -F\' '$1=="menuentry " {print i++ " : " $2}' /boot/efi/EFI/centos/grub.cfg
 
 # 切换内核
 grub2-set-default 0
