@@ -138,6 +138,7 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com
 
 ``` bash
 
+# ingress
 kubectl create namespace ingress || true
 helm --namespace=ingress uninstall nginx || true
 helm --namespace=ingress install nginx stable/nginx-ingress  \
