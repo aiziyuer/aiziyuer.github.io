@@ -12,7 +12,6 @@ published: True
 ## 基础软件
 
 ``` bash
-
 # 安装必要的软件
 yum -y install wget net-tools telnet tcpdump lrzsz iptables-services
 
@@ -34,7 +33,6 @@ sed -i 's:^/dev/mapper/centos-swap:#/dev/mapper/centos-swap:g' /etc/fstab
 ## 安装Docker
 
 ``` bash
-
 # 安装docker需要的工具
 yum install -y yum-utils \
   device-mapper-persistent-data \
@@ -60,7 +58,6 @@ service iptables save
 ## 安装Kubernetes
 
 ``` bash
-
 # 安装kubeadm、kubectl、kubelet
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -95,7 +92,6 @@ systemctl start kubelet
 ## kubenetes主集群初始化
 
 ``` bash
-
 # 初始化安装
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
@@ -132,7 +128,6 @@ curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bas
 
 # 设置stable源
 helm repo add stable https://kubernetes-charts.storage.googleapis.com
-
 ```
 
 ## helm使用
@@ -140,7 +135,6 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com
 借助helm安装必要的app
 
 ``` bash
-
 # ingress
 kubectl create namespace ingress || true
 helm --namespace=ingress uninstall nginx || true
