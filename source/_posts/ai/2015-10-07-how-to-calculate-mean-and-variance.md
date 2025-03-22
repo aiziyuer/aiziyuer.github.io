@@ -4,6 +4,7 @@ title: 如何计算方差和平均值
 categories: [算法]
 tags: [算法，统计]
 published: True
+mathjax: true
 
 ---
 
