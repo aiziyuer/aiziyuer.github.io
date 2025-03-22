@@ -2,267 +2,1098 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
-  
   <title>如何不换PC使用多个github账号 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="最近博客上的几个类库的cdn服务都在国外,速度很慢,想来想去,最好自己弄个cdn的仓库做服务,所以就需要有两个github的账号. 本来用起来没有问题, 但是在git push的时候发现没法push,ssh key在github上不能重复. 么有办法了, 不可能 原理相当于ssh的时候, 让ssh根据hosts的url来选择不同的密钥文件(当然你也可以设置不同仓库使用不同邮箱提交),懒人配置如下:">
+  <meta name="keywords" content=" git , ssh ">
+  <meta name="description" content="如何不换PC使用多个github账号 | Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何不换PC使用多个github账号">
-<meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/life/2016-07-13-git-study/index.html">
+<meta property="og:title" content="Tomcat支持双向认证">
+<meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="最近博客上的几个类库的cdn服务都在国外,速度很慢,想来想去,最好自己弄个cdn的仓库做服务,所以就需要有两个github的账号. 本来用起来没有问题, 但是在git push的时候发现没法push,ssh key在github上不能重复. 么有办法了, 不可能 原理相当于ssh的时候, 让ssh根据hosts的url来选择不同的密钥文件(当然你也可以设置不同仓库使用不同邮箱提交),懒人配置如下:">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-03-22T11:29:07.653Z">
-<meta property="article:modified_time" content="2025-03-22T11:29:07.654Z">
+<meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
+<meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="git">
-<meta property="article:tag" content="ssh">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="keytool">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+<link rel="icon" href="/img/avatar.jpg">
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://aiziyuer.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-life/2016-07-13-git-study" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/life/2016-07-13-git-study/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.653Z" itemprop="datePublished">2025-03-22</time>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
 </a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
+<div class="author">
+    <span>John Doe</span>
+</div>
 
-  </div>
-  <div class="article-inner">
+<div class="icon">
     
-    
-      <header class="article-header">
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      如何不换PC使用多个github账号
-    </h1>
-  
-
-      </header>
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>最近博客上的几个类库的cdn服务都在国外,速度很慢,想来想去,最好自己弄个cdn的仓库做服务,所以就需要有两个<br><code>github</code>的账号. 本来用起来没有问题, 但是在<code>git push</code>的时候发现没法<code>push</code>,<br><code>ssh key</code>在github上不能重复. 么有办法了, 不可能</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>相当于ssh的时候, 让ssh根据hosts的url来选择不同的密钥文件(当然你也可以设置不同仓库使用不同邮箱提交),<br>懒人配置如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh/</span><br><span class="line"><span class="built_in">touch</span> config</span><br></pre></td></tr></table></figure>
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/people/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认就是不配置, 走默认的密钥文件</span></span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二个选择, 如果你的仓库url是形如git@two.github.com:hello/hello.git就会默认走这个配置</span></span><br><span class="line">Host two.github.com  <span class="comment"># 前缀名可以任意设置</span></span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<h2 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h2><p>每个密钥文件都是<code>ssh-keygen -t rsa -b 4096 -C &quot;ziyu0123456789@gmail.com&quot;</code>这样生成的,<br>而生成的公钥又会配置到<code>github</code>上面, 所以我们如果使用了不同的密钥文件, github应该可以通过密钥的不同<br>区分出我们来.以下是我的测试及回显:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment">#Hi aiziyuer! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br><span class="line"><span class="comment"># 上面可以看出, github已经认出我是aiziyuer, 说明我使用的是默认密钥</span></span><br><span class="line"></span><br><span class="line">ssh -T git@two.github.com</span><br><span class="line"><span class="comment">#Hi aiziyuer-cdn! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br><span class="line"><span class="comment"># 上面识别出我是aiziyuer-cdn, 说明我使用的第二密钥</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="设置仓库使用第二密钥"><a href="#设置仓库使用第二密钥" class="headerlink" title="设置仓库使用第二密钥"></a>设置仓库使用第二密钥</h2><p>因为我的默认的仓库地址是<code>git@github.com:aiziyuer-cdn/aiziyuer-cdn.github.io.git</code>, 所以修改如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">rm</span> origin</span><br><span class="line">git remote add origin git@two.github.com::aiziyuer-cdn/aiziyuer-cdn.github.io.git</span><br></pre></td></tr></table></figure>
-      
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(23)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="读书">
+            
+            读书
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="工具">
+            
+            工具
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="博客">
+            
+            博客
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="生活">
+            
+            生活
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="算法">
+            
+            算法
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="图形">
+            
+            图形
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="网页">
+            
+            网页
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="学习">
+            
+            学习
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="移动">
+            
+            移动
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/life/2016-07-13-git-study/" data-id="cm8k4p94t000sn09d5wqhfinn" data-title="如何不换PC使用多个github账号" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
 
-    </footer>
-  </div>
-  
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="search shortcut key i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="switch to outline view shortcut key w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="return"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="case sensitive"></i>
+            <i class="iconfont icon-tag" data-title="label"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">outline</div>
+            <i class="iconfont icon-list" data-title="switch to article list"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>2015</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>技术</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>生活</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数学，图形，Geogebra</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法，统计</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法，java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>效率</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>自动化</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>about</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>bash</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>bat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blog</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>javascript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>keytool</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>me</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodejs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssh</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sublime</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>windows</a>
+            </li>
+        
+    </div>
+
+</div>
+
     
-<nav id="article-nav">
-  
-    <a href="/2025/03/22/life/2016-07-10-gulp-work-study/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+    <nav id="title-list-nav">
         
-          gulp学习笔记
         
-      </div>
-    </a>
-  
-  
-    <a href="/2025/03/22/life/2015-09-20-about-me/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">个人简历</div>
-    </a>
-  
-</nav>
+        <a  class="All 网页 "
+           href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/"
+           data-tag="java,keytool"
+           data-author="" >
+            <span class="post-title" title="Tomcat支持双向认证">Tomcat支持双向认证</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 网页 "
+           href="/2025/03/22/web/2016-07-16-timeline-guide/"
+           data-tag="javascript"
+           data-author="" >
+            <span class="post-title" title="TimeLine学习手记">TimeLine学习手记</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 工具 "
+           href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
+           data-tag="2015,sublime,前端"
+           data-author="" >
+            <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/"
+           data-tag="bat,windows"
+           data-author="" >
+            <span class="post-title" title="win下让Kafka以Service方式运行">win下让Kafka以Service方式运行</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-05-09-maven%E5%BC%80%E5%8F%91web/"
+           data-tag="websocket"
+           data-author="" >
+            <span class="post-title" title="maven开发web">maven开发web</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 算法 "
+           href="/2025/03/22/study/2015-08-09-%E5%8C%BA%E9%97%B4%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"
+           data-tag="算法，java"
+           data-author="" >
+            <span class="post-title" title="区间查找算法">区间查找算法</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-03-30-leetCode-TwoNumbers%20/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Add Two Numbers">Add Two Numbers</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-03-30-leetCode-TwoSum/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Two Sum">Two Sum</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 移动 "
+           href="/2025/03/22/mobile/2016-07-15-android-xposed-module-introduce/"
+           data-tag="android,生活,效率"
+           data-author="" >
+            <span class="post-title" title="好用的Xposed模块推荐">好用的Xposed模块推荐</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 移动 "
+           href="/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/"
+           data-tag="android,生活,效率"
+           data-author="" >
+            <span class="post-title" title="Xposed框架安装">Xposed框架安装</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2025/03/22/life/2016-07-10-gulp-work-study/"
+           data-tag="nodejs,自动化"
+           data-author="" >
+            <span class="post-title" title="gulp学习笔记">gulp学习笔记</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2025/03/22/life/2016-07-13-git-study/"
+           data-tag="git,ssh"
+           data-author="" >
+            <span class="post-title" title="如何不换PC使用多个github账号">如何不换PC使用多个github账号</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2025/03/22/life/2015-09-20-about-me/"
+           data-tag="about,me"
+           data-author="" >
+            <span class="post-title" title="个人简历">个人简历</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 图形 "
+           href="/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/"
+           data-tag="数学，图形，Geogebra"
+           data-author="" >
+            <span class="post-title" title="翻页效果模拟">翻页效果模拟</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 读书 "
+           href="/2025/03/22/books/2015-03-30-book-list-of-2015/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2015阅读书单">2015阅读书单</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-17-how-to-add-disqus/"
+           data-tag="技术"
+           data-author="" >
+            <span class="post-title" title="怎样为你的博客增加评论功能">怎样为你的博客增加评论功能</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-11-how-to-manager-blog-start/"
+           data-tag="blog,bash"
+           data-author="" >
+            <span class="post-title" title="如何高效地管理博客">如何高效地管理博客</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-14-how-to-accelerate-your-blog/"
+           data-tag="技术"
+           data-author="" >
+            <span class="post-title" title="怎样加速你的博客">怎样加速你的博客</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-11-how-blog-support-search/"
+           data-tag="blog,javascript"
+           data-author="" >
+            <span class="post-title" title="如何实现博客的搜索">如何实现博客的搜索</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-10-blog-roadmap/"
+           data-tag="技术"
+           data-author="" >
+            <span class="post-title" title="博客的RoadMap">博客的RoadMap</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 算法 "
+           href="/2025/03/22/ai/2015-10-07-how-to-calculate-mean-and-variance/"
+           data-tag="算法，统计"
+           data-author="" >
+            <span class="post-title" title="如何计算方差和平均值">如何计算方差和平均值</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2025-03-22 19:27:10">2025/03/22</span>
+        </a>
+        
+        <div id="no-item-tips">
 
-  
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="Toggle full screen shortcut key s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-life/2016-07-13-git-study" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">如何不换PC使用多个github账号</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="生活">生活</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color4">git</a>
+            
+            <a class="color4">ssh</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            Created At : <time class="date" title='Updated At: 2025-03-22 19:29:07'>2025-03-22 19:29</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            Views 👀 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+
+最近博客上的几个类库的cdn服务都在国外,速度很慢,想来想去,最好自己弄个cdn的仓库做服务,所以就需要有两个
+`github`的账号. 本来用起来没有问题, 但是在`git push`的时候发现没法`push`,
+`ssh key`在github上不能重复. 么有办法了, 不可能
+
+
+## 原理
+
+相当于ssh的时候, 让ssh根据hosts的url来选择不同的密钥文件(当然你也可以设置不同仓库使用不同邮箱提交),
+懒人配置如下:
+
+``` bash
+cd ~/.ssh/
+touch config
+```
+
+```bash
+# 默认就是不配置, 走默认的密钥文件
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa
+
+# 第二个选择, 如果你的仓库url是形如git@two.github.com:hello/hello.git就会默认走这个配置
+Host two.github.com  # 前缀名可以任意设置
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa1
+
+```
+
+## 测试一下
+
+每个密钥文件都是`ssh-keygen -t rsa -b 4096 -C "ziyu0123456789@gmail.com"`这样生成的, 
+而生成的公钥又会配置到`github`上面, 所以我们如果使用了不同的密钥文件, github应该可以通过密钥的不同
+区分出我们来.以下是我的测试及回显:
+
+``` bash
+ssh -T git@github.com
+#Hi aiziyuer! You've successfully authenticated, but GitHub does not provide shell access.
+# 上面可以看出, github已经认出我是aiziyuer, 说明我使用的是默认密钥
+
+ssh -T git@two.github.com
+#Hi aiziyuer-cdn! You've successfully authenticated, but GitHub does not provide shell access.
+# 上面识别出我是aiziyuer-cdn, 说明我使用的第二密钥
+```
+
+## 设置仓库使用第二密钥
+
+因为我的默认的仓库地址是`git@github.com:aiziyuer-cdn/aiziyuer-cdn.github.io.git`, 所以修改如下:
+
+``` bash
+git remote rm origin
+git remote add origin git@two.github.com::aiziyuer-cdn/aiziyuer-cdn.github.io.git
+```
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
 </article>
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E9%A1%B5/">网页</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
-    </div>
-  </div>
+<p>
+    <a  class="dashang" onclick="dashangToggle()">💰</a>
+</p>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/" rel="tag">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/about/" rel="tag">about</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bat/" rel="tag">bat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keytool/" rel="tag">keytool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/me/" rel="tag">me</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/" rel="tag">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" rel="tag">算法，java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" rel="tag">算法，统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/2015/" style="font-size: 10px;">2015</a> <a href="/tags/about/" style="font-size: 10px;">about</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bat/" style="font-size: 10px;">bat</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/me/" style="font-size: 10px;">me</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 15px;">效率</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" style="font-size: 10px;">数学，图形，Geogebra</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 15px;">生活</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" style="font-size: 10px;">算法，java</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">算法，统计</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/">Tomcat支持双向认证</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/web/2016-07-16-timeline-guide/">TimeLine学习手记</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/">Sublime-配置</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/tools/2015-10-24-vim-compile/">vim-compile</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/">win下让Kafka以Service方式运行</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
     
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
 
 
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="Toggle full screen shortcut key s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
 
 
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
 </body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
 </html>

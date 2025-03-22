@@ -2,848 +2,1008 @@
 <html>
 <head>
   <meta charset="utf-8">
-  
-  
   <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://aiziyuer.github.io/page/2/index.html">
+  <meta name="keywords" content="">
+  <meta name="description" content="Hexo">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tomcat支持双向认证">
+<meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
+<meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="keytool">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+<link rel="icon" href="/img/avatar.jpg">
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
 
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://aiziyuer.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-mobile/2016-07-15-how-to-root-your-android-mobile" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.734Z" itemprop="datePublished">2025-03-22</time>
+<aside class="nav mobile">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
 </a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a>
-  </div>
+<div class="author">
+    <span>John Doe</span>
+</div>
 
-  </div>
-  <div class="article-inner">
+<div class="icon">
     
-    
-      <header class="article-header">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/">Xposed框架安装</a>
-    </h1>
-  
-
-      </header>
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>今天早晨醒来, 手机显示有了新的操作系统更新, 所以晚上照旧 下载<code>Factory</code>固件 -&gt;<br>线刷 -&gt; 检查<code>recovery</code>包 -&gt; 恢复<code>root</code> -&gt; 恢复<code>xposed</code>框架</p>
-<p>以上的过程对于我现在来说比较熟悉的情况下大概需要花费我1-2小时的时间</p>
-<h2 id="为什么选择全部手工"><a href="#为什么选择全部手工" class="headerlink" title="为什么选择全部手工?"></a>为什么选择全部手工?</h2><p>其实我也是一个懒人, 所以我肯定写过一些脚本来自动做, 目前这个脚本已经可以自动去官网上自动下载最新的fatory固件、<br>去除<code>flash-all.sh</code>中的<code>-w</code>选项、并且通知我的手机进入<code>bootloader</code>刷机模式,但是现在有些比较蛋疼的是, 刷完后系统会自动<br>重启，然后应用的优化会非常耗时(不算xposed都有77个), 所以后面的<code>recovery</code>和<code>xposed</code>就比较难弄了, 所以只能先”手动”了</p>
-<h2 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h2><p>作为21世纪有思想的新青年, 自动化是必然的事情, 所以在我没有想到解决上面的问题前, 先把刷机固定的步骤记录下来,<br>方便后面自动脚本的编写.</p>
+        
+            <a title="github"
+               href="https://github.com/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="facebook"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-facebook"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+    
+        
+            <a title="instagram"
+               href="https://www.facebook.com/faker.tops"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-instagram"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="reddit"
+               href="https://www.reddit.com/user/yelog/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-reddit"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="weibo"
+               href="http://weibo.com/u/2307534817"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-weibo"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="jianshu"
+               href="https://www.jianshu.com/u/ff56736de7cf"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-jianshu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="zhihu"
+               href="https://www.zhihu.com/people/jaytp/activities"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-zhihu"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="oschina"
+               href="https://my.oschina.net/yelog"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-oschina"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+    
+        
+            <a title="email"
+               href="mailto:jaytp@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=872336115&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="kugou"
+               href="https://www.kugou.com/"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-kugou"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="neteasemusic"
+               href="https://music.163.com/#/user/home?id=88151013"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-neteasemusic"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
 <ul>
-<li><input checked="" disabled="" type="checkbox"> 固化刷机步骤</li>
-<li><input disabled="" type="checkbox"> 脚本自动刷机</li>
+    <li>
+        <div class="all active" data-rel="All">All
+            
+                <small>(23)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="读书">
+            
+            读书
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="工具">
+            
+            工具
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="博客">
+            
+            博客
+            <small>(5)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="生活">
+            
+            生活
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="算法">
+            
+            算法
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="图形">
+            
+            图形
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="网页">
+            
+            网页
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="学习">
+            
+            学习
+            <small>(4)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="移动">
+            
+            移动
+            <small>(2)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
 </ul>
-<h2 id="固定刷机步骤"><a href="#固定刷机步骤" class="headerlink" title="固定刷机步骤"></a>固定刷机步骤</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
-<li>你需要一台原生android系统的手机(Nexus)</li>
-<li>解锁OEM锁(开发者模式里面有)</li>
-<li>解锁bootloader(开机会比较可怕,无所谓)<code>fastboot flashing unlock</code></li>
-</ul>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>这里考虑的是万能方法, 所以必然是线刷Factory固件了, 你需要有以下几样东西, 每次都需要检查是否是最新版本:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://developers.google.com/android/nexus/images">Nexus Factory Images</a>不仅可以刷机用还能救转(unlock bootloader, oem unlock)</li>
-<li><a target="_blank" rel="noopener" href="https://twrp.me/">TWRP</a>第三方的恢复镜像,因为谷歌官方不支持恢复第三方的东西(<code>supersu</code>, <code>xposed</code>)</li>
-<li><a target="_blank" rel="noopener" href="http://download.chainfire.eu/supersu">supersu</a>root专用,最后<code>recover</code>刷进去</li>
-<li><a target="_blank" rel="noopener" href="http://dl-xda.xposed.info/framework/">Xposed</a>杀手级应用</li>
-</ul>
-<h3 id="放入第三方的定制包"><a href="#放入第三方的定制包" class="headerlink" title="放入第三方的定制包"></a>放入第三方的定制包</h3><p><code>suspersu</code>和<code>xposed</code>两个包基本上都是zip格式的, 因为需要在recovery页面手动刷入, 所以为了避免麻烦, 在刷机前先通过USB拷入手机, 放到一个熟悉的目录,<br>后面需要手动进入该目录,所以不要太复杂,放根目录进行了.</p>
-<h3 id="恢复官方工厂镜像"><a href="#恢复官方工厂镜像" class="headerlink" title="恢复官方工厂镜像"></a>恢复官方工厂镜像</h3><p>手机开debug模式usb连电脑, 然后解压工厂固件的压缩包, 然后进入解压缩后的目录</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 替换掉flash-all中危险的清空数据选项-w</span></span><br><span class="line">gsed -i <span class="string">&#x27;s/fastboot -w/fastboot/g&#x27;</span> flash-all.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入bootloader状态</span></span><br><span class="line">adb reboot bootloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入固件</span></span><br><span class="line">sh ./flash-all.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面手机会重启, 真的很久, 下次研究研究有没有替换的方法</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="刷入recovery固件"><a href="#刷入recovery固件" class="headerlink" title="刷入recovery固件"></a>刷入<code>recovery</code>固件</h3><p>命令行进入twrp镜像所在目录, 然后命令行运行如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入bootloader状态</span></span><br><span class="line">adb reboot bootloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入固件</span></span><br><span class="line">fastboot flash recovery twrp-3.0.2-0-angler.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入后不会要求重启, 马上进入下面的刷入supersu和exposed</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入恢复模式（建议还是硬件操作比较好）</span></span><br><span class="line">adb reboot recovery</span><br></pre></td></tr></table></figure>
-
-<h3 id="刷入定制的第三方定制包"><a href="#刷入定制的第三方定制包" class="headerlink" title="刷入定制的第三方定制包"></a>刷入定制的第三方定制包</h3><p>这一步基本都是手动, 手动就手动吧, 手动安装两个zip的包然后重启.</p>
-<p><strong>DONE</strong></p>
-
-      
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/" data-id="cm8k4p94w000zn09dh8jk27cf" data-title="Xposed框架安装" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-life/2016-07-10-gulp-work-study" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/life/2016-07-10-gulp-work-study/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.653Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div>
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/life/2016-07-10-gulp-work-study/">gulp学习笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="背景说明"><a href="#背景说明" class="headerlink" title="背景说明"></a>背景说明</h2><p>我的博客自14年以来更新非常缓慢,想了一下原因,主要前端这块的接触实在太少,所以每次想美化一下博客,<br>或者给博客增加一些小功能的时候非常痛苦,所以准备用工程化的理念来对博客进行管理.</p>
-<h2 id="Gulp介绍"><a href="#Gulp介绍" class="headerlink" title="Gulp介绍"></a>Gulp介绍</h2><p>gulp我的理解是, 使用npm作为类库管理, 但是使用js这种灵活的脚本来完成任务的编写,而且最吸引我的是,<br>她是基于流的, 所以给我的最大感受就是, 刚开始学习有些困难, 但是弄明白一个之后就一通百通了.</p>
-<h3 id="使用插件介绍"><a href="#使用插件介绍" class="headerlink" title="使用插件介绍"></a>使用插件介绍</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gulp-load-plugins:</span> <span class="string">以驼峰访问的方式访问以gulp开头的插件</span></span><br><span class="line"><span class="attr">gulp-util:</span> <span class="string">日志啊什么的</span></span><br><span class="line"><span class="attr">gulp-sass:</span> <span class="string">用来编译sass为css</span></span><br><span class="line"><span class="attr">gulp-filter:</span> <span class="string">过滤器</span></span><br><span class="line"><span class="attr">gulp-print:</span> <span class="string">用于输入管道的中间文件</span></span><br><span class="line"><span class="attr">gulp-concat:</span> <span class="string">用于拼接文件</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="gulp脚本重构"><a href="#gulp脚本重构" class="headerlink" title="gulp脚本重构"></a>gulp脚本重构</h3><ul>
-<li><input checked="" disabled="" type="checkbox"> 第一次重构, 将<code>config.json</code>改写成<code>config.js</code>, 是的配置的编写更加自由</li>
-<li><input checked="" disabled="" type="checkbox"> 第二次重构, 将gulp的task根据功能分成不同的文件, 便于管理和区分</li>
-</ul>
-
-      
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">About</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">Friends</a>
+        
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/life/2016-07-10-gulp-work-study/" data-id="cm8k4p94r000on09demvpdacu" data-title="gulp学习笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="23">
 
-    </footer>
-  </div>
-  
-</article>
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
 
-
-
-  
-    <article id="post-life/2016-07-13-git-study" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/life/2016-07-13-git-study/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.653Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/life/2016-07-13-git-study/">如何不换PC使用多个github账号</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>最近博客上的几个类库的cdn服务都在国外,速度很慢,想来想去,最好自己弄个cdn的仓库做服务,所以就需要有两个<br><code>github</code>的账号. 本来用起来没有问题, 但是在<code>git push</code>的时候发现没法<code>push</code>,<br><code>ssh key</code>在github上不能重复. 么有办法了, 不可能</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>相当于ssh的时候, 让ssh根据hosts的url来选择不同的密钥文件(当然你也可以设置不同仓库使用不同邮箱提交),<br>懒人配置如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/.ssh/</span><br><span class="line"><span class="built_in">touch</span> config</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认就是不配置, 走默认的密钥文件</span></span><br><span class="line">Host github.com</span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二个选择, 如果你的仓库url是形如git@two.github.com:hello/hello.git就会默认走这个配置</span></span><br><span class="line">Host two.github.com  <span class="comment"># 前缀名可以任意设置</span></span><br><span class="line">HostName github.com</span><br><span class="line">User git</span><br><span class="line">IdentityFile ~/.ssh/id_rsa1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h2><p>每个密钥文件都是<code>ssh-keygen -t rsa -b 4096 -C &quot;ziyu0123456789@gmail.com&quot;</code>这样生成的,<br>而生成的公钥又会配置到<code>github</code>上面, 所以我们如果使用了不同的密钥文件, github应该可以通过密钥的不同<br>区分出我们来.以下是我的测试及回显:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="comment">#Hi aiziyuer! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br><span class="line"><span class="comment"># 上面可以看出, github已经认出我是aiziyuer, 说明我使用的是默认密钥</span></span><br><span class="line"></span><br><span class="line">ssh -T git@two.github.com</span><br><span class="line"><span class="comment">#Hi aiziyuer-cdn! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span></span><br><span class="line"><span class="comment"># 上面识别出我是aiziyuer-cdn, 说明我使用的第二密钥</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="设置仓库使用第二密钥"><a href="#设置仓库使用第二密钥" class="headerlink" title="设置仓库使用第二密钥"></a>设置仓库使用第二密钥</h2><p>因为我的默认的仓库地址是<code>git@github.com:aiziyuer-cdn/aiziyuer-cdn.github.io.git</code>, 所以修改如下:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="built_in">rm</span> origin</span><br><span class="line">git remote add origin git@two.github.com::aiziyuer-cdn/aiziyuer-cdn.github.io.git</span><br></pre></td></tr></table></figure>
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/life/2016-07-13-git-study/" data-id="cm8k4p94t000sn09d5wqhfinn" data-title="如何不换PC使用多个github账号" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-life/2015-09-20-about-me" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/life/2015-09-20-about-me/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.652Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/life/2015-09-20-about-me/">个人简历</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>$${ (1+0.1)^{ 365 }&#x3D;37.78343433288728 }$$<br>$${ (1-0.1)^{ 365 }&#x3D;0.025517964452291 }$$</p>
-</blockquote>
-<p>通往荣誉的道路上并不是铺满鲜花的。 </p>
-<h1 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h1><ul>
-<li>手机：<code>18629673183</code>&#x2F;<code>15109237103</code>(家人)</li>
-<li>Email：<code>spritemoss@gmail.com</code></li>
-<li>QQ&#x2F;微信号：<code>910217951</code>&#x2F;<code>moss815210</code></li>
-</ul>
-<hr>
-<h1 id="个人信息"><a href="#个人信息" class="headerlink" title="个人信息"></a>个人信息</h1><ul>
-<li><p>李聪 &#x2F; 男 &#x2F; 1990</p>
-</li>
-<li><p>本科&#x2F;西安电子科技大学</p>
-</li>
-<li><p>工作年限：3年~</p>
-</li>
-<li><p>技术博客：<a target="_blank" rel="noopener" href="http://blog.aiziyuer.com/">http://blog.aiziyuer.com</a></p>
-</li>
-<li><p>Github: <a target="_blank" rel="noopener" href="https://github.com/aiziyuer">https://github.com/aiziyuer</a></p>
-</li>
-<li><p>期望职位：C++&#x2F;java高级程序员</p>
-</li>
-<li><p>期望薪资：税前月薪13k~20k，特别喜欢的公司可例外</p>
-</li>
-<li><p>期望城市：西安&#x2F;杭州</p>
-</li>
-</ul>
-<hr>
-<h1 id="工作经历"><a href="#工作经历" class="headerlink" title="工作经历"></a>工作经历</h1><h2 id="西安华为技术公司-（-2013年7月-当前-）"><a href="#西安华为技术公司-（-2013年7月-当前-）" class="headerlink" title="西安华为技术公司 （ 2013年7月 ~ 当前 ）"></a>西安华为技术公司 （ 2013年7月 ~ 当前 ）</h2><h3 id="Struts从1-0到2-0框架切换"><a href="#Struts从1-0到2-0框架切换" class="headerlink" title="Struts从1.0到2.0框架切换"></a>Struts从1.0到2.0框架切换</h3><p>我在此项目中主导完成产品Web前台框架的切换。因为是第一次接触Web，克服了对Spring和Struts的不熟悉，积极研读Apache官方文档和指导，最终在3天内完成了框架的切换，大大超出最初2周工作量估计，并且可以做到Struts1和Struts2并存，让产品可以慢慢过渡，得到部门领导的一致好评，并获得部门“金网络”的殊荣。</p>
-<h3 id="CodeCT项目"><a href="#CodeCT项目" class="headerlink" title="CodeCT项目"></a>CodeCT项目</h3><p>我在此项目中主要完成结果的图表展示功能开发。使用java自带的SAX来将java的对象转换成XML，在半天的时间内高效完成图表的展示功能开发，并且将代码形成模式，利于后续为维护和扩展。超出原始的一周工作量估计，并且实现的机制受到之后维护的兄弟一致好评。CodeCT工具最终也获得了“固网好工具”的称号。</p>
-<h3 id="VDF一期OTDR算法增强项目"><a href="#VDF一期OTDR算法增强项目" class="headerlink" title="VDF一期OTDR算法增强项目"></a>VDF一期OTDR算法增强项目</h3><p>我在此项目中主要担任双端测试的结果合并算法逻辑实现，与另外两名同事配合。过程中我积极与算法SE沟通算法规格的细节，将算法实现的风险提前暴露，最终完成VDF一期的交付，得到一线客户的认同。</p>
-<h3 id="MatchOnu项目"><a href="#MatchOnu项目" class="headerlink" title="MatchOnu项目"></a>MatchOnu项目</h3><p>我在此项目中独立完成了MatchONU的算法编写。项目中我尝试了学习JDK的模板方法抽象了算法中使用到的排列组合逻辑，使得这部分复杂逻辑可以独立与业务逻辑得到测试用例的验证，最终在两周的时间内完成了算法的实现。</p>
-<h3 id="Vectoring运维保障工具项目"><a href="#Vectoring运维保障工具项目" class="headerlink" title="Vectoring运维保障工具项目"></a>Vectoring运维保障工具项目</h3><p>我在此项目中使用SWT独立完成用户界面的开发，项目中我克服了对SWT框架不熟、java多线程、SQLite读写性能瓶颈等诸多困难，最终在与项目组SE和其余同事讨论以及在自己的研究下，在3周内完成界面开发，并获得了产品一线运维人员的好评。过程中在数据库的处理上使用了java中的反射高效完成了数据库表到对象的转换，兼顾读写速度的同时还减少了开发的工作量，获得同事的认可。</p>
-<hr>
-<h1 id="开源项目和作品"><a href="#开源项目和作品" class="headerlink" title="开源项目和作品"></a>开源项目和作品</h1><p>初出茅庐，学艺尚浅，所以工作之余将工作中或者学习中的一些心得和笔记用一些小的项目记录下来。</p>
-<h2 id="开源项目"><a href="#开源项目" class="headerlink" title="开源项目"></a>开源项目</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/aiziyuer/CurveLibrary">CurveLibrary</a>:用于学习Maven做项目管理的web项目</li>
-<li><a target="_blank" rel="noopener" href="https://github.com/aiziyuer/Signorina">Signorina</a>:学习SWT和Spring的AOP而做的客户端项目</li>
-</ul>
-<h2 id="技术文章"><a href="#技术文章" class="headerlink" title="技术文章"></a>技术文章</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://blog.aiziyuer.com/2015/05/28/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F.html">翻页效果模拟</a></li>
-<li><a target="_blank" rel="noopener" href="http://blog.aiziyuer.com/2015/06/18/Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81.html">Tomcat支持双向认证</a></li>
-</ul>
-<h1 id="技能清单"><a href="#技能清单" class="headerlink" title="技能清单"></a>技能清单</h1><p>以下均为我熟练使用的技能</p>
-<ul>
-<li>Web开发：JavaScript</li>
-<li>Web框架：Struts&#x2F;Spring</li>
-<li>前端工具：Grunt&#x2F;SaSS&#x2F;</li>
-<li>数据库相关：MySQL&#x2F;SQLite&#x2F;Oracle</li>
-<li>版本管理、文档和自动化部署工具：Svn&#x2F;Git&#x2F;Maven</li>
-<li>语言工具类：正则表达式</li>
-</ul>
-<p>一下是我熟悉的技能</p>
-<ul>
-<li>语言类：C++&#x2F;Ruby&#x2F;Qt&#x2F;Shell</li>
-</ul>
-<hr>
-<h1 id="致谢"><a href="#致谢" class="headerlink" title="致谢"></a>致谢</h1><p>感谢您花时间阅读我的简历，期待能有机会和您共事。</p>
-
-      
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        Links
+        <i class="iconfont icon-left"></i>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/life/2015-09-20-about-me/" data-id="cm8k4p94q000nn09d1wr97g0s" data-title="个人简历" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/about/" rel="tag">about</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/me/" rel="tag">me</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-graph/2015-05-28-翻页效果模拟" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.575Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/">翻页效果模拟</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p>这是一个简单的翻页模拟，还是大学里面研究的，这里相当于是复习一下，所以准备重新梳理一下文章。</p>
-<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA.png" alt="image"></p>
-<h2 id="绘制准备"><a href="#绘制准备" class="headerlink" title="绘制准备"></a>绘制准备</h2><ol>
-<li>这里为了简单体检，我使用的是<code>GeoGebra</code>进行模拟，在画布上绘制一个矩形ABCD, 然后新建一个点<code>P</code>, 相当于我们的手指触摸；</li>
-<li>然后做点P和点B的中垂线与矩形的边AB和边BC分别相交与E2,E1点：</li>
-</ol>
-<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%87%86%E5%A4%87.png" alt="image"></p>
-<h2 id="计算弯曲点"><a href="#计算弯曲点" class="headerlink" title="计算弯曲点"></a>计算弯曲点</h2><p>假设我们对纸张没有任何的弯曲， 那么线段E1E2就是折痕，但是大自然是很神奇的，纸张反抗，会有一些弯曲，先不关注怎么弯曲的，<br>纸张一定有一段是直的，没有弯曲，我们以线段PF2为例子，假设弯曲部分比例是 $f\in (0,1]$. 所以我们可以在线段PE2上面作点F2使<code>|PF2|=f|PE2|</code>.<br>所以这里的点命令为：<code>F2=(1-f)P+E2</code>，同理，做出线段PF1上的点F1. 这里我们可以认为点F1和点F2是纸张的完全开始点，那么物理上，<br>肯定在线段AB和BC上面存在与之对应的点，并且弯曲部分的曲线也一定是对称的，一样，以F2为例子，那么点F2’的坐标可以表示为<code>((x(E2)-|F2E2|，0)</code>，<br>曲线如下：</p>
-<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E8%AE%A1%E7%AE%97%E5%BC%AF%E6%9B%B2%E7%82%B9.png" alt="image"></p>
-<h2 id="绘制弯曲部分曲线"><a href="#绘制弯曲部分曲线" class="headerlink" title="绘制弯曲部分曲线"></a>绘制弯曲部分曲线</h2><p>这里的曲线是贝塞尔曲线，并且它的三个控制点我们都已经找出来了，分辨是折点、弯曲点和对称的弯曲点，这里我们去除掉线段PE2和线段PE1，然后根据三个控制点绘制贝塞尔曲线。这里有一点需要注意，Geogebra并没有自带贝塞尔曲线的函数，所以我们需要借助<code>轨迹</code>功能，来绘制函数的轨迹，这就要求我们清楚贝塞尔的定义：</p>
-<h3 id="线性贝塞尔曲线"><a href="#线性贝塞尔曲线" class="headerlink" title="线性贝塞尔曲线"></a>线性贝塞尔曲线</h3><blockquote>
-<p>给定点P0、P1，线性贝塞尔曲线只是一条两点之间的直线。这条线由下式给出：<br>$$B(t) &#x3D; { P }<em>{ 0 }+t({ P }</em>{ 1 }-{ P }<em>{ 0 })&#x3D;(1-t){ P }</em>{ 0 }+t{ P }_{ 1 }\quad ,t\in [0,1]$$<br>且其等同于线性插值。</p>
-</blockquote>
-<p>线性贝塞尔曲线函数中的t会经过由P0至P1的B（t）所描述的曲线。例如当t&#x3D;0.25时，B（t）即一条由点P0至P1路径的四分之一处。就像由0至1的连续t，B（t）描述一条由P0至P1的直线。<img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_1_big.gif" alt="image"></p>
-<h3 id="二次方贝塞尔曲线"><a href="#二次方贝塞尔曲线" class="headerlink" title="二次方贝塞尔曲线"></a>二次方贝塞尔曲线</h3><p>二次相当于是对一次的扩充</p>
-<blockquote>
-<p>二次方贝塞尔曲线的路径由给定点P0、P1、P2的函数B（t）追踪：<br>$$B(t)&#x3D;{ (1-t) }^{ 2 }{ P }<em>{ 0 }+2t(1-t){ P }</em>{ 1 }+{ t }^{ 2 }{ P }_{ 2 }\quad ,t\in [0,1]$$<br>TrueType字型就运用了以贝塞尔样条组成的二次贝塞尔曲线。</p>
-</blockquote>
-<p>为建构二次贝塞尔曲线，可以中介点Q0和Q1作为由0至1的t：</p>
-<blockquote>
-<p>由P0至P1的连续点Q0，描述一条线性贝塞尔曲线。<br>由P1至P2的连续点Q1，描述一条线性贝塞尔曲线。<br>由Q0至Q1的连续点B（t），描述一条二次贝塞尔曲线。</p>
-</blockquote>
-<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.svg.png" alt="image"> <img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.gif" alt="image"></p>
-<p>所以我们的F2-E2-F2’上的贝塞尔轨迹可以表示为$B(t)&#x3D;(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2’)\quad ,t\in[0,1]$,作图如下：</p>
-<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E6%9B%B2%E7%BA%BF.png" alt="image"></p>
-<h2 id="绘制弯曲部分的切线"><a href="#绘制弯曲部分的切线" class="headerlink" title="绘制弯曲部分的切线"></a>绘制弯曲部分的切线</h2><p>到这里，应该是已经完成了纸张弯曲的模拟部分了，但是为了更加接近于纸张的效果，我们需要作弯曲部分的切线，这个我也是想了很长时间，可以这样简单理解，我弯曲纸张，那么弯曲上下两部分收到的作用应该是一样的，所以弯曲的曲线一定是对称的，那么我们的切点其实就是曲线的中点。而一次贝塞尔曲线的中点很简单，就是两个点相加除以2的问题，那么二次呢？我们知道二次是对一次的扩充，所以我们相当于先对两个一次贝塞尔曲线求中点，然后再对中点连成的曲线求中点, $B(t)&#x3D;(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2’) ,t&#x3D;\frac { 1 }{ 2 } $, 最后的效果如下:</p>
-<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E7%9A%84%E5%88%87%E7%BA%BF.png" alt="image"></p>
-<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><p>之前尝试过载Android和Qt两个平台上进行编码，Android基本实现了Demo，但是性能非常成问题，所以这里留个任务，之后改进一下计算方法，对理论的计算工程化，争取做一个有意思的Demo出来。</p>
-
-      
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/" data-id="cm8k4p94n000gn09d20u4528i" data-title="翻页效果模拟" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-books/2015-03-30-book-list-of-2015" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/books/2015-03-30-book-list-of-2015/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.499Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/books/2015-03-30-book-list-of-2015/">2015阅读书单</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="学习正则表达式"><a href="#学习正则表达式" class="headerlink" title="学习正则表达式"></a>学习正则表达式</h2><ul>
-<li>status: 第一遍读完</li>
-<li>author: 【美】Michael Fitzgerald (王热宇 译)</li>
-<li>publisher: 人民邮电出版社</li>
-<li>language: 中文</li>
-<li>link: <a target="_blank" rel="noopener" href="http://www.duokan.com/book/62686">http://www.duokan.com/book/62686</a></li>
-<li>cover: <a target="_blank" rel="noopener" href="http://cover.read.duokan.com/mfsv2/download/s010/p01FsMcEwqgb/zlmp4cWu38g6tx.jpg!e">http://cover.read.duokan.com/mfsv2/download/s010/p01FsMcEwqgb/zlmp4cWu38g6tx.jpg!e</a></li>
-<li>description: 整本书对正则的介绍还算详实,但是不能当做工具书,因为书中涉及了多门语言, perl, javascript, java, python等, 如果是想要当工具书, 推荐&lt;&lt;30分钟正则表达式入门&gt;&gt;</li>
-</ul>
-<h2 id="30分钟入门正则表达式"><a href="#30分钟入门正则表达式" class="headerlink" title="30分钟入门正则表达式"></a>30分钟入门正则表达式</h2><ul>
-<li>status: 完成</li>
-<li>author: 互联网</li>
-<li>publisher: 互联网</li>
-<li>language: 中文</li>
-<li>link: <a target="_blank" rel="noopener" href="http://hijiangtao.github.io/2014/06/29/StudyNodeofRE/">http://hijiangtao.github.io/2014/06/29/StudyNodeofRE/</a></li>
-<li>description: 非常棒的总结的书籍, 第一遍读一点都没有负担,在工作中边学边读,很多知识温故而知新,我已经通读了3遍了,但是每次用到的时候还会觉得有收获</li>
-</ul>
-
-      
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="search shortcut key i"></i>
+            <div class="right-title">All</div>
+            <i class="iconfont icon-file-tree" data-title="switch to outline view shortcut key w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="return"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="case sensitive"></i>
+            <i class="iconfont icon-tag" data-title="label"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">outline</div>
+            <i class="iconfont icon-list" data-title="switch to article list"></i>
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/books/2015-03-30-book-list-of-2015/" data-id="cm8k4p94b0002n09d8w6og27d" data-title="2015阅读书单" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
 
-
-
-  
-    <article id="post-blog/2016-07-17-how-to-add-disqus" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/blog/2016-07-17-how-to-add-disqus/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.425Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/blog/2016-07-17-how-to-add-disqus/">怎样为你的博客增加评论功能</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>看了那么多网上使用多说失败的帖子, 所以决定直接使用<a target="_blank" rel="noopener" href="https://disqus.com/"><code>disqus</code></a>作为我的博客系统</p>
-<h2 id="博客微调"><a href="#博客微调" class="headerlink" title="博客微调"></a>博客微调</h2><p>这个评论系统做的真的非常棒, 暂时还不了解它的工作原理, 不明白它怎么区分不同的文章的, 不管怎样,先布上去再说.</p>
-<h3 id="页面修改"><a href="#页面修改" class="headerlink" title="页面修改"></a>页面修改</h3><p>我的博客比较简单, 因为我只想给每个<code>post</code>页面, 所以在post页面中多一个<code>include</code>文件<code>disqus</code>, 内容如下:</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- An element a visitor can click if they &lt;3 comments! --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;disqus_thread&quot;</span> <span class="attr">name</span>=<span class="string">&quot;&#123;&#123; site.disqus.shortname &#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span>Please enable JavaScript to view the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://disqus.com/?ref_noscript&quot;</span>&gt;</span>comments powered by Disqus.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://disqus.com&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dsq-brlink&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>Loading Disqus comments...<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样每个页面在加完后都会多个div来表示需要拉取谁的评论信息, 我这里使用的jekyll博客, 所以这里的配置其实是来自<code>_config.yml</code>:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">disqus:</span></span><br><span class="line">  <span class="attr">shortname:</span> <span class="string">aiziyuer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="脚本修改"><a href="#脚本修改" class="headerlink" title="脚本修改"></a>脚本修改</h3><p>我这里使用的ajax的方式执行js, 详细如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ds_loaded = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> top = $(<span class="string">&#x27;#disqus_thread&#x27;</span>).<span class="title function_">offset</span>().<span class="property">top</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">disqus_shortname</span> = $(<span class="string">&#x27;#disqus_thread&#x27;</span>).<span class="title function_">attr</span>(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">check</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="keyword">if</span> ( !ds_loaded &amp;&amp; container.<span class="title function_">scrollTop</span>() + container.<span class="title function_">height</span>() &gt; top ) &#123;</span><br><span class="line">  $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;//&#x27;</span> + disqus_shortname + <span class="string">&#x27;.disqus.com/embed.js&#x27;</span>,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&#x27;script&#x27;</span>,</span><br><span class="line">    <span class="attr">cache</span>: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  ds_loaded = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="title function_">check</span>();</span><br><span class="line">container.<span class="title function_">scroll</span>(check);</span><br></pre></td></tr></table></figure>
-
-      
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>2015</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>技术</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>前端</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>生活</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>数学，图形，Geogebra</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法，统计</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>算法，java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>效率</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>自动化</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>about</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>android</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>bash</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>bat</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>blog</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>git</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>java</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>javascript</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>keytool</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>me</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>nodejs</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ssh</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>sublime</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>websocket</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>windows</a>
+            </li>
+        
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/blog/2016-07-17-how-to-add-disqus/" data-id="cm8k4p94l000cn09dawb67hii" data-title="怎样为你的博客增加评论功能" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
+</div>
 
-
-
-  
-    <article id="post-blog/2016-07-14-how-to-accelerate-your-blog" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/blog/2016-07-14-how-to-accelerate-your-blog/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.424Z" itemprop="datePublished">2025-03-22</time>
-</a>
     
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <nav id="title-list-nav">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/blog/2016-07-14-how-to-accelerate-your-blog/">怎样加速你的博客</a>
-    </h1>
-  
+        
+        <a  class="All 网页 "
+           href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/"
+           data-tag="java,keytool"
+           data-author="" >
+            <span class="post-title" title="Tomcat支持双向认证">Tomcat支持双向认证</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 网页 "
+           href="/2025/03/22/web/2016-07-16-timeline-guide/"
+           data-tag="javascript"
+           data-author="" >
+            <span class="post-title" title="TimeLine学习手记">TimeLine学习手记</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 工具 "
+           href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
+           data-tag="2015,sublime,前端"
+           data-author="" >
+            <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/"
+           data-tag="bat,windows"
+           data-author="" >
+            <span class="post-title" title="win下让Kafka以Service方式运行">win下让Kafka以Service方式运行</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-05-09-maven%E5%BC%80%E5%8F%91web/"
+           data-tag="websocket"
+           data-author="" >
+            <span class="post-title" title="maven开发web">maven开发web</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 算法 "
+           href="/2025/03/22/study/2015-08-09-%E5%8C%BA%E9%97%B4%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/"
+           data-tag="算法，java"
+           data-author="" >
+            <span class="post-title" title="区间查找算法">区间查找算法</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-03-30-leetCode-TwoNumbers%20/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Add Two Numbers">Add Two Numbers</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 学习 "
+           href="/2025/03/22/study/2015-03-30-leetCode-TwoSum/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Two Sum">Two Sum</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 移动 "
+           href="/2025/03/22/mobile/2016-07-15-android-xposed-module-introduce/"
+           data-tag="android,生活,效率"
+           data-author="" >
+            <span class="post-title" title="好用的Xposed模块推荐">好用的Xposed模块推荐</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 移动 "
+           href="/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/"
+           data-tag="android,生活,效率"
+           data-author="" >
+            <span class="post-title" title="Xposed框架安装">Xposed框架安装</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2025/03/22/life/2016-07-10-gulp-work-study/"
+           data-tag="nodejs,自动化"
+           data-author="" >
+            <span class="post-title" title="gulp学习笔记">gulp学习笔记</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2025/03/22/life/2016-07-13-git-study/"
+           data-tag="git,ssh"
+           data-author="" >
+            <span class="post-title" title="如何不换PC使用多个github账号">如何不换PC使用多个github账号</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 生活 "
+           href="/2025/03/22/life/2015-09-20-about-me/"
+           data-tag="about,me"
+           data-author="" >
+            <span class="post-title" title="个人简历">个人简历</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 图形 "
+           href="/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/"
+           data-tag="数学，图形，Geogebra"
+           data-author="" >
+            <span class="post-title" title="翻页效果模拟">翻页效果模拟</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 读书 "
+           href="/2025/03/22/books/2015-03-30-book-list-of-2015/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="2015阅读书单">2015阅读书单</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-17-how-to-add-disqus/"
+           data-tag="技术"
+           data-author="" >
+            <span class="post-title" title="怎样为你的博客增加评论功能">怎样为你的博客增加评论功能</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-11-how-to-manager-blog-start/"
+           data-tag="blog,bash"
+           data-author="" >
+            <span class="post-title" title="如何高效地管理博客">如何高效地管理博客</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-14-how-to-accelerate-your-blog/"
+           data-tag="技术"
+           data-author="" >
+            <span class="post-title" title="怎样加速你的博客">怎样加速你的博客</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-11-how-blog-support-search/"
+           data-tag="blog,javascript"
+           data-author="" >
+            <span class="post-title" title="如何实现博客的搜索">如何实现博客的搜索</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 博客 "
+           href="/2025/03/22/blog/2016-07-10-blog-roadmap/"
+           data-tag="技术"
+           data-author="" >
+            <span class="post-title" title="博客的RoadMap">博客的RoadMap</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All 算法 "
+           href="/2025/03/22/ai/2015-10-07-how-to-calculate-mean-and-variance/"
+           data-tag="算法，统计"
+           data-author="" >
+            <span class="post-title" title="如何计算方差和平均值">如何计算方差和平均值</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/hello-world/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="Hello World">Hello World</span>
+            <span class="post-date" title="2025-03-22 19:27:10">2025/03/22</span>
+        </a>
+        
+        <div id="no-item-tips">
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>众所周知,墙内的生活是拮据的,国内访问github速度一直都非常缓慢,如果你跟我一样选择github的pages服务的话应该会碰到跟我一样的烦恼;</p>
-<ul>
-<li>国内访问速度巨慢, 但是国外的github服务非常稳定, 而且免费</li>
-<li>国内有替代品<code>coding.net</code>(gitcafe是他的前身), 但是全部放到上面不太放心</li>
-</ul>
-<p>搜索了一下, 发现有人已经想到了解决的办法, 这里只是做一些简单的说明</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>如今的域名解析已经非常多样了, 除了普通意义的顶级域名(.com)的根域名解析, 想godday这样的大厂还会把域名映射功能”外包”出去,即允许<br>第三方的域名服务提供商来提供这部分域名的解析功能, 而国内的<code>dnspod</code>就是这样一个存在, 它虽然不具备顶级域名的发放功能,但是实际上<br>他是具有这样的能力(生得太晚了), 而且它的功能做的已经比godday还要好, 它可以针对线路的类型来分流;</p>
-<p>如果是<code>godday</code>+<code>dnspod</code>这样的组合,我们访问我们域名的整个过程就变成了 浏览器请求 -&gt; 根域名服务解析 -&gt; 一级域名解析<br>-&gt; DNSPod根据请求的发起线路选择服务节点 -&gt; 最终的服务提供 -&gt; 相应请求</p>
-<h2 id="我对CNAME的理解"><a href="#我对CNAME的理解" class="headerlink" title="我对CNAME的理解"></a>我对CNAME的理解</h2><p>我觉得博客中的<code>CNAME</code>文件在<code>github</code>中会起到一个跳转作用, 但是不论是<code>github</code>还是<code>coding.net</code>, 其实C<code>NAME</code>文件只是为了<br>让他们的服务器面授<code>DDOS</code>攻击,对于博客作者和博客观众没有任何作用.</p>
-<p>DNS记录中配置的<code>CNAME</code>是有用处的,它允许你使用域名的方式制定私服节点(运行博客的服务器);</p>
-<h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><ol>
-<li><p>到<a target="_blank" rel="noopener" href="https://www.dnspod.cn/"><code>dnspod</code></a>注册个号, 然后进入控制台准备配置;</p>
-</li>
-<li><p>找到<em><strong>域名解析</strong></em>然后<em><strong>添加域名</strong></em>,这里基本都是傻瓜式;</p>
-</li>
-<li><p>添加三条记录, 根据线路类型做分流的两条记录以及一条默认线路:</p>
-<p> 编号    |主机记录    |记录类型    |线路类型    | 记录值<br> 1    |@         |CNAME    |默认     | aiziyuer.github.io<br> 2    |@         |CNAME     |国内     | aiziyuer.coding.me<br> 3    |@        |CNAME     |国外     | aiziyuer.github.io</p>
-</li>
-<li><p>需要设置<code>godday</code>使用<code>dnspod</code>来做<code>nameservice</code>;<br> godday 的DNS Manager -&gt; Nameservers 选择自定义 -&gt; 添加两条<code>f1g1ns1.dnspod.net</code>、<code>f1g1ns2.dnspod.net</code><br> -&gt; 保存然后等待修改生效</p>
-</li>
-</ol>
-
-      
+        </div>
+    </nav>
+    <div id="outline-list">
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/blog/2016-07-14-how-to-accelerate-your-blog/" data-id="cm8k4p94i0007n09dduzo1ucp" data-title="怎样加速你的博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li></ul>
+</div>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blog/2016-07-11-how-to-manager-blog-start" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/blog/2016-07-11-how-to-manager-blog-start/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.424Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/blog/2016-07-11-how-to-manager-blog-start/">如何高效地管理博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>我的博客主要是采用<code>jekyll</code>作为后台进行<code>markdown</code>文法的文章渲染,但是我在使用过程中发现主要有两种使用场景:</p>
-<ul>
-<li>对博客主题进行修改 – 往往需要调节<code>css</code>和<code>js</code>等跟博客文章无关的东西, 需要一个可以即时预览的功能</li>
-<li>纯粹写文章, 不想被其他因素打扰, 不涉及美化工作, 文法基本已经记住,不需要实时预览,但是需要刷新页面就能看效果</li>
-</ul>
-<h2 id="实时预览功能"><a href="#实时预览功能" class="headerlink" title="实时预览功能"></a>实时预览功能</h2><p>这个实时预览功能, 最直接的就是修改文章样式后, 浏览器(可能还有我的手机平板)上的网页内容需要跟着刷新.而且同时<br>我的博客中样式的编写都是<code>scss</code>的,所以需要有个实时的编译器,观察到我的样式改变后,立刻生成对应的<code>css</code>文件,并且通知<br><code>jekyll</code>服务刷新头文件,最后通知浏览器刷新页面.</p>
-<h3 id="前端自动化"><a href="#前端自动化" class="headerlink" title="前端自动化"></a>前端自动化</h3><p>考虑到博客也算是一个弱化的前端工程,尝试过<a target="_blank" rel="noopener" href="http://compass-style.org/"><code>compass</code></a>、<br><a target="_blank" rel="noopener" href="http://koala-app.com/"><code>kola</code></a>,觉得限制实在太多,<br>所以干脆从头开始使用纯前端自动化工具<a target="_blank" rel="noopener" href="http://www.gulpjs.com.cn/"><code>gulp</code></a>管理博客.</p>
-<h3 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h3><p><code>gulp</code>这个东西给我的感觉有点像<code>unix</code>的味道, 不过不管她多么好用,依然离不开<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/"><code>nodejs</code></a>,<br><a target="_blank" rel="noopener" href="https://www.npmjs.com/"><code>npm</code></a>,我这里就不赘述. 以下是我的一些<code>gulp</code>任务书写经验</p>
-<ul>
-<li><code>gulpfile.js</code>其实可以是一个文件夹, <code>gulp</code>的运行非常聪明, 她可以以文件夹下的index.js作为入口文件</li>
-<li>整个工程中,只有<code>gulp</code>的脚本是属于<code>nodejs</code>, 所以<code>.jshintrc</code>文件建议在<code>gulpfile.js</code>单独弄一个</li>
-<li>使用<a target="_blank" rel="noopener" href="https://github.com/aseemk/requireDir"><code>require-dir</code></a>插件可以遍历一个文件夹下所有的<code>javascript</code>文件,懒人必备</li>
-<li><code>config.json</code>作为配置文件的方式太low了, 一律使用<code>config.js</code>+ <code>module.exports</code>的方式替代,美真的不是一点点</li>
-</ul>
-<h3 id="Sass的编译"><a href="#Sass的编译" class="headerlink" title="Sass的编译"></a>Sass的编译</h3><blockquote>
-<p>talk’s cheap, show u the code.</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js/tasks/css.js 定义编译的任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    gulp.<span class="title function_">src</span>(config.<span class="property">src</span>.<span class="property">scss</span> + <span class="string">&#x27;/**/*.?(s)css&#x27;</span>)</span><br><span class="line">        .<span class="title function_">pipe</span>($.<span class="title function_">sass</span>())</span><br><span class="line">        .<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">        	<span class="comment">// 这里捕获异常, 只是打印错误日志, 不会终止css任务</span></span><br><span class="line">            $.util.<span class="title function_">log</span>(err);</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;style.css&#x27;</span>))</span><br><span class="line">        .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(config.<span class="property">src</span>.<span class="property">css</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js/tasks/watch.js 定义watch任务, 当有css文件更新就触发编译任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;watch:css&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    gulp.<span class="title function_">watch</span>(config.<span class="property">src</span>.<span class="property">scss</span> + <span class="string">&#x27;**/*.?(s)css&#x27;</span>, [<span class="string">&#x27;css&#x27;</span>]);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="Jekyll编译服务"><a href="#Jekyll编译服务" class="headerlink" title="Jekyll编译服务"></a>Jekyll编译服务</h3><p>因为<code>jekyll</code>是使用<code>ruby</code>语言开发的一个小的服务器,所以需要使用<code>nodejs</code>提供的<code>chind.spawn</code>的方式来多进程运行:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js/tasks/jekyll.js 使用child.spawn来完成jekyll进程的启动</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;jekyll&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> jekyll_exe = process.<span class="property">platform</span> === <span class="string">&quot;win32&quot;</span> ? <span class="string">&quot;jekyll.bat&quot;</span> : <span class="string">&quot;jekyll&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> jekyll = child.<span class="title function_">spawn</span>(jekyll_exe, [<span class="string">&#x27;build&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;--incremental&#x27;</span>, <span class="comment">// 当文章非常多的时候开启, 文章少的时候貌似不开效果更好</span></span><br><span class="line">        <span class="string">&#x27;--watch&#x27;</span></span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> <span class="title function_">jekyllLogger</span> = (<span class="params">buffer</span>) =&gt; &#123;</span><br><span class="line">        buffer.<span class="title function_">toString</span>()</span><br><span class="line">            .<span class="title function_">split</span>(<span class="regexp">/\n/</span>)</span><br><span class="line">            .<span class="title function_">forEach</span>(<span class="function">(<span class="params">message</span>) =&gt;</span> $.util.<span class="title function_">log</span>(<span class="string">&#x27;Jekyll: &#x27;</span> + message));</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    jekyll.<span class="property">stdout</span>.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, jekyllLogger);</span><br><span class="line">    jekyll.<span class="property">stderr</span>.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, jekyllLogger);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="同步刷新浏览器"><a href="#同步刷新浏览器" class="headerlink" title="同步刷新浏览器"></a>同步刷新浏览器</h3><p>这里要介绍下一个很好玩的插件<a target="_blank" rel="noopener" href="https://www.browsersync.io/"><code>browserSync</code></a>, 我的理解是她代理了一部分的http服务,<br>所以访问网站的同时,其实是她在页面的投入加入了一些东西, 所以她可以远程触发浏览器重新请求网页, 配置如下:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br><span class="line"></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;server&#x27;</span>, [<span class="string">&#x27;css&#x27;</span>], <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	$.util.<span class="title function_">log</span>(config.<span class="property">site</span>);</span><br><span class="line"></span><br><span class="line">    browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">        <span class="attr">files</span>: [config.<span class="property">site</span>.<span class="property">root</span> + <span class="string">&#x27;/**&#x27;</span>],</span><br><span class="line">        <span class="attr">port</span>: <span class="number">3131</span>,</span><br><span class="line">        <span class="attr">server</span>: &#123;</span><br><span class="line">            <span class="attr">baseDir</span>: config.<span class="property">site</span>.<span class="property">root</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">   </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="汇总gulp任务"><a href="#汇总gulp任务" class="headerlink" title="汇总gulp任务"></a>汇总gulp任务</h3><p>到这里, 基本上稍微串一串几个任务就可以实现第一个需求了: <code>gulp.task(&#39;start&#39;, [&#39;jekyll&#39;,&#39;server&#39;, &#39;watch&#39;]);</code></p>
-<h3 id="纯粹写代码"><a href="#纯粹写代码" class="headerlink" title="纯粹写代码"></a>纯粹写代码</h3><p>由于我之前博客是使用<code>gulp</code>来进行管理, 这种方式肯定是希望控制台回显更多的错误日志才好,但是如果是平时的使用,我更希望专注于内容的协作, 所以我使用<code>bash</code>改写了启动脚本:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">usage</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span> <span class="string">&quot;</span></span><br><span class="line"><span class="string">Usage</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  start [options]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Options</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-k|--kill] 杀死jekyll进程</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-j|--jekyll] 启动jekyll进程</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-h|--help] 显示帮助</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-g|--gulp] gulp的方式运行</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">kill_jekyll_service</span></span>()&#123;</span><br><span class="line">  ps -ef | grep jekyll | grep -v grep | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">start_jekyll_service</span></span>()&#123;</span><br><span class="line">  jekyll server &gt;output.log 2&gt;&amp;1 &amp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">gulp_start</span></span>()&#123;</span><br><span class="line">  gulp start</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">    (-k|--<span class="built_in">kill</span>)</span><br><span class="line">	    kill_jekyll_service</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">	    ;;</span><br><span class="line"></span><br><span class="line">    (-j|--jekyll)</span><br><span class="line">      kill_jekyll_service</span><br><span class="line">      start_jekyll_service</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">    (-h|--<span class="built_in">help</span>)</span><br><span class="line">      usage</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">    (-g|--gulp)</span><br><span class="line">      gulp_start</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">    (*)</span><br><span class="line">      usage</span><br><span class="line">      <span class="built_in">exit</span> 1</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
-
-      
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/blog/2016-07-11-how-to-manager-blog-start/" data-id="cm8k4p94k000bn09dar9j7pyz" data-title="如何高效地管理博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-blog/2016-07-11-how-blog-support-search" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/03/22/blog/2016-07-11-how-blog-support-search/" class="article-date">
-  <time class="dt-published" datetime="2025-03-22T11:29:07.423Z" itemprop="datePublished">2025-03-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/22/blog/2016-07-11-how-blog-support-search/">如何实现博客的搜索</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>这个问题其实是在几个月前已经解决了,但是这个问题确确实实困扰了我很长的时间,所以我相信写出来肯定也会方便不少人.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">&#x27;#search-input&#x27;</span>).<span class="title function_">keyup</span>(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line"></span><br><span class="line">    $(<span class="variable language_">this</span>).<span class="title function_">addClass</span>(<span class="string">&#x27;active&#x27;</span>).<span class="title function_">siblings</span>().<span class="title function_">removeClass</span>(<span class="string">&#x27;active&#x27;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先将隐藏所有的文章</span></span><br><span class="line">    $(<span class="string">&#x27;.pl__all&#x27;</span>).<span class="title function_">hide</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取输入框的内容(转小写是为了不区分大小写)</span></span><br><span class="line">    <span class="keyword">var</span> search_val = $(<span class="string">&#x27;#search-input&#x27;</span>).<span class="title function_">val</span>().<span class="title function_">toLowerCase</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里是获取当前用户选择了分类</span></span><br><span class="line">    $(<span class="string">&#x27;#pl__container &gt; .&#x27;</span> + $(<span class="string">&#x27;#tags__ul &gt; .active&#x27;</span>).<span class="title function_">attr</span>(<span class="string">&#x27;id&#x27;</span>) + <span class="string">&#x27; &gt; .pl__title &#x27;</span>).<span class="title function_">each</span>(<span class="keyword">function</span>(<span class="params">i</span>) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> e = $(<span class="variable language_">this</span>);</span><br><span class="line">        <span class="comment">// 忽略大小写后进行比较</span></span><br><span class="line">        <span class="keyword">if</span> (e.<span class="title function_">text</span>().<span class="title function_">toLowerCase</span>().<span class="title function_">contains</span>(search_val)) &#123;</span><br><span class="line">            <span class="comment">// 设置延迟10ms并且渐变显示出来</span></span><br><span class="line">            e.<span class="title function_">parent</span>().<span class="title function_">delay</span>(<span class="number">10</span>).<span class="title function_">fadeIn</span>(<span class="number">15</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-      
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="https://aiziyuer.github.io/2025/03/22/blog/2016-07-11-how-blog-support-search/" data-id="cm8k4p94h0006n09dbf7scwtg" data-title="如何实现博客的搜索" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
-  </nav>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E9%A1%B5/">网页</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/" rel="tag">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/about/" rel="tag">about</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bat/" rel="tag">bat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keytool/" rel="tag">keytool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/me/" rel="tag">me</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/" rel="tag">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" rel="tag">算法，java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" rel="tag">算法，统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/2015/" style="font-size: 10px;">2015</a> <a href="/tags/about/" style="font-size: 10px;">about</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bat/" style="font-size: 10px;">bat</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/me/" style="font-size: 10px;">me</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 15px;">效率</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" style="font-size: 10px;">数学，图形，Geogebra</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 15px;">生活</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" style="font-size: 10px;">算法，java</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">算法，统计</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/">Tomcat支持双向认证</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/web/2016-07-16-timeline-guide/">TimeLine学习手记</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/">Sublime-配置</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/tools/2015-10-24-vim-compile/">vim-compile</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/">win下让Kafka以Service方式运行</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
 </aside>
+<div id="post" class="index">
+    <div class="pjax">
+        <article class="index">
+            <div class="toc-ref">
+    
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+            # Why Blog
+## 对博客的理解
+喜欢写Blog的人，会经历三个阶段。
+>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。
+
+>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。
+
+>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。
+ 
+我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。
+
+通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。
+
+## 关于叶落阁
+**叶落阁** 是阁主的个人站。
+
+到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。
+
+本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次
+
+## 博客平台
+这个博客通过 [Hexo](https://hexo.io/) 生成，部署在 [GitHub Pages](https://pages.github.com/)主题 [3-hexo](https://github.com/yelog/hexo-theme-3-hexo) 已经在github上开源
+
+`3-hexo` 主题使用交流可以加 Q群: <a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=e8cf083cc097141eaf323396f1766809b8e90ff00c67bb441898f672892f6904"><img data-ignore border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="3-hexo使用交流" title="3-hexo使用交流"></a>
+
+主要功能：
+- 搜索支持文章标题、标签(#标签)、作者(@作者)
+- pad/手机等移动端适配
+- 页面全局快捷键 <a target="_blank" rel="noopener" href='http://yelog.org/2017/03/24/3-hexo-shortcuts/'>3-hexo快捷键说明</a>
+
+        </article>
+        
+        <p>
+            <a  class="dashang" onclick="dashangToggle()">赏</a>
+        </p>
+        
+        
     </div>
-  </div>
-</footer>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2016-2020 Yelog
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
 
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+</div>
+<div class="full-toc">
+    <button class="full" data-title="Toggle full screen shortcut key s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>Help us with donation</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">alipay</label></span><span><label><input type="radio" name="pay" value="weixin">weixin</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
     
 
 
-<script src="/js/jquery-3.6.4.min.js"></script>
+    /*引用块样式*/
+    
 
+    /*文章列表背景图*/
+    
 
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
+    
+</style>
 
 
 
 
-  </div>
-</body>
+
+
+
 </html>
