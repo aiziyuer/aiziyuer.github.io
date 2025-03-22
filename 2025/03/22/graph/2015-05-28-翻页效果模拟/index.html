@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>翻页效果模拟 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="效果展示这是一个简单的翻页模拟，还是大学里面研究的，这里相当于是复习一下，所以准备重新梳理一下文章。  绘制准备 这里为了简单体检，我使用的是GeoGebra进行模拟，在画布上绘制一个矩形ABCD, 然后新建一个点P, 相当于我们的手指触摸； 然后做点P和点B的中垂线与矩形的边AB和边BC分别相交与E2,E1点：   计算弯曲点假设我们对纸张没有任何的弯曲， 那么线段E1E2就是折痕，但是大自然是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="翻页效果模拟">
+<meta property="og:url" content="http://aiziyuer.github.io/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="效果展示这是一个简单的翻页模拟，还是大学里面研究的，这里相当于是复习一下，所以准备重新梳理一下文章。  绘制准备 这里为了简单体检，我使用的是GeoGebra进行模拟，在画布上绘制一个矩形ABCD, 然后新建一个点P, 相当于我们的手指触摸； 然后做点P和点B的中垂线与矩形的边AB和边BC分别相交与E2,E1点：   计算弯曲点假设我们对纸张没有任何的弯曲， 那么线段E1E2就是折痕，但是大自然是">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA.png">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%87%86%E5%A4%87.png">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E8%AE%A1%E7%AE%97%E5%BC%AF%E6%9B%B2%E7%82%B9.png">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_1_big.gif">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.svg.png">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.gif">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E6%9B%B2%E7%BA%BF.png">
+<meta property="og:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E7%9A%84%E5%88%87%E7%BA%BF.png">
+<meta property="article:published_time" content="2025-03-22T11:29:07.575Z">
+<meta property="article:modified_time" content="2025-03-22T11:29:07.575Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数学，图形，Geogebra">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://aiziyuer.github.io/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://aiziyuer.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-graph/2015-05-28-翻页效果模拟" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/" class="article-date">
+  <time class="dt-published" datetime="2025-03-22T11:29:07.575Z" itemprop="datePublished">2025-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      翻页效果模拟
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p>这是一个简单的翻页模拟，还是大学里面研究的，这里相当于是复习一下，所以准备重新梳理一下文章。</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA.png" alt="image"></p>
+<h2 id="绘制准备"><a href="#绘制准备" class="headerlink" title="绘制准备"></a>绘制准备</h2><ol>
+<li>这里为了简单体检，我使用的是<code>GeoGebra</code>进行模拟，在画布上绘制一个矩形ABCD, 然后新建一个点<code>P</code>, 相当于我们的手指触摸；</li>
+<li>然后做点P和点B的中垂线与矩形的边AB和边BC分别相交与E2,E1点：</li>
+</ol>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%87%86%E5%A4%87.png" alt="image"></p>
+<h2 id="计算弯曲点"><a href="#计算弯曲点" class="headerlink" title="计算弯曲点"></a>计算弯曲点</h2><p>假设我们对纸张没有任何的弯曲， 那么线段E1E2就是折痕，但是大自然是很神奇的，纸张反抗，会有一些弯曲，先不关注怎么弯曲的，<br>纸张一定有一段是直的，没有弯曲，我们以线段PF2为例子，假设弯曲部分比例是 $f\in (0,1]$. 所以我们可以在线段PE2上面作点F2使<code>|PF2|=f|PE2|</code>.<br>所以这里的点命令为：<code>F2=(1-f)P+E2</code>，同理，做出线段PF1上的点F1. 这里我们可以认为点F1和点F2是纸张的完全开始点，那么物理上，<br>肯定在线段AB和BC上面存在与之对应的点，并且弯曲部分的曲线也一定是对称的，一样，以F2为例子，那么点F2’的坐标可以表示为<code>((x(E2)-|F2E2|，0)</code>，<br>曲线如下：</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E8%AE%A1%E7%AE%97%E5%BC%AF%E6%9B%B2%E7%82%B9.png" alt="image"></p>
+<h2 id="绘制弯曲部分曲线"><a href="#绘制弯曲部分曲线" class="headerlink" title="绘制弯曲部分曲线"></a>绘制弯曲部分曲线</h2><p>这里的曲线是贝塞尔曲线，并且它的三个控制点我们都已经找出来了，分辨是折点、弯曲点和对称的弯曲点，这里我们去除掉线段PE2和线段PE1，然后根据三个控制点绘制贝塞尔曲线。这里有一点需要注意，Geogebra并没有自带贝塞尔曲线的函数，所以我们需要借助<code>轨迹</code>功能，来绘制函数的轨迹，这就要求我们清楚贝塞尔的定义：</p>
+<h3 id="线性贝塞尔曲线"><a href="#线性贝塞尔曲线" class="headerlink" title="线性贝塞尔曲线"></a>线性贝塞尔曲线</h3><blockquote>
+<p>给定点P0、P1，线性贝塞尔曲线只是一条两点之间的直线。这条线由下式给出：<br>$$B(t) &#x3D; { P }<em>{ 0 }+t({ P }</em>{ 1 }-{ P }<em>{ 0 })&#x3D;(1-t){ P }</em>{ 0 }+t{ P }_{ 1 }\quad ,t\in [0,1]$$<br>且其等同于线性插值。</p>
+</blockquote>
+<p>线性贝塞尔曲线函数中的t会经过由P0至P1的B（t）所描述的曲线。例如当t&#x3D;0.25时，B（t）即一条由点P0至P1路径的四分之一处。就像由0至1的连续t，B（t）描述一条由P0至P1的直线。<img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_1_big.gif" alt="image"></p>
+<h3 id="二次方贝塞尔曲线"><a href="#二次方贝塞尔曲线" class="headerlink" title="二次方贝塞尔曲线"></a>二次方贝塞尔曲线</h3><p>二次相当于是对一次的扩充</p>
+<blockquote>
+<p>二次方贝塞尔曲线的路径由给定点P0、P1、P2的函数B（t）追踪：<br>$$B(t)&#x3D;{ (1-t) }^{ 2 }{ P }<em>{ 0 }+2t(1-t){ P }</em>{ 1 }+{ t }^{ 2 }{ P }_{ 2 }\quad ,t\in [0,1]$$<br>TrueType字型就运用了以贝塞尔样条组成的二次贝塞尔曲线。</p>
+</blockquote>
+<p>为建构二次贝塞尔曲线，可以中介点Q0和Q1作为由0至1的t：</p>
+<blockquote>
+<p>由P0至P1的连续点Q0，描述一条线性贝塞尔曲线。<br>由P1至P2的连续点Q1，描述一条线性贝塞尔曲线。<br>由Q0至Q1的连续点B（t），描述一条二次贝塞尔曲线。</p>
+</blockquote>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.svg.png" alt="image"> <img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.gif" alt="image"></p>
+<p>所以我们的F2-E2-F2’上的贝塞尔轨迹可以表示为$B(t)&#x3D;(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2’)\quad ,t\in[0,1]$,作图如下：</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E6%9B%B2%E7%BA%BF.png" alt="image"></p>
+<h2 id="绘制弯曲部分的切线"><a href="#绘制弯曲部分的切线" class="headerlink" title="绘制弯曲部分的切线"></a>绘制弯曲部分的切线</h2><p>到这里，应该是已经完成了纸张弯曲的模拟部分了，但是为了更加接近于纸张的效果，我们需要作弯曲部分的切线，这个我也是想了很长时间，可以这样简单理解，我弯曲纸张，那么弯曲上下两部分收到的作用应该是一样的，所以弯曲的曲线一定是对称的，那么我们的切点其实就是曲线的中点。而一次贝塞尔曲线的中点很简单，就是两个点相加除以2的问题，那么二次呢？我们知道二次是对一次的扩充，所以我们相当于先对两个一次贝塞尔曲线求中点，然后再对中点连成的曲线求中点, $B(t)&#x3D;(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2’) ,t&#x3D;\frac { 1 }{ 2 } $, 最后的效果如下:</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E7%9A%84%E5%88%87%E7%BA%BF.png" alt="image"></p>
+<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><p>之前尝试过载Android和Qt两个平台上进行编码，Android基本实现了Demo，但是性能非常成问题，所以这里留个任务，之后改进一下计算方法，对理论的计算工程化，争取做一个有意思的Demo出来。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://aiziyuer.github.io/2025/03/22/graph/2015-05-28-%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/" data-id="cm8k4nc1y000h4r9d25upgwg1" data-title="翻页效果模拟" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/22/life/2015-09-20-about-me/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          个人简历
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/22/books/2015-03-30-book-list-of-2015/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015阅读书单</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E9%A1%B5/">网页</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/" rel="tag">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/about/" rel="tag">about</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bat/" rel="tag">bat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keytool/" rel="tag">keytool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/me/" rel="tag">me</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/" rel="tag">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" rel="tag">算法，java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" rel="tag">算法，统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2015/" style="font-size: 10px;">2015</a> <a href="/tags/about/" style="font-size: 10px;">about</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bat/" style="font-size: 10px;">bat</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/me/" style="font-size: 10px;">me</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 15px;">效率</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" style="font-size: 10px;">数学，图形，Geogebra</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 15px;">生活</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" style="font-size: 10px;">算法，java</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">算法，统计</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/">Tomcat支持双向认证</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/web/2016-07-16-timeline-guide/">TimeLine学习手记</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/">Sublime-配置</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/tools/2015-10-24-vim-compile/">vim-compile</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/">win下让Kafka以Service方式运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

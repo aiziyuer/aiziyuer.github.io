@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Xposed框架安装 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="今天早晨醒来, 手机显示有了新的操作系统更新, 所以晚上照旧 下载Factory固件 -&gt;线刷 -&gt; 检查recovery包 -&gt; 恢复root -&gt; 恢复xposed框架 以上的过程对于我现在来说比较熟悉的情况下大概需要花费我1-2小时的时间 为什么选择全部手工?其实我也是一个懒人, 所以我肯定写过一些脚本来自动做, 目前这个脚本已经可以自动去官网上自动下载最新的fato">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Xposed框架安装">
+<meta property="og:url" content="http://aiziyuer.github.io/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天早晨醒来, 手机显示有了新的操作系统更新, 所以晚上照旧 下载Factory固件 -&gt;线刷 -&gt; 检查recovery包 -&gt; 恢复root -&gt; 恢复xposed框架 以上的过程对于我现在来说比较熟悉的情况下大概需要花费我1-2小时的时间 为什么选择全部手工?其实我也是一个懒人, 所以我肯定写过一些脚本来自动做, 目前这个脚本已经可以自动去官网上自动下载最新的fato">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-22T11:29:07.734Z">
+<meta property="article:modified_time" content="2025-03-22T11:29:07.734Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="生活">
+<meta property="article:tag" content="效率">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://aiziyuer.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-mobile/2016-07-15-how-to-root-your-android-mobile" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/" class="article-date">
+  <time class="dt-published" datetime="2025-03-22T11:29:07.734Z" itemprop="datePublished">2025-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Xposed框架安装
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>今天早晨醒来, 手机显示有了新的操作系统更新, 所以晚上照旧 下载<code>Factory</code>固件 -&gt;<br>线刷 -&gt; 检查<code>recovery</code>包 -&gt; 恢复<code>root</code> -&gt; 恢复<code>xposed</code>框架</p>
+<p>以上的过程对于我现在来说比较熟悉的情况下大概需要花费我1-2小时的时间</p>
+<h2 id="为什么选择全部手工"><a href="#为什么选择全部手工" class="headerlink" title="为什么选择全部手工?"></a>为什么选择全部手工?</h2><p>其实我也是一个懒人, 所以我肯定写过一些脚本来自动做, 目前这个脚本已经可以自动去官网上自动下载最新的fatory固件、<br>去除<code>flash-all.sh</code>中的<code>-w</code>选项、并且通知我的手机进入<code>bootloader</code>刷机模式,但是现在有些比较蛋疼的是, 刷完后系统会自动<br>重启，然后应用的优化会非常耗时(不算xposed都有77个), 所以后面的<code>recovery</code>和<code>xposed</code>就比较难弄了, 所以只能先”手动”了</p>
+<h2 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h2><p>作为21世纪有思想的新青年, 自动化是必然的事情, 所以在我没有想到解决上面的问题前, 先把刷机固定的步骤记录下来,<br>方便后面自动脚本的编写.</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 固化刷机步骤</li>
+<li><input disabled="" type="checkbox"> 脚本自动刷机</li>
+</ul>
+<h2 id="固定刷机步骤"><a href="#固定刷机步骤" class="headerlink" title="固定刷机步骤"></a>固定刷机步骤</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
+<li>你需要一台原生android系统的手机(Nexus)</li>
+<li>解锁OEM锁(开发者模式里面有)</li>
+<li>解锁bootloader(开机会比较可怕,无所谓)<code>fastboot flashing unlock</code></li>
+</ul>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>这里考虑的是万能方法, 所以必然是线刷Factory固件了, 你需要有以下几样东西, 每次都需要检查是否是最新版本:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/android/nexus/images">Nexus Factory Images</a>不仅可以刷机用还能救转(unlock bootloader, oem unlock)</li>
+<li><a target="_blank" rel="noopener" href="https://twrp.me/">TWRP</a>第三方的恢复镜像,因为谷歌官方不支持恢复第三方的东西(<code>supersu</code>, <code>xposed</code>)</li>
+<li><a target="_blank" rel="noopener" href="http://download.chainfire.eu/supersu">supersu</a>root专用,最后<code>recover</code>刷进去</li>
+<li><a target="_blank" rel="noopener" href="http://dl-xda.xposed.info/framework/">Xposed</a>杀手级应用</li>
+</ul>
+<h3 id="放入第三方的定制包"><a href="#放入第三方的定制包" class="headerlink" title="放入第三方的定制包"></a>放入第三方的定制包</h3><p><code>suspersu</code>和<code>xposed</code>两个包基本上都是zip格式的, 因为需要在recovery页面手动刷入, 所以为了避免麻烦, 在刷机前先通过USB拷入手机, 放到一个熟悉的目录,<br>后面需要手动进入该目录,所以不要太复杂,放根目录进行了.</p>
+<h3 id="恢复官方工厂镜像"><a href="#恢复官方工厂镜像" class="headerlink" title="恢复官方工厂镜像"></a>恢复官方工厂镜像</h3><p>手机开debug模式usb连电脑, 然后解压工厂固件的压缩包, 然后进入解压缩后的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 替换掉flash-all中危险的清空数据选项-w</span></span><br><span class="line">gsed -i <span class="string">&#x27;s/fastboot -w/fastboot/g&#x27;</span> flash-all.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入bootloader状态</span></span><br><span class="line">adb reboot bootloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入固件</span></span><br><span class="line">sh ./flash-all.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面手机会重启, 真的很久, 下次研究研究有没有替换的方法</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="刷入recovery固件"><a href="#刷入recovery固件" class="headerlink" title="刷入recovery固件"></a>刷入<code>recovery</code>固件</h3><p>命令行进入twrp镜像所在目录, 然后命令行运行如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入bootloader状态</span></span><br><span class="line">adb reboot bootloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入固件</span></span><br><span class="line">fastboot flash recovery twrp-3.0.2-0-angler.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入后不会要求重启, 马上进入下面的刷入supersu和exposed</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入恢复模式（建议还是硬件操作比较好）</span></span><br><span class="line">adb reboot recovery</span><br></pre></td></tr></table></figure>
+
+<h3 id="刷入定制的第三方定制包"><a href="#刷入定制的第三方定制包" class="headerlink" title="刷入定制的第三方定制包"></a>刷入定制的第三方定制包</h3><p>这一步基本都是手动, 手动就手动吧, 手动安装两个zip的包然后重启.</p>
+<p><strong>DONE</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://aiziyuer.github.io/2025/03/22/mobile/2016-07-15-how-to-root-your-android-mobile/" data-id="cm8k4nc2700104r9d6lngcda8" data-title="Xposed框架安装" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/22/mobile/2016-07-15-android-xposed-module-introduce/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          好用的Xposed模块推荐
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/22/life/2016-07-10-gulp-work-study/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">gulp学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E9%A1%B5/">网页</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/" rel="tag">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/about/" rel="tag">about</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bat/" rel="tag">bat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keytool/" rel="tag">keytool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/me/" rel="tag">me</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/" rel="tag">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" rel="tag">算法，java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" rel="tag">算法，统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2015/" style="font-size: 10px;">2015</a> <a href="/tags/about/" style="font-size: 10px;">about</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bat/" style="font-size: 10px;">bat</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/me/" style="font-size: 10px;">me</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 15px;">效率</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" style="font-size: 10px;">数学，图形，Geogebra</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 15px;">生活</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" style="font-size: 10px;">算法，java</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">算法，统计</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/">Tomcat支持双向认证</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/web/2016-07-16-timeline-guide/">TimeLine学习手记</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/">Sublime-配置</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/tools/2015-10-24-vim-compile/">vim-compile</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/">win下让Kafka以Service方式运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

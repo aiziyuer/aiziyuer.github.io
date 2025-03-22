@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Sublime-配置 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言考虑到在sb2上有些插件已经不在支持了(sidebarenhancements), 所以我还是选择sb3, 但是暂时不选择购买, 还比较小资, 对我来说太贵了, 所以以后的文章都是针对sb3. 系统的配置同步一劳永逸的事情, sb所有的包都是放在package里面, 所以选择同步这个文件夹就可以做到多个系统同步:  打开Sublime Text -&gt; Browse Packages找到包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sublime-配置">
+<meta property="og:url" content="http://aiziyuer.github.io/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="前言考虑到在sb2上有些插件已经不在支持了(sidebarenhancements), 所以我还是选择sb3, 但是暂时不选择购买, 还比较小资, 对我来说太贵了, 所以以后的文章都是针对sb3. 系统的配置同步一劳永逸的事情, sb所有的包都是放在package里面, 所以选择同步这个文件夹就可以做到多个系统同步:  打开Sublime Text -&gt; Browse Packages找到包">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-03-22T11:29:07.898Z">
+<meta property="article:modified_time" content="2025-03-22T11:29:07.898Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="2015">
+<meta property="article:tag" content="sublime">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://aiziyuer.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-tools/2015-04-26-sublime配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/" class="article-date">
+  <time class="dt-published" datetime="2025-03-22T11:29:07.898Z" itemprop="datePublished">2025-03-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Sublime-配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>考虑到在sb2上有些插件已经不在支持了(sidebarenhancements), 所以我还是选择sb3, 但是暂时不选择购买, 还比较小资, 对我来说太贵了, 所以以后的文章都是针对sb3.</p>
+<h2 id="系统的配置"><a href="#系统的配置" class="headerlink" title="系统的配置"></a>系统的配置</h2><h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>一劳永逸的事情, sb所有的包都是放在package里面, 所以选择同步这个文件夹就可以做到多个系统同步:</p>
+<ol>
+<li>打开Sublime Text -&gt; Browse Packages找到包的目录, mac下是<code>~/Library/Application Support/Sublime Text 3</code></li>
+<li>目录下的<code>Packages</code>移动到Dropbox,我的目录<code>~/Dropbox/Sync/Sublime3/Packages</code></li>
+<li>进入support目录,建立软连接<code>ln -s ~/Dropbox/Sync/Sublime3/Packages Packages</code></li>
+<li>选择喜欢的工具进行同步(github&#x2F;dropbox)</li>
+<li>下次需要使用的时候, 只要重复以上几步即可</li>
+</ol>
+<h3 id="各系统Package的目录："><a href="#各系统Package的目录：" class="headerlink" title="各系统Package的目录："></a>各系统Package的目录：</h3><ul>
+<li>OS X:</li>
+</ul>
+<blockquote>
+<p>~&#x2F;Library&#x2F;Application Support&#x2F;Sublime Text 3&#x2F;Packages&#x2F;</p>
+</blockquote>
+<ul>
+<li>Linux:</li>
+</ul>
+<blockquote>
+<p>~&#x2F;.config&#x2F;sublime-text-2&#x2F;Packages&#x2F;</p>
+</blockquote>
+<ul>
+<li>Windows:</li>
+</ul>
+<blockquote>
+<p>%APPDATA%&#x2F;Roaming&#x2F;Sublime Text 3&#x2F;Packages&#x2F;</p>
+</blockquote>
+<h3 id="更换图标"><a href="#更换图标" class="headerlink" title="更换图标"></a>更换图标</h3><ul>
+<li><p>Mac下面直接找到应用<code>CMD+i</code>进入应用信息的查看,然后吧要准备好的图表拖拽到信息中的图标上就可以了</p>
+</li>
+<li><p>Windows下有待补充</p>
+</li>
+</ul>
+<h3 id="编辑器的配置"><a href="#编辑器的配置" class="headerlink" title="编辑器的配置"></a>编辑器的配置</h3><p>因为考虑到我自己有些使用习惯，所以配置如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 让 minimap(就是大纲里面的小框) 里的当前位置更显眼点</span></span><br><span class="line"><span class="attr">&quot;always_show_minimap_viewport&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;draw_minimap_border&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置主题的名称</span></span><br><span class="line"><span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Soda Dark.sublime-theme&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;soda_classic_tabs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;soda_folder_icons&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置颜色主题</span></span><br><span class="line"><span class="attr">&quot;color_scheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Packages/Monokai Extended/Monokai Extended.tmTheme&quot;</span><span class="punctuation">,</span>	</span><br><span class="line"></span><br><span class="line"><span class="comment">// ST 里我经常找不到光标在哪儿, 这个开启后可以高亮当前行</span></span><br><span class="line"><span class="attr">&quot;highlight_modified_tabs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 启用Vinageouss</span></span><br><span class="line"><span class="attr">&quot;ignored_packages&quot;</span><span class="punctuation">:</span></span><br><span class="line"><span class="punctuation">[</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Finder 里打开文件时, 不会新开窗口了</span></span><br><span class="line"><span class="attr">&quot;open_files_in_new_window&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示文件编码</span></span><br><span class="line"><span class="attr">&quot;show_encoding&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 标题栏上显示完整路径, 有时候不小心开错了文件, 这样能帮你早点发现.</span></span><br><span class="line"><span class="attr">&quot;show_full_path&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;show_line_endings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// vim使用系统的剪贴板</span></span><br><span class="line"><span class="attr">&quot;vintageous_use_sys_clipboard&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="各种各样有意思的插件"><a href="#各种各样有意思的插件" class="headerlink" title="各种各样有意思的插件"></a>各种各样有意思的插件</h2><p>因为插件非常丰富,所以这里根据用途、平台、语言等来分类进行总结。</p>
+<h3 id="基本的插件"><a href="#基本的插件" class="headerlink" title="基本的插件"></a>基本的插件</h3><ol>
+<li>Git – 用来替代命令行处理文件，我的博客放在github上，所以有时候写文章写到一半不想写了，用来撤销用</li>
+<li>GitGutter – GitGutter 更好的帮助开发者查看文件之前的改动和差异，提升开发效率</li>
+<li>SideBarEnhancements – 可以是你的sidebar右击多出很多有用的菜单</li>
+<li>AutoFileName – 自动补全文件路径-非常方便</li>
+<li>PlainTasks – 支持todo后缀的文件进行任务状态的跟踪</li>
+</ol>
+<h3 id="jekyll支持"><a href="#jekyll支持" class="headerlink" title="jekyll支持"></a>jekyll支持</h3><p>我的博客都是用Sublime编写的，并且使用的是jekyll排版系统，jekyll真的非常方便，但是它只专注于写文章，高亮和其他还需要其他插件完成</p>
+<ol>
+<li>安装jekyll插件</li>
+<li>Markdown Extended – 使用扩展的Markdown的方式，代码高亮非常好用(&#96;&#96;&#96;&#96;里面可以书写语言就能高亮)</li>
+<li>MonoKai Extended – 颜色主题，配合Markdown Extended进行语法高亮, 支持</li>
+</ol>
+<h3 id="web开发"><a href="#web开发" class="headerlink" title="web开发"></a>web开发</h3><ol>
+<li>编辑器的vi支持，自带的不好用，直接禁用：</li>
+</ol>
+<blockquote>
+<p>“Vintagous” 非常棒的vi插件</p>
+</blockquote>
+<h3 id="代码编辑"><a href="#代码编辑" class="headerlink" title="代码编辑"></a>代码编辑</h3><p>代码编辑过程中有些事情很繁琐，譬如注释，代码补全，匹配括号高亮，自动对齐什么的，以下插件用来解决：</p>
+<ol>
+<li>DocBlockr – 成为你编写代码文档的有效工具。当输入&#x2F;**并且按下Tab键的时候，这个插件会自动解析任何一个函数并且为你准备好合适的模板</li>
+</ol>
+<blockquote>
+<p> “jsdocs_extend_double_slash”: false &#x2F;&#x2F;否则双斜杠了之后，下一行会跟着学习</p>
+</blockquote>
+<ol start="2">
+<li>CodeIntel – 语法补全</li>
+<li>BracketHighlighter – 高亮匹配的括号</li>
+</ol>
+<h3 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h3><p>这里推荐Soda Theme， 安装简单，功能稳定</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://aiziyuer.github.io/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/" data-id="cm8k4nc2e001g4r9dc9w85rzo" data-title="Sublime-配置" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/2015/" rel="tag">2015</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sublime/" rel="tag">sublime</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/03/22/web/2016-07-16-timeline-guide/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TimeLine学习手记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/03/22/tools/2015-10-24-vim-compile/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vim-compile</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2/">博客</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%9B%BE%E5%BD%A2/">图形</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0/">学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%A7%BB%E5%8A%A8/">移动</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E9%A1%B5/">网页</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/2015/" rel="tag">2015</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/about/" rel="tag">about</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bash/" rel="tag">bash</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bat/" rel="tag">bat</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/blog/" rel="tag">blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/keytool/" rel="tag">keytool</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/me/" rel="tag">me</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/" rel="tag">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/" rel="tag">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sublime/" rel="tag">sublime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/websocket/" rel="tag">websocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%88%E7%8E%87/" rel="tag">效率</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" rel="tag">数学，图形，Geogebra</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E6%B4%BB/" rel="tag">生活</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" rel="tag">算法，java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" rel="tag">算法，统计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" rel="tag">自动化</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/2015/" style="font-size: 10px;">2015</a> <a href="/tags/about/" style="font-size: 10px;">about</a> <a href="/tags/android/" style="font-size: 15px;">android</a> <a href="/tags/bash/" style="font-size: 10px;">bash</a> <a href="/tags/bat/" style="font-size: 10px;">bat</a> <a href="/tags/blog/" style="font-size: 15px;">blog</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 15px;">javascript</a> <a href="/tags/keytool/" style="font-size: 10px;">keytool</a> <a href="/tags/me/" style="font-size: 10px;">me</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/sublime/" style="font-size: 10px;">sublime</a> <a href="/tags/websocket/" style="font-size: 10px;">websocket</a> <a href="/tags/windows/" style="font-size: 10px;">windows</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E6%8A%80%E6%9C%AF/" style="font-size: 20px;">技术</a> <a href="/tags/%E6%95%88%E7%8E%87/" style="font-size: 15px;">效率</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E5%9B%BE%E5%BD%A2%EF%BC%8CGeogebra/" style="font-size: 10px;">数学，图形，Geogebra</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 15px;">生活</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8Cjava/" style="font-size: 10px;">算法，java</a> <a href="/tags/%E7%AE%97%E6%B3%95%EF%BC%8C%E7%BB%9F%E8%AE%A1/" style="font-size: 10px;">算法，统计</a> <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" style="font-size: 10px;">自动化</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/03/">March 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/">Tomcat支持双向认证</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/web/2016-07-16-timeline-guide/">TimeLine学习手记</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/">Sublime-配置</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/tools/2015-10-24-vim-compile/">vim-compile</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/study/2015-11-15-kafka-work-as-windows-service/">win下让Kafka以Service方式运行</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
