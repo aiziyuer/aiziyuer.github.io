@@ -6,12 +6,12 @@
   <meta name="keywords" content=" 数学，图形，Geogebra ">
   <meta name="description" content="翻页效果模拟 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -832,7 +832,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA"><span class="toc-text">效果展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%87%86%E5%A4%87"><span class="toc-text">绘制准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%BC%AF%E6%9B%B2%E7%82%B9"><span class="toc-text">计算弯曲点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E6%9B%B2%E7%BA%BF"><span class="toc-text">绘制弯曲部分曲线</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="toc-text">线性贝塞尔曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E6%AC%A1%E6%96%B9%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF"><span class="toc-text">二次方贝塞尔曲线</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E7%9A%84%E5%88%87%E7%BA%BF"><span class="toc-text">绘制弯曲部分的切线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%A5%E7%A8%8B%E5%8C%96"><span class="toc-text">工程化</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -848,74 +848,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-## 效果展示
-
-这是一个简单的翻页模拟，还是大学里面研究的，这里相当于是复习一下，所以准备重新梳理一下文章。
-
-![image](/image/翻页效果模拟/效果展示.png)
-
-
-## 绘制准备
-
-1. 这里为了简单体检，我使用的是`GeoGebra`进行模拟，在画布上绘制一个矩形ABCD, 然后新建一个点`P`, 相当于我们的手指触摸；
-2. 然后做点P和点B的中垂线与矩形的边AB和边BC分别相交与E2,E1点：
-
-![image](/image/翻页效果模拟/绘制准备.png)
-
-
-## 计算弯曲点
-
-假设我们对纸张没有任何的弯曲， 那么线段E1E2就是折痕，但是大自然是很神奇的，纸张反抗，会有一些弯曲，先不关注怎么弯曲的，
-纸张一定有一段是直的，没有弯曲，我们以线段PF2为例子，假设弯曲部分比例是 $f\in (0,1]$. 所以我们可以在线段PE2上面作点F2使`|PF2|=f|PE2|`.
-所以这里的点命令为：`F2=(1-f)P+E2`，同理，做出线段PF1上的点F1. 这里我们可以认为点F1和点F2是纸张的完全开始点，那么物理上，
-肯定在线段AB和BC上面存在与之对应的点，并且弯曲部分的曲线也一定是对称的，一样，以F2为例子，那么点F2'的坐标可以表示为`((x(E2)-|F2E2|，0)`，
-曲线如下：
-
-![image](/image/翻页效果模拟/计算弯曲点.png)
-
-## 绘制弯曲部分曲线
-
-这里的曲线是贝塞尔曲线，并且它的三个控制点我们都已经找出来了，分辨是折点、弯曲点和对称的弯曲点，这里我们去除掉线段PE2和线段PE1，然后根据三个控制点绘制贝塞尔曲线。这里有一点需要注意，Geogebra并没有自带贝塞尔曲线的函数，所以我们需要借助`轨迹`功能，来绘制函数的轨迹，这就要求我们清楚贝塞尔的定义：
-
-### 线性贝塞尔曲线
-
-> 给定点P0、P1，线性贝塞尔曲线只是一条两点之间的直线。这条线由下式给出：
-> $$B(t) = { P }_{ 0 }+t({ P }_{ 1 }-{ P }_{ 0 })=(1-t){ P }_{ 0 }+t{ P }_{ 1 }\quad ,t\in [0,1]$$
-> 且其等同于线性插值。
-
-线性贝塞尔曲线函数中的t会经过由P0至P1的B（t）所描述的曲线。例如当t=0.25时，B（t）即一条由点P0至P1路径的四分之一处。就像由0至1的连续t，B（t）描述一条由P0至P1的直线。![image](/image/翻页效果模拟/Bézier_1_big.gif)
-
-### 二次方贝塞尔曲线
-
-二次相当于是对一次的扩充
-
-> 二次方贝塞尔曲线的路径由给定点P0、P1、P2的函数B（t）追踪：
-> $$B(t)={ (1-t) }^{ 2 }{ P }_{ 0 }+2t(1-t){ P }_{ 1 }+{ t }^{ 2 }{ P }_{ 2 }\quad ,t\in [0,1]$$
-> TrueType字型就运用了以贝塞尔样条组成的二次贝塞尔曲线。
-
-为建构二次贝塞尔曲线，可以中介点Q0和Q1作为由0至1的t：
-
-> 由P0至P1的连续点Q0，描述一条线性贝塞尔曲线。
-> 由P1至P2的连续点Q1，描述一条线性贝塞尔曲线。
-> 由Q0至Q1的连续点B（t），描述一条二次贝塞尔曲线。
-
-![image](/image/翻页效果模拟/Bézier_2_big.svg.png) ![image](/image/翻页效果模拟/Bézier_2_big.gif)
-
-所以我们的F2-E2-F2'上的贝塞尔轨迹可以表示为$B(t)=(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2')\quad ,t\in[0,1]$,作图如下：
-
-![image](/image/翻页效果模拟/绘制弯曲部分曲线.png)
-
-
-## 绘制弯曲部分的切线
-
-到这里，应该是已经完成了纸张弯曲的模拟部分了，但是为了更加接近于纸张的效果，我们需要作弯曲部分的切线，这个我也是想了很长时间，可以这样简单理解，我弯曲纸张，那么弯曲上下两部分收到的作用应该是一样的，所以弯曲的曲线一定是对称的，那么我们的切点其实就是曲线的中点。而一次贝塞尔曲线的中点很简单，就是两个点相加除以2的问题，那么二次呢？我们知道二次是对一次的扩充，所以我们相当于先对两个一次贝塞尔曲线求中点，然后再对中点连成的曲线求中点, $B(t)=(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2') ,t=\frac { 1 }{ 2 } $, 最后的效果如下:
-
-![image](/image/翻页效果模拟/绘制弯曲部分的切线.png)
-
-## 工程化
-
-之前尝试过载Android和Qt两个平台上进行编码，Android基本实现了Demo，但是性能非常成问题，所以这里留个任务，之后改进一下计算方法，对理论的计算工程化，争取做一个有意思的Demo出来。
+        <h2 id="效果展示"><a href="#效果展示" class="headerlink" title="效果展示"></a>效果展示</h2><p>这是一个简单的翻页模拟，还是大学里面研究的，这里相当于是复习一下，所以准备重新梳理一下文章。</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E6%95%88%E6%9E%9C%E5%B1%95%E7%A4%BA.png" alt="image"></p>
+<h2 id="绘制准备"><a href="#绘制准备" class="headerlink" title="绘制准备"></a>绘制准备</h2><ol>
+<li>这里为了简单体检，我使用的是<code>GeoGebra</code>进行模拟，在画布上绘制一个矩形ABCD, 然后新建一个点<code>P</code>, 相当于我们的手指触摸；</li>
+<li>然后做点P和点B的中垂线与矩形的边AB和边BC分别相交与E2,E1点：</li>
+</ol>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%87%86%E5%A4%87.png" alt="image"></p>
+<h2 id="计算弯曲点"><a href="#计算弯曲点" class="headerlink" title="计算弯曲点"></a>计算弯曲点</h2><p>假设我们对纸张没有任何的弯曲， 那么线段E1E2就是折痕，但是大自然是很神奇的，纸张反抗，会有一些弯曲，先不关注怎么弯曲的，<br>纸张一定有一段是直的，没有弯曲，我们以线段PF2为例子，假设弯曲部分比例是 $f\in (0,1]$. 所以我们可以在线段PE2上面作点F2使<code>|PF2|=f|PE2|</code>.<br>所以这里的点命令为：<code>F2=(1-f)P+E2</code>，同理，做出线段PF1上的点F1. 这里我们可以认为点F1和点F2是纸张的完全开始点，那么物理上，<br>肯定在线段AB和BC上面存在与之对应的点，并且弯曲部分的曲线也一定是对称的，一样，以F2为例子，那么点F2’的坐标可以表示为<code>((x(E2)-|F2E2|，0)</code>，<br>曲线如下：</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E8%AE%A1%E7%AE%97%E5%BC%AF%E6%9B%B2%E7%82%B9.png" alt="image"></p>
+<h2 id="绘制弯曲部分曲线"><a href="#绘制弯曲部分曲线" class="headerlink" title="绘制弯曲部分曲线"></a>绘制弯曲部分曲线</h2><p>这里的曲线是贝塞尔曲线，并且它的三个控制点我们都已经找出来了，分辨是折点、弯曲点和对称的弯曲点，这里我们去除掉线段PE2和线段PE1，然后根据三个控制点绘制贝塞尔曲线。这里有一点需要注意，Geogebra并没有自带贝塞尔曲线的函数，所以我们需要借助<code>轨迹</code>功能，来绘制函数的轨迹，这就要求我们清楚贝塞尔的定义：</p>
+<h3 id="线性贝塞尔曲线"><a href="#线性贝塞尔曲线" class="headerlink" title="线性贝塞尔曲线"></a>线性贝塞尔曲线</h3><blockquote>
+<p>给定点P0、P1，线性贝塞尔曲线只是一条两点之间的直线。这条线由下式给出：<br>$$B(t) &#x3D; { P }<em>{ 0 }+t({ P }</em>{ 1 }-{ P }<em>{ 0 })&#x3D;(1-t){ P }</em>{ 0 }+t{ P }_{ 1 }\quad ,t\in [0,1]$$<br>且其等同于线性插值。</p>
+</blockquote>
+<p>线性贝塞尔曲线函数中的t会经过由P0至P1的B（t）所描述的曲线。例如当t&#x3D;0.25时，B（t）即一条由点P0至P1路径的四分之一处。就像由0至1的连续t，B（t）描述一条由P0至P1的直线。<img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_1_big.gif" alt="image"></p>
+<h3 id="二次方贝塞尔曲线"><a href="#二次方贝塞尔曲线" class="headerlink" title="二次方贝塞尔曲线"></a>二次方贝塞尔曲线</h3><p>二次相当于是对一次的扩充</p>
+<blockquote>
+<p>二次方贝塞尔曲线的路径由给定点P0、P1、P2的函数B（t）追踪：<br>$$B(t)&#x3D;{ (1-t) }^{ 2 }{ P }<em>{ 0 }+2t(1-t){ P }</em>{ 1 }+{ t }^{ 2 }{ P }_{ 2 }\quad ,t\in [0,1]$$<br>TrueType字型就运用了以贝塞尔样条组成的二次贝塞尔曲线。</p>
+</blockquote>
+<p>为建构二次贝塞尔曲线，可以中介点Q0和Q1作为由0至1的t：</p>
+<blockquote>
+<p>由P0至P1的连续点Q0，描述一条线性贝塞尔曲线。<br>由P1至P2的连续点Q1，描述一条线性贝塞尔曲线。<br>由Q0至Q1的连续点B（t），描述一条二次贝塞尔曲线。</p>
+</blockquote>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.svg.png" alt="image"> <img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/B%C3%A9zier_2_big.gif" alt="image"></p>
+<p>所以我们的F2-E2-F2’上的贝塞尔轨迹可以表示为$B(t)&#x3D;(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2’)\quad ,t\in[0,1]$,作图如下：</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E6%9B%B2%E7%BA%BF.png" alt="image"></p>
+<h2 id="绘制弯曲部分的切线"><a href="#绘制弯曲部分的切线" class="headerlink" title="绘制弯曲部分的切线"></a>绘制弯曲部分的切线</h2><p>到这里，应该是已经完成了纸张弯曲的模拟部分了，但是为了更加接近于纸张的效果，我们需要作弯曲部分的切线，这个我也是想了很长时间，可以这样简单理解，我弯曲纸张，那么弯曲上下两部分收到的作用应该是一样的，所以弯曲的曲线一定是对称的，那么我们的切点其实就是曲线的中点。而一次贝塞尔曲线的中点很简单，就是两个点相加除以2的问题，那么二次呢？我们知道二次是对一次的扩充，所以我们相当于先对两个一次贝塞尔曲线求中点，然后再对中点连成的曲线求中点, $B(t)&#x3D;(1-t)((1-t)F2+tE2)+t((1-t)E2+tF2’) ,t&#x3D;\frac { 1 }{ 2 } $, 最后的效果如下:</p>
+<p><img src="/image/%E7%BF%BB%E9%A1%B5%E6%95%88%E6%9E%9C%E6%A8%A1%E6%8B%9F/%E7%BB%98%E5%88%B6%E5%BC%AF%E6%9B%B2%E9%83%A8%E5%88%86%E7%9A%84%E5%88%87%E7%BA%BF.png" alt="image"></p>
+<h2 id="工程化"><a href="#工程化" class="headerlink" title="工程化"></a>工程化</h2><p>之前尝试过载Android和Qt两个平台上进行编码，Android基本实现了Demo，但是性能非常成问题，所以这里留个任务，之后改进一下计算方法，对理论的计算工程化，争取做一个有意思的Demo出来。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>

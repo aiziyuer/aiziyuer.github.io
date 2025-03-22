@@ -6,12 +6,12 @@
   <meta name="keywords" content=" 算法，统计 ">
   <meta name="description" content="如何计算方差和平均值 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -832,7 +832,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%92%E6%8E%A8%E5%85%AC%E5%BC%8F"><span class="toc-text">递推公式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC"><span class="toc-text">公式推导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%9D%87%E5%80%BC%E6%8E%A8%E5%AF%BC"><span class="toc-text">平均值推导</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E5%B7%AE%E6%8E%A8%E5%AF%BC"><span class="toc-text">方差推导</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">编码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java%E7%89%88%E6%9C%AC"><span class="toc-text">java版本</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -848,90 +848,46 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-在日常工作中，会碰到需要重复统计某些固定范围的数据，而这些数据往往有以下的特点：
-
-- 数据可能是每天都需要更新；
-- 每天的数据量非常大；
-- 最终需要快速展示多天数据的统计信息：方差，期望；
-- 统计所用内存不能太大；
-
-从以上的条件中可以看到，方差和均值的计算必须是增量式的，不能存储中间的结果；庆幸的是，数学总是很奇妙，可以满足我们磕磕绊绊的需求。
-
-## 递推公式
-
-平均值计算:
-
-$${ E }_{ n }={ E }_{ n-1 }+\frac { { X }_{ n }-{ E }_{ n-1 } }{ n } ,\quad 其中{ E }_{ n }=\frac { \sum _{ i=1 }^{ n }{ { x }_{ n } }  }{ n } ,{ E }_{ n }={ x }_{ 0 }. $$
-
-方差计算:
-
-$$F_{ n }={ F }_{ n-1 }+({ x }_{ n }-{ F }_{ n-1 })({ x }_{ n }-{ F }_{ n }),\quad { 其中{ { S }_{ n } }^{ 2 } }=\frac { { F }_{ n } }{ n } =\frac { \sum _{ i-1 }^{ n }{ { ({ x }_{ i }-{ E }_{ n }) }^{ 2 } }  }{ n } ,{ { S }_{ 0 } }^{ 2 }=0. $$
-
-所以每次迭代都可以直接通过上一次的结果得到当前的平均值和方差，下面给出一些公式的推导。
-
-## 公式推导
-
-### 平均值推导
-
-平均值定义：$${ E }_{ n }=\frac { \sum _{ i=1 }^{ n }{ { x }_{ n } }  }{ n } ,$$所以可以得到如下推导:
-
-$${ E }_{ n }=\frac { \sum _{ i=1 }^{ n }{ { x }_{ n } }  }{ n } =\frac { \sum _{ i=1 }^{ n-1 }{ { x }_{ i } } +{ x }_{ n } }{ n } =\frac { (n-1)\frac { \sum _{ i=1 }^{ n-1 }{ { x }_{ i } }  }{ n-1 } +{ x }_{ n } }{ n } =\frac { (n-1){ E }_{ n-1 }+{ x }_{ n } }{ n } ={ E }_{ n-1 }+\frac { { x }_{ n }-{ E }_{ n-1 } }{ n }$$,
-
- 其中其中$${ E }_{ 0 }={ x }_{ 0 }$$.
-
-### 方差推导
-
-方差定义： $${ { { S }_{ n } }^{ 2 } }=\frac { \sum _{ i-1 }^{ n }{ { ({ x }_{ i }-{ E }_{ n }) }^{ 2 } }  }{ n } $$.
-
-为了推导方便，令$${ F }_{ n }=\sum _{ i=1 }^{ n }{ { ({ x }_{ i }-{ E }_{ n }) }^{ 2 } }. $$, 想要获得方差，其实就是需要计算函数F在n处的值，已下给出相关推导:
-
-$${ F }_{ n }-{ F }_{ n-1 }=\sum _{ i=1 }^{ n }{ { ({ x }_{ i }-{ E }_{ n }) }^{ 2 } } -\sum _{ i=1 }^{ n-1 }{ { ({ x }_{ i }-{ E }_{ n-1 }) }^{ 2 }= } \sum _{ i=1 }^{ n }{ { ({ x }_{ i }-{ E }_{ n-1 }+{ E }_{ n-1 }-{ E }_{ n }) }^{ 2 } } -\sum _{ i=1 }^{ n-1 }{ { ({ x }_{ i }-{ E }_{ n-1 }) }^{ 2 } } $$，
-
-继续展开第一项中的平方: 
-
-$${ F }_{ n }-{ F }_{ n-1 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }+\sum _{ i=1 }^{ n-1 }{ { ({ x }_{ i }-{ E }_{ n-1 }) }^{ 2 } } +2({ E }_{ n-1 }-{ E }_{ n })\sum _{ i=1 }^{ n }{ ({ x }_{ i }-{ E }_{ n-1 }) } +\sum _{ i=1 }^{ n }{ { ({ E }_{ n-1 }-{ E }_{ n }) }^{ 2 } } -\sum _{ i=1 }^{ n-1 }{ { ({ x }_{ i }-{ E }_{ n-1 }) }^{ 2 } } $$,
-
-第二项和第五项消掉并且直接计算第三四项求和:
-
-$${ F }_{ n }-{ F }_{ n-1 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }+2({ E }_{ n-1 }-{ E }_{ n })({ nE }_{ n }-{ nE }_{ n-1 })+{ n({ E }_{ n-1 }-{ E }_{ n }) }^{ 2 }$$,
-
-根据平均值的计算可以推导如下:
-
-$${ E }_{ n }={ E }_{ n-1 }+\frac { { x }_{ n }-{ E }_{ n-1 } }{ n } \Rightarrow n{ E }_{ n }=n{ E }_{ n-1 }+{ x }_{ n }-{ E }_{ n-1 }\Rightarrow n({ E }_{ n }-{ E }_{ n-1 })={ x }_{ n }-{ E }_{ n-1 }$$,
-
-带入上一步第二项化简:
-
-$${ F }_{ n }-{ F }_{ n-1 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }+2({ x }_{ n }-{ E }_{ n-1 })({ E }_{ n-1 }-{ E }_{ n })+{ n({ E }_{ n-1 }-{ E }_{ n }) }^{ 2 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }-2({ x }_{ n }-{ E }_{ n-1 })({ E }_{ n }-{ E }_{ n-1 })+{ n({ E }_{ n }-{ E }_{ n-1 }) }^{ 2 }$$,
-
-后面两项提出公因式后:
-
-$${ F }_{ n }-{ F }_{ n-1 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }+({ E }_{ n }-{ E }_{ n-1 }){ [-2x }_{ n }+2{ E }_{ n-1 }+n({ E }_{ n }-{ E }_{ n-1 })]$$,
-
-带入均值推导公式的第二个推导式并化简:
-
-$${ F }_{ n }-{ F }_{ n-1 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }+({ E }_{ n }-{ E }_{ n-1 }){ [{ E }_{ n-1 }-x }_{ n }]$$,
-
-整理顺序看起来更加清晰:
-
-$${ F }_{ n }-{ F }_{ n-1 }={ ({ x }_{ n }-{ E }_{ n-1 }) }^{ 2 }-({ x }_{ n }-{ E }_{ n-1 })({ E }_{ n }-{ E }_{ n-1 })$$,
-
-提取公因式获得最终的最简式:
-
-$${ F }_{ n }-{ F }_{ n-1 }=({ x }_{ n }-{ E }_{ n-1 })({ x }_{ n }-{ E }_{ n })$$,
-
-因此可以得到如下公式:
-
-$${ F }_{ n }={ F }_{ n-1 }+({ x }_{ n }-{ E }_{ n-1 })({ x }_{ n }-{ E }_{ n })$$,
-
-其中$${ F }_{ 0 }={ 0 }$$.
-
-证毕.
-
-## 编码实现
-
-### java版本
-(未完待续)
+        <p>在日常工作中，会碰到需要重复统计某些固定范围的数据，而这些数据往往有以下的特点：</p>
+<ul>
+<li>数据可能是每天都需要更新；</li>
+<li>每天的数据量非常大；</li>
+<li>最终需要快速展示多天数据的统计信息：方差，期望；</li>
+<li>统计所用内存不能太大；</li>
+</ul>
+<p>从以上的条件中可以看到，方差和均值的计算必须是增量式的，不能存储中间的结果；庆幸的是，数学总是很奇妙，可以满足我们磕磕绊绊的需求。</p>
+<h2 id="递推公式"><a href="#递推公式" class="headerlink" title="递推公式"></a>递推公式</h2><p>平均值计算:</p>
+<p>$${ E }<em>{ n }&#x3D;{ E }</em>{ n-1 }+\frac { { X }<em>{ n }-{ E }</em>{ n-1 } }{ n } ,\quad 其中{ E }<em>{ n }&#x3D;\frac { \sum <em>{ i&#x3D;1 }^{ n }{ { x }</em>{ n } }  }{ n } ,{ E }</em>{ n }&#x3D;{ x }_{ 0 }. $$</p>
+<p>方差计算:</p>
+<p>$$F_{ n }&#x3D;{ F }<em>{ n-1 }+({ x }</em>{ n }-{ F }<em>{ n-1 })({ x }</em>{ n }-{ F }<em>{ n }),\quad { 其中{ { S }</em>{ n } }^{ 2 } }&#x3D;\frac { { F }<em>{ n } }{ n } &#x3D;\frac { \sum <em>{ i-1 }^{ n }{ { ({ x }</em>{ i }-{ E }</em>{ n }) }^{ 2 } }  }{ n } ,{ { S }_{ 0 } }^{ 2 }&#x3D;0. $$</p>
+<p>所以每次迭代都可以直接通过上一次的结果得到当前的平均值和方差，下面给出一些公式的推导。</p>
+<h2 id="公式推导"><a href="#公式推导" class="headerlink" title="公式推导"></a>公式推导</h2><h3 id="平均值推导"><a href="#平均值推导" class="headerlink" title="平均值推导"></a>平均值推导</h3><p>平均值定义：$${ E }_{ n }&#x3D;\frac { \sum <em>{ i&#x3D;1 }^{ n }{ { x }</em>{ n } }  }{ n } ,$$所以可以得到如下推导:</p>
+<p>$${ E }<em>{ n }&#x3D;\frac { \sum <em>{ i&#x3D;1 }^{ n }{ { x }</em>{ n } }  }{ n } &#x3D;\frac { \sum <em>{ i&#x3D;1 }^{ n-1 }{ { x }</em>{ i } } +{ x }</em>{ n } }{ n } &#x3D;\frac { (n-1)\frac { \sum <em>{ i&#x3D;1 }^{ n-1 }{ { x }</em>{ i } }  }{ n-1 } +{ x }<em>{ n } }{ n } &#x3D;\frac { (n-1){ E }</em>{ n-1 }+{ x }<em>{ n } }{ n } &#x3D;{ E }</em>{ n-1 }+\frac { { x }<em>{ n }-{ E }</em>{ n-1 } }{ n }$$,</p>
+<p> 其中其中$${ E }<em>{ 0 }&#x3D;{ x }</em>{ 0 }$$.</p>
+<h3 id="方差推导"><a href="#方差推导" class="headerlink" title="方差推导"></a>方差推导</h3><p>方差定义： $${ { { S }<em>{ n } }^{ 2 } }&#x3D;\frac { \sum <em>{ i-1 }^{ n }{ { ({ x }</em>{ i }-{ E }</em>{ n }) }^{ 2 } }  }{ n } $$.</p>
+<p>为了推导方便，令$${ F }<em>{ n }&#x3D;\sum <em>{ i&#x3D;1 }^{ n }{ { ({ x }</em>{ i }-{ E }</em>{ n }) }^{ 2 } }. $$, 想要获得方差，其实就是需要计算函数F在n处的值，已下给出相关推导:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;\sum <em>{ i&#x3D;1 }^{ n }{ { ({ x }</em>{ i }-{ E }<em>{ n }) }^{ 2 } } -\sum <em>{ i&#x3D;1 }^{ n-1 }{ { ({ x }</em>{ i }-{ E }</em>{ n-1 }) }^{ 2 }&#x3D; } \sum <em>{ i&#x3D;1 }^{ n }{ { ({ x }</em>{ i }-{ E }<em>{ n-1 }+{ E }</em>{ n-1 }-{ E }<em>{ n }) }^{ 2 } } -\sum <em>{ i&#x3D;1 }^{ n-1 }{ { ({ x }</em>{ i }-{ E }</em>{ n-1 }) }^{ 2 } } $$，</p>
+<p>继续展开第一项中的平方: </p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }+\sum <em>{ i&#x3D;1 }^{ n-1 }{ { ({ x }</em>{ i }-{ E }<em>{ n-1 }) }^{ 2 } } +2({ E }</em>{ n-1 }-{ E }<em>{ n })\sum <em>{ i&#x3D;1 }^{ n }{ ({ x }</em>{ i }-{ E }</em>{ n-1 }) } +\sum <em>{ i&#x3D;1 }^{ n }{ { ({ E }</em>{ n-1 }-{ E }<em>{ n }) }^{ 2 } } -\sum <em>{ i&#x3D;1 }^{ n-1 }{ { ({ x }</em>{ i }-{ E }</em>{ n-1 }) }^{ 2 } } $$,</p>
+<p>第二项和第五项消掉并且直接计算第三四项求和:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }+2({ E }<em>{ n-1 }-{ E }</em>{ n })({ nE }<em>{ n }-{ nE }</em>{ n-1 })+{ n({ E }<em>{ n-1 }-{ E }</em>{ n }) }^{ 2 }$$,</p>
+<p>根据平均值的计算可以推导如下:</p>
+<p>$${ E }<em>{ n }&#x3D;{ E }</em>{ n-1 }+\frac { { x }<em>{ n }-{ E }</em>{ n-1 } }{ n } \Rightarrow n{ E }<em>{ n }&#x3D;n{ E }</em>{ n-1 }+{ x }<em>{ n }-{ E }</em>{ n-1 }\Rightarrow n({ E }<em>{ n }-{ E }</em>{ n-1 })&#x3D;{ x }<em>{ n }-{ E }</em>{ n-1 }$$,</p>
+<p>带入上一步第二项化简:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }+2({ x }<em>{ n }-{ E }</em>{ n-1 })({ E }<em>{ n-1 }-{ E }</em>{ n })+{ n({ E }<em>{ n-1 }-{ E }</em>{ n }) }^{ 2 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }-2({ x }<em>{ n }-{ E }</em>{ n-1 })({ E }<em>{ n }-{ E }</em>{ n-1 })+{ n({ E }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }$$,</p>
+<p>后面两项提出公因式后:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }+({ E }<em>{ n }-{ E }</em>{ n-1 }){ [-2x }<em>{ n }+2{ E }</em>{ n-1 }+n({ E }<em>{ n }-{ E }</em>{ n-1 })]$$,</p>
+<p>带入均值推导公式的第二个推导式并化简:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }+({ E }<em>{ n }-{ E }</em>{ n-1 }){ [{ E }<em>{ n-1 }-x }</em>{ n }]$$,</p>
+<p>整理顺序看起来更加清晰:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;{ ({ x }<em>{ n }-{ E }</em>{ n-1 }) }^{ 2 }-({ x }<em>{ n }-{ E }</em>{ n-1 })({ E }<em>{ n }-{ E }</em>{ n-1 })$$,</p>
+<p>提取公因式获得最终的最简式:</p>
+<p>$${ F }<em>{ n }-{ F }</em>{ n-1 }&#x3D;({ x }<em>{ n }-{ E }</em>{ n-1 })({ x }<em>{ n }-{ E }</em>{ n })$$,</p>
+<p>因此可以得到如下公式:</p>
+<p>$${ F }<em>{ n }&#x3D;{ F }</em>{ n-1 }+({ x }<em>{ n }-{ E }</em>{ n-1 })({ x }<em>{ n }-{ E }</em>{ n })$$,</p>
+<p>其中$${ F }_{ 0 }&#x3D;{ 0 }$$.</p>
+<p>证毕.</p>
+<h2 id="编码实现"><a href="#编码实现" class="headerlink" title="编码实现"></a>编码实现</h2><h3 id="java版本"><a href="#java版本" class="headerlink" title="java版本"></a>java版本</h3><p>(未完待续)</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>

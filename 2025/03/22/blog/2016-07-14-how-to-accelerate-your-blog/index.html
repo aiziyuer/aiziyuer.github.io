@@ -6,12 +6,12 @@
   <meta name="keywords" content=" 技术 ">
   <meta name="description" content="怎样加速你的博客 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -832,7 +832,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%88%91%E5%AF%B9CNAME%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-text">我对CNAME的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E9%85%8D%E7%BD%AE"><span class="toc-text">具体配置</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -848,46 +848,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-## 背景
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>众所周知,墙内的生活是拮据的,国内访问github速度一直都非常缓慢,如果你跟我一样选择github的pages服务的话应该会碰到跟我一样的烦恼;</p>
+<ul>
+<li>国内访问速度巨慢, 但是国外的github服务非常稳定, 而且免费</li>
+<li>国内有替代品<code>coding.net</code>(gitcafe是他的前身), 但是全部放到上面不太放心</li>
+</ul>
+<p>搜索了一下, 发现有人已经想到了解决的办法, 这里只是做一些简单的说明</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>如今的域名解析已经非常多样了, 除了普通意义的顶级域名(.com)的根域名解析, 想godday这样的大厂还会把域名映射功能”外包”出去,即允许<br>第三方的域名服务提供商来提供这部分域名的解析功能, 而国内的<code>dnspod</code>就是这样一个存在, 它虽然不具备顶级域名的发放功能,但是实际上<br>他是具有这样的能力(生得太晚了), 而且它的功能做的已经比godday还要好, 它可以针对线路的类型来分流;</p>
+<p>如果是<code>godday</code>+<code>dnspod</code>这样的组合,我们访问我们域名的整个过程就变成了 浏览器请求 -&gt; 根域名服务解析 -&gt; 一级域名解析<br>-&gt; DNSPod根据请求的发起线路选择服务节点 -&gt; 最终的服务提供 -&gt; 相应请求</p>
+<h2 id="我对CNAME的理解"><a href="#我对CNAME的理解" class="headerlink" title="我对CNAME的理解"></a>我对CNAME的理解</h2><p>我觉得博客中的<code>CNAME</code>文件在<code>github</code>中会起到一个跳转作用, 但是不论是<code>github</code>还是<code>coding.net</code>, 其实C<code>NAME</code>文件只是为了<br>让他们的服务器面授<code>DDOS</code>攻击,对于博客作者和博客观众没有任何作用.</p>
+<p>DNS记录中配置的<code>CNAME</code>是有用处的,它允许你使用域名的方式制定私服节点(运行博客的服务器);</p>
+<h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><ol>
+<li><p>到<a target="_blank" rel="noopener" href="https://www.dnspod.cn/"><code>dnspod</code></a>注册个号, 然后进入控制台准备配置;</p>
+</li>
+<li><p>找到<em><strong>域名解析</strong></em>然后<em><strong>添加域名</strong></em>,这里基本都是傻瓜式;</p>
+</li>
+<li><p>添加三条记录, 根据线路类型做分流的两条记录以及一条默认线路:</p>
+<p> 编号    |主机记录    |记录类型    |线路类型    | 记录值<br> 1    |@         |CNAME    |默认     | aiziyuer.github.io<br> 2    |@         |CNAME     |国内     | aiziyuer.coding.me<br> 3    |@        |CNAME     |国外     | aiziyuer.github.io</p>
+</li>
+<li><p>需要设置<code>godday</code>使用<code>dnspod</code>来做<code>nameservice</code>;<br> godday 的DNS Manager -&gt; Nameservers 选择自定义 -&gt; 添加两条<code>f1g1ns1.dnspod.net</code>、<code>f1g1ns2.dnspod.net</code><br> -&gt; 保存然后等待修改生效</p>
+</li>
+</ol>
 
-众所周知,墙内的生活是拮据的,国内访问github速度一直都非常缓慢,如果你跟我一样选择github的pages服务的话应该会碰到跟我一样的烦恼;
-
-- 国内访问速度巨慢, 但是国外的github服务非常稳定, 而且免费
-- 国内有替代品`coding.net`(gitcafe是他的前身), 但是全部放到上面不太放心
-
-搜索了一下, 发现有人已经想到了解决的办法, 这里只是做一些简单的说明
-
-## 原理
-
-如今的域名解析已经非常多样了, 除了普通意义的顶级域名(.com)的根域名解析, 想godday这样的大厂还会把域名映射功能"外包"出去,即允许
-第三方的域名服务提供商来提供这部分域名的解析功能, 而国内的`dnspod`就是这样一个存在, 它虽然不具备顶级域名的发放功能,但是实际上
-他是具有这样的能力(生得太晚了), 而且它的功能做的已经比godday还要好, 它可以针对线路的类型来分流;
-
-如果是`godday`+`dnspod`这样的组合,我们访问我们域名的整个过程就变成了 浏览器请求 -> 根域名服务解析 -> 一级域名解析 
--> DNSPod根据请求的发起线路选择服务节点 -> 最终的服务提供 -> 相应请求
-
-## 我对CNAME的理解
-
-我觉得博客中的`CNAME`文件在`github`中会起到一个跳转作用, 但是不论是`github`还是`coding.net`, 其实C`NAME`文件只是为了
-让他们的服务器面授`DDOS`攻击,对于博客作者和博客观众没有任何作用.
-
-DNS记录中配置的`CNAME`是有用处的,它允许你使用域名的方式制定私服节点(运行博客的服务器);
-
-## 具体配置
-
-1. 到[`dnspod`](https://www.dnspod.cn/)注册个号, 然后进入控制台准备配置;
-2. 找到***域名解析***然后***添加域名***,这里基本都是傻瓜式;
-3. 添加三条记录, 根据线路类型做分流的两条记录以及一条默认线路:
-
-	编号	|主机记录	|记录类型	|线路类型	| 记录值
-	1	|@ 		|CNAME	|默认 	| aiziyuer.github.io
-	2	|@ 		|CNAME 	|国内 	| aiziyuer.coding.me
-	3	|@		|CNAME 	|国外 	| aiziyuer.github.io
-
-4. 需要设置`godday`使用`dnspod`来做`nameservice`;
-	godday 的DNS Manager -> Nameservers 选择自定义 -> 添加两条`f1g1ns1.dnspod.net`、`f1g1ns2.dnspod.net`
-	-> 保存然后等待修改生效
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>

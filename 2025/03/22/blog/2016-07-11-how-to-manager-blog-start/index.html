@@ -6,12 +6,12 @@
   <meta name="keywords" content=" blog , bash ">
   <meta name="description" content="如何高效地管理博客 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -834,7 +834,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%8A%9F%E8%83%BD"><span class="toc-text">实时预览功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-text">前端自动化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%BB%8F%E9%AA%8C"><span class="toc-text">一些经验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sass%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-text">Sass的编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jekyll%E7%BC%96%E8%AF%91%E6%9C%8D%E5%8A%A1"><span class="toc-text">Jekyll编译服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%88%B7%E6%96%B0%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">同步刷新浏览器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B1%87%E6%80%BBgulp%E4%BB%BB%E5%8A%A1"><span class="toc-text">汇总gulp任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%AF%E7%B2%B9%E5%86%99%E4%BB%A3%E7%A0%81"><span class="toc-text">纯粹写代码</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -850,186 +850,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-我的博客主要是采用`jekyll`作为后台进行`markdown`文法的文章渲染,但是我在使用过程中发现主要有两种使用场景:
+        <p>我的博客主要是采用<code>jekyll</code>作为后台进行<code>markdown</code>文法的文章渲染,但是我在使用过程中发现主要有两种使用场景:</p>
+<ul>
+<li>对博客主题进行修改 – 往往需要调节<code>css</code>和<code>js</code>等跟博客文章无关的东西, 需要一个可以即时预览的功能</li>
+<li>纯粹写文章, 不想被其他因素打扰, 不涉及美化工作, 文法基本已经记住,不需要实时预览,但是需要刷新页面就能看效果</li>
+</ul>
+<h2 id="实时预览功能"><a href="#实时预览功能" class="headerlink" title="实时预览功能"></a>实时预览功能</h2><p>这个实时预览功能, 最直接的就是修改文章样式后, 浏览器(可能还有我的手机平板)上的网页内容需要跟着刷新.而且同时<br>我的博客中样式的编写都是<code>scss</code>的,所以需要有个实时的编译器,观察到我的样式改变后,立刻生成对应的<code>css</code>文件,并且通知<br><code>jekyll</code>服务刷新头文件,最后通知浏览器刷新页面.</p>
+<h3 id="前端自动化"><a href="#前端自动化" class="headerlink" title="前端自动化"></a>前端自动化</h3><p>考虑到博客也算是一个弱化的前端工程,尝试过<a target="_blank" rel="noopener" href="http://compass-style.org/"><code>compass</code></a>、<br><a target="_blank" rel="noopener" href="http://koala-app.com/"><code>kola</code></a>,觉得限制实在太多,<br>所以干脆从头开始使用纯前端自动化工具<a target="_blank" rel="noopener" href="http://www.gulpjs.com.cn/"><code>gulp</code></a>管理博客.</p>
+<h3 id="一些经验"><a href="#一些经验" class="headerlink" title="一些经验"></a>一些经验</h3><p><code>gulp</code>这个东西给我的感觉有点像<code>unix</code>的味道, 不过不管她多么好用,依然离不开<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/"><code>nodejs</code></a>,<br><a target="_blank" rel="noopener" href="https://www.npmjs.com/"><code>npm</code></a>,我这里就不赘述. 以下是我的一些<code>gulp</code>任务书写经验</p>
+<ul>
+<li><code>gulpfile.js</code>其实可以是一个文件夹, <code>gulp</code>的运行非常聪明, 她可以以文件夹下的index.js作为入口文件</li>
+<li>整个工程中,只有<code>gulp</code>的脚本是属于<code>nodejs</code>, 所以<code>.jshintrc</code>文件建议在<code>gulpfile.js</code>单独弄一个</li>
+<li>使用<a target="_blank" rel="noopener" href="https://github.com/aseemk/requireDir"><code>require-dir</code></a>插件可以遍历一个文件夹下所有的<code>javascript</code>文件,懒人必备</li>
+<li><code>config.json</code>作为配置文件的方式太low了, 一律使用<code>config.js</code>+ <code>module.exports</code>的方式替代,美真的不是一点点</li>
+</ul>
+<h3 id="Sass的编译"><a href="#Sass的编译" class="headerlink" title="Sass的编译"></a>Sass的编译</h3><blockquote>
+<p>talk’s cheap, show u the code.</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js/tasks/css.js 定义编译的任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;css&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    gulp.<span class="title function_">src</span>(config.<span class="property">src</span>.<span class="property">scss</span> + <span class="string">&#x27;/**/*.?(s)css&#x27;</span>)</span><br><span class="line">        .<span class="title function_">pipe</span>($.<span class="title function_">sass</span>())</span><br><span class="line">        .<span class="title function_">on</span>(<span class="string">&#x27;error&#x27;</span>, <span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">        	<span class="comment">// 这里捕获异常, 只是打印错误日志, 不会终止css任务</span></span><br><span class="line">            $.util.<span class="title function_">log</span>(err);</span><br><span class="line">        &#125;)</span><br><span class="line">        .<span class="title function_">pipe</span>($.<span class="title function_">concat</span>(<span class="string">&#x27;style.css&#x27;</span>))</span><br><span class="line">        .<span class="title function_">pipe</span>(gulp.<span class="title function_">dest</span>(config.<span class="property">src</span>.<span class="property">css</span>));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js/tasks/watch.js 定义watch任务, 当有css文件更新就触发编译任务</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;watch:css&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    gulp.<span class="title function_">watch</span>(config.<span class="property">src</span>.<span class="property">scss</span> + <span class="string">&#x27;**/*.?(s)css&#x27;</span>, [<span class="string">&#x27;css&#x27;</span>]);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-- 对博客主题进行修改 -- 往往需要调节`css`和`js`等跟博客文章无关的东西, 需要一个可以即时预览的功能
-- 纯粹写文章, 不想被其他因素打扰, 不涉及美化工作, 文法基本已经记住,不需要实时预览,但是需要刷新页面就能看效果
+<h3 id="Jekyll编译服务"><a href="#Jekyll编译服务" class="headerlink" title="Jekyll编译服务"></a>Jekyll编译服务</h3><p>因为<code>jekyll</code>是使用<code>ruby</code>语言开发的一个小的服务器,所以需要使用<code>nodejs</code>提供的<code>chind.spawn</code>的方式来多进程运行:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// gulpfile.js/tasks/jekyll.js 使用child.spawn来完成jekyll进程的启动</span></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;jekyll&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> jekyll_exe = process.<span class="property">platform</span> === <span class="string">&quot;win32&quot;</span> ? <span class="string">&quot;jekyll.bat&quot;</span> : <span class="string">&quot;jekyll&quot;</span>;</span><br><span class="line">    <span class="keyword">var</span> jekyll = child.<span class="title function_">spawn</span>(jekyll_exe, [<span class="string">&#x27;build&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;--incremental&#x27;</span>, <span class="comment">// 当文章非常多的时候开启, 文章少的时候貌似不开效果更好</span></span><br><span class="line">        <span class="string">&#x27;--watch&#x27;</span></span><br><span class="line">    ]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> <span class="title function_">jekyllLogger</span> = (<span class="params">buffer</span>) =&gt; &#123;</span><br><span class="line">        buffer.<span class="title function_">toString</span>()</span><br><span class="line">            .<span class="title function_">split</span>(<span class="regexp">/\n/</span>)</span><br><span class="line">            .<span class="title function_">forEach</span>(<span class="function">(<span class="params">message</span>) =&gt;</span> $.util.<span class="title function_">log</span>(<span class="string">&#x27;Jekyll: &#x27;</span> + message));</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    jekyll.<span class="property">stdout</span>.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, jekyllLogger);</span><br><span class="line">    jekyll.<span class="property">stderr</span>.<span class="title function_">on</span>(<span class="string">&#x27;data&#x27;</span>, jekyllLogger);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-## 实时预览功能
+<h3 id="同步刷新浏览器"><a href="#同步刷新浏览器" class="headerlink" title="同步刷新浏览器"></a>同步刷新浏览器</h3><p>这里要介绍下一个很好玩的插件<a target="_blank" rel="noopener" href="https://www.browsersync.io/"><code>browserSync</code></a>, 我的理解是她代理了一部分的http服务,<br>所以访问网站的同时,其实是她在页面的投入加入了一些东西, 所以她可以远程触发浏览器重新请求网页, 配置如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> browserSync = <span class="built_in">require</span>(<span class="string">&#x27;browser-sync&#x27;</span>).<span class="title function_">create</span>();</span><br><span class="line"></span><br><span class="line">gulp.<span class="title function_">task</span>(<span class="string">&#x27;server&#x27;</span>, [<span class="string">&#x27;css&#x27;</span>], <span class="function">() =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">	$.util.<span class="title function_">log</span>(config.<span class="property">site</span>);</span><br><span class="line"></span><br><span class="line">    browserSync.<span class="title function_">init</span>(&#123;</span><br><span class="line">        <span class="attr">files</span>: [config.<span class="property">site</span>.<span class="property">root</span> + <span class="string">&#x27;/**&#x27;</span>],</span><br><span class="line">        <span class="attr">port</span>: <span class="number">3131</span>,</span><br><span class="line">        <span class="attr">server</span>: &#123;</span><br><span class="line">            <span class="attr">baseDir</span>: config.<span class="property">site</span>.<span class="property">root</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">   </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-这个实时预览功能, 最直接的就是修改文章样式后, 浏览器(可能还有我的手机平板)上的网页内容需要跟着刷新.而且同时
-我的博客中样式的编写都是`scss`的,所以需要有个实时的编译器,观察到我的样式改变后,立刻生成对应的`css`文件,并且通知
-`jekyll`服务刷新头文件,最后通知浏览器刷新页面.
-
-
-### 前端自动化
-
-考虑到博客也算是一个弱化的前端工程,尝试过[`compass`](http://compass-style.org/)、
-[`kola`](http://koala-app.com/),觉得限制实在太多,
-所以干脆从头开始使用纯前端自动化工具[`gulp`](http://www.gulpjs.com.cn/)管理博客.
-
-### 一些经验
-
-`gulp`这个东西给我的感觉有点像`unix`的味道, 不过不管她多么好用,依然离不开[`nodejs`](https://nodejs.org/zh-cn/),
-[`npm`](https://www.npmjs.com/),我这里就不赘述. 以下是我的一些`gulp`任务书写经验
-
-- `gulpfile.js`其实可以是一个文件夹, `gulp`的运行非常聪明, 她可以以文件夹下的index.js作为入口文件
-- 整个工程中,只有`gulp`的脚本是属于`nodejs`, 所以`.jshintrc`文件建议在`gulpfile.js`单独弄一个
-- 使用[`require-dir`](https://github.com/aseemk/requireDir)插件可以遍历一个文件夹下所有的`javascript`文件,懒人必备
-- `config.json`作为配置文件的方式太low了, 一律使用`config.js`+ `module.exports`的方式替代,美真的不是一点点
-
-### Sass的编译
-
-> talk's cheap, show u the code.
-
-``` javascript 
-
-// gulpfile.js/tasks/css.js 定义编译的任务
-gulp.task('css', () => {
-    gulp.src(config.src.scss + '/**/*.?(s)css')
-        .pipe($.sass())
-        .on('error', (err) => {
-        	// 这里捕获异常, 只是打印错误日志, 不会终止css任务
-            $.util.log(err);
-        })
-        .pipe($.concat('style.css'))
-        .pipe(gulp.dest(config.src.css));
-});
-
-// gulpfile.js/tasks/watch.js 定义watch任务, 当有css文件更新就触发编译任务
-gulp.task('watch:css', () => {
-    gulp.watch(config.src.scss + '**/*.?(s)css', ['css']);
-});
-
-```
-
-### Jekyll编译服务
-
-因为`jekyll`是使用`ruby`语言开发的一个小的服务器,所以需要使用`nodejs`提供的`chind.spawn`的方式来多进程运行:
-
-``` javascript 
-
-// gulpfile.js/tasks/jekyll.js 使用child.spawn来完成jekyll进程的启动
-gulp.task('jekyll', () => {
-
-    var jekyll_exe = process.platform === "win32" ? "jekyll.bat" : "jekyll";
-    var jekyll = child.spawn(jekyll_exe, ['build',
-        '--incremental', // 当文章非常多的时候开启, 文章少的时候貌似不开效果更好
-        '--watch'
-    ]);
-
-    var jekyllLogger = (buffer) => {
-        buffer.toString()
-            .split(/\n/)
-            .forEach((message) => $.util.log('Jekyll: ' + message));
-    };
-
-    jekyll.stdout.on('data', jekyllLogger);
-    jekyll.stderr.on('data', jekyllLogger);
-});
-
-```
-
-### 同步刷新浏览器
-
-这里要介绍下一个很好玩的插件[`browserSync`](https://www.browsersync.io/), 我的理解是她代理了一部分的http服务,
-所以访问网站的同时,其实是她在页面的投入加入了一些东西, 所以她可以远程触发浏览器重新请求网页, 配置如下:
-
-```javascript
-var browserSync = require('browser-sync').create();
-
-gulp.task('server', ['css'], () => {
-
-	$.util.log(config.site);
-
-    browserSync.init({
-        files: [config.site.root + '/**'],
-        port: 3131,
-        server: {
-            baseDir: config.site.root
-        }
-    });
-   
-});
-```
-
-### 汇总gulp任务
-
-到这里, 基本上稍微串一串几个任务就可以实现第一个需求了: `gulp.task('start', ['jekyll','server', 'watch']);`
-
-
-### 纯粹写代码
-
-由于我之前博客是使用`gulp`来进行管理, 这种方式肯定是希望控制台回显更多的错误日志才好,但是如果是平时的使用,我更希望专注于内容的协作, 所以我使用`bash`改写了启动脚本:
-
-```bash
-#!/usr/bin/env bash
-
-usage()
-{
-	printf "
-Usage
-
-  start [options]
-
-Options
-
-[-k|--kill] 杀死jekyll进程
-
-[-j|--jekyll] 启动jekyll进程
-
-[-h|--help] 显示帮助
-
-[-g|--gulp] gulp的方式运行
-	
-"
-}
-
-kill_jekyll_service(){
-  ps -ef | grep jekyll | grep -v grep | awk '{print $2}' | xargs kill -9
-}
-
-start_jekyll_service(){
-  jekyll server >output.log 2>&1 &
-}
-
-gulp_start(){
-  gulp start
-}
-
-while true; do
-  case "$1" in
-
-    (-k|--kill)
-	    kill_jekyll_service
-      exit 0
-	    ;;
-
-    (-j|--jekyll)
-      kill_jekyll_service
-      start_jekyll_service
-      exit 0
-      ;;
-
-    (-h|--help)
-      usage
-      exit 0
-      ;;
-
-    (-g|--gulp)
-      gulp_start
-      exit 0
-      ;;
-
-    (*)
-      usage
-      exit 1
-      ;;
-
-  esac
-done
-```
+<h3 id="汇总gulp任务"><a href="#汇总gulp任务" class="headerlink" title="汇总gulp任务"></a>汇总gulp任务</h3><p>到这里, 基本上稍微串一串几个任务就可以实现第一个需求了: <code>gulp.task(&#39;start&#39;, [&#39;jekyll&#39;,&#39;server&#39;, &#39;watch&#39;]);</code></p>
+<h3 id="纯粹写代码"><a href="#纯粹写代码" class="headerlink" title="纯粹写代码"></a>纯粹写代码</h3><p>由于我之前博客是使用<code>gulp</code>来进行管理, 这种方式肯定是希望控制台回显更多的错误日志才好,但是如果是平时的使用,我更希望专注于内容的协作, 所以我使用<code>bash</code>改写了启动脚本:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">usage</span></span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="built_in">printf</span> <span class="string">&quot;</span></span><br><span class="line"><span class="string">Usage</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  start [options]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Options</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-k|--kill] 杀死jekyll进程</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-j|--jekyll] 启动jekyll进程</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-h|--help] 显示帮助</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">[-g|--gulp] gulp的方式运行</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">kill_jekyll_service</span></span>()&#123;</span><br><span class="line">  ps -ef | grep jekyll | grep -v grep | awk <span class="string">&#x27;&#123;print $2&#125;&#x27;</span> | xargs <span class="built_in">kill</span> -9</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">start_jekyll_service</span></span>()&#123;</span><br><span class="line">  jekyll server &gt;output.log 2&gt;&amp;1 &amp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">gulp_start</span></span>()&#123;</span><br><span class="line">  gulp start</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>; <span class="keyword">do</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;<span class="variable">$1</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line"></span><br><span class="line">    (-k|--<span class="built_in">kill</span>)</span><br><span class="line">	    kill_jekyll_service</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">	    ;;</span><br><span class="line"></span><br><span class="line">    (-j|--jekyll)</span><br><span class="line">      kill_jekyll_service</span><br><span class="line">      start_jekyll_service</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">    (-h|--<span class="built_in">help</span>)</span><br><span class="line">      usage</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">    (-g|--gulp)</span><br><span class="line">      gulp_start</span><br><span class="line">      <span class="built_in">exit</span> 0</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">    (*)</span><br><span class="line">      usage</span><br><span class="line">      <span class="built_in">exit</span> 1</span><br><span class="line">      ;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 
 
       

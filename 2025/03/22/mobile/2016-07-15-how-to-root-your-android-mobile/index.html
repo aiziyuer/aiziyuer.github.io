@@ -6,12 +6,12 @@
   <meta name="keywords" content=" android , 生活 , 效率 ">
   <meta name="description" content="Xposed框架安装 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -836,7 +836,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E5%85%A8%E9%83%A8%E6%89%8B%E5%B7%A5"><span class="toc-text">为什么选择全部手工?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Plan"><span class="toc-text">Plan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BA%E5%AE%9A%E5%88%B7%E6%9C%BA%E6%AD%A5%E9%AA%A4"><span class="toc-text">固定刷机步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E6%8F%90"><span class="toc-text">前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-text">准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%BE%E5%85%A5%E7%AC%AC%E4%B8%89%E6%96%B9%E7%9A%84%E5%AE%9A%E5%88%B6%E5%8C%85"><span class="toc-text">放入第三方的定制包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%81%A2%E5%A4%8D%E5%AE%98%E6%96%B9%E5%B7%A5%E5%8E%82%E9%95%9C%E5%83%8F"><span class="toc-text">恢复官方工厂镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E5%85%A5recovery%E5%9B%BA%E4%BB%B6"><span class="toc-text">刷入recovery固件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E5%85%A5%E5%AE%9A%E5%88%B6%E7%9A%84%E7%AC%AC%E4%B8%89%E6%96%B9%E5%AE%9A%E5%88%B6%E5%8C%85"><span class="toc-text">刷入定制的第三方定制包</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -852,90 +852,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-今天早晨醒来, 手机显示有了新的操作系统更新, 所以晚上照旧 下载`Factory`固件 ->
-线刷 -> 检查`recovery`包 -> 恢复`root` -> 恢复`xposed`框架
+        <p>今天早晨醒来, 手机显示有了新的操作系统更新, 所以晚上照旧 下载<code>Factory</code>固件 -&gt;<br>线刷 -&gt; 检查<code>recovery</code>包 -&gt; 恢复<code>root</code> -&gt; 恢复<code>xposed</code>框架</p>
+<p>以上的过程对于我现在来说比较熟悉的情况下大概需要花费我1-2小时的时间</p>
+<h2 id="为什么选择全部手工"><a href="#为什么选择全部手工" class="headerlink" title="为什么选择全部手工?"></a>为什么选择全部手工?</h2><p>其实我也是一个懒人, 所以我肯定写过一些脚本来自动做, 目前这个脚本已经可以自动去官网上自动下载最新的fatory固件、<br>去除<code>flash-all.sh</code>中的<code>-w</code>选项、并且通知我的手机进入<code>bootloader</code>刷机模式,但是现在有些比较蛋疼的是, 刷完后系统会自动<br>重启，然后应用的优化会非常耗时(不算xposed都有77个), 所以后面的<code>recovery</code>和<code>xposed</code>就比较难弄了, 所以只能先”手动”了</p>
+<h2 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h2><p>作为21世纪有思想的新青年, 自动化是必然的事情, 所以在我没有想到解决上面的问题前, 先把刷机固定的步骤记录下来,<br>方便后面自动脚本的编写.</p>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> 固化刷机步骤</li>
+<li><input disabled="" type="checkbox"> 脚本自动刷机</li>
+</ul>
+<h2 id="固定刷机步骤"><a href="#固定刷机步骤" class="headerlink" title="固定刷机步骤"></a>固定刷机步骤</h2><h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
+<li>你需要一台原生android系统的手机(Nexus)</li>
+<li>解锁OEM锁(开发者模式里面有)</li>
+<li>解锁bootloader(开机会比较可怕,无所谓)<code>fastboot flashing unlock</code></li>
+</ul>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>这里考虑的是万能方法, 所以必然是线刷Factory固件了, 你需要有以下几样东西, 每次都需要检查是否是最新版本:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/android/nexus/images">Nexus Factory Images</a>不仅可以刷机用还能救转(unlock bootloader, oem unlock)</li>
+<li><a target="_blank" rel="noopener" href="https://twrp.me/">TWRP</a>第三方的恢复镜像,因为谷歌官方不支持恢复第三方的东西(<code>supersu</code>, <code>xposed</code>)</li>
+<li><a target="_blank" rel="noopener" href="http://download.chainfire.eu/supersu">supersu</a>root专用,最后<code>recover</code>刷进去</li>
+<li><a target="_blank" rel="noopener" href="http://dl-xda.xposed.info/framework/">Xposed</a>杀手级应用</li>
+</ul>
+<h3 id="放入第三方的定制包"><a href="#放入第三方的定制包" class="headerlink" title="放入第三方的定制包"></a>放入第三方的定制包</h3><p><code>suspersu</code>和<code>xposed</code>两个包基本上都是zip格式的, 因为需要在recovery页面手动刷入, 所以为了避免麻烦, 在刷机前先通过USB拷入手机, 放到一个熟悉的目录,<br>后面需要手动进入该目录,所以不要太复杂,放根目录进行了.</p>
+<h3 id="恢复官方工厂镜像"><a href="#恢复官方工厂镜像" class="headerlink" title="恢复官方工厂镜像"></a>恢复官方工厂镜像</h3><p>手机开debug模式usb连电脑, 然后解压工厂固件的压缩包, 然后进入解压缩后的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 替换掉flash-all中危险的清空数据选项-w</span></span><br><span class="line">gsed -i <span class="string">&#x27;s/fastboot -w/fastboot/g&#x27;</span> flash-all.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入bootloader状态</span></span><br><span class="line">adb reboot bootloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入固件</span></span><br><span class="line">sh ./flash-all.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面手机会重启, 真的很久, 下次研究研究有没有替换的方法</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-以上的过程对于我现在来说比较熟悉的情况下大概需要花费我1-2小时的时间
+<h3 id="刷入recovery固件"><a href="#刷入recovery固件" class="headerlink" title="刷入recovery固件"></a>刷入<code>recovery</code>固件</h3><p>命令行进入twrp镜像所在目录, 然后命令行运行如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入bootloader状态</span></span><br><span class="line">adb reboot bootloader</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入固件</span></span><br><span class="line">fastboot flash recovery twrp-3.0.2-0-angler.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刷入后不会要求重启, 马上进入下面的刷入supersu和exposed</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入恢复模式（建议还是硬件操作比较好）</span></span><br><span class="line">adb reboot recovery</span><br></pre></td></tr></table></figure>
 
-## 为什么选择全部手工?
+<h3 id="刷入定制的第三方定制包"><a href="#刷入定制的第三方定制包" class="headerlink" title="刷入定制的第三方定制包"></a>刷入定制的第三方定制包</h3><p>这一步基本都是手动, 手动就手动吧, 手动安装两个zip的包然后重启.</p>
+<p><strong>DONE</strong></p>
 
-其实我也是一个懒人, 所以我肯定写过一些脚本来自动做, 目前这个脚本已经可以自动去官网上自动下载最新的fatory固件、
-去除`flash-all.sh`中的`-w`选项、并且通知我的手机进入`bootloader`刷机模式,但是现在有些比较蛋疼的是, 刷完后系统会自动
-重启，然后应用的优化会非常耗时(不算xposed都有77个), 所以后面的`recovery`和`xposed`就比较难弄了, 所以只能先"手动"了
-
-## Plan
-
-作为21世纪有思想的新青年, 自动化是必然的事情, 所以在我没有想到解决上面的问题前, 先把刷机固定的步骤记录下来,
-方便后面自动脚本的编写.
-
-- [x] 固化刷机步骤
-- [ ] 脚本自动刷机
-
-## 固定刷机步骤
-
-### 前提
-
-- 你需要一台原生android系统的手机(Nexus)
-- 解锁OEM锁(开发者模式里面有)
-- 解锁bootloader(开机会比较可怕,无所谓)`fastboot flashing unlock`
-
-### 准备
-
-这里考虑的是万能方法, 所以必然是线刷Factory固件了, 你需要有以下几样东西, 每次都需要检查是否是最新版本:
-
-- [Nexus Factory Images](https://developers.google.com/android/nexus/images)不仅可以刷机用还能救转(unlock bootloader, oem unlock)
-- [TWRP](https://twrp.me/)第三方的恢复镜像,因为谷歌官方不支持恢复第三方的东西(`supersu`, `xposed`)
-- [supersu](http://download.chainfire.eu/supersu)root专用,最后`recover`刷进去
-- [Xposed](http://dl-xda.xposed.info/framework/)杀手级应用
-
-### 放入第三方的定制包
-
-`suspersu`和`xposed`两个包基本上都是zip格式的, 因为需要在recovery页面手动刷入, 所以为了避免麻烦, 在刷机前先通过USB拷入手机, 放到一个熟悉的目录,
-后面需要手动进入该目录,所以不要太复杂,放根目录进行了.
-
-
-### 恢复官方工厂镜像
-
-手机开debug模式usb连电脑, 然后解压工厂固件的压缩包, 然后进入解压缩后的目录
-
-```bash
-# 替换掉flash-all中危险的清空数据选项-w
-gsed -i 's/fastboot -w/fastboot/g' flash-all.sh
-
-# 进入bootloader状态
-adb reboot bootloader
-
-# 刷入固件
-sh ./flash-all.sh
-
-# 下面手机会重启, 真的很久, 下次研究研究有没有替换的方法
-
-```
-
-### 刷入`recovery`固件
-
-命令行进入twrp镜像所在目录, 然后命令行运行如下:
-
-```bash
-# 进入bootloader状态
-adb reboot bootloader
-
-# 刷入固件
-fastboot flash recovery twrp-3.0.2-0-angler.img
-
-# 刷入后不会要求重启, 马上进入下面的刷入supersu和exposed
-
-# 进入恢复模式（建议还是硬件操作比较好）
-adb reboot recovery
-```
-
-### 刷入定制的第三方定制包
-
-这一步基本都是手动, 手动就手动吧, 手动安装两个zip的包然后重启.
-
-
-**DONE**
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>

@@ -6,12 +6,12 @@
   <meta name="keywords" content=" android , 生活 , 效率 ">
   <meta name="description" content="好用的Xposed模块推荐 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -836,7 +836,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E7%BD%97%E5%88%97"><span class="toc-text">应用罗列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%85%E5%AE%B6%E5%BF%85%E5%A4%87%E7%9A%84"><span class="toc-text">居家必备的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%80%E6%89%8B%E7%BA%A7%E7%9A%84"><span class="toc-text">杀手级的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%9E%E5%B8%B8%E5%AE%9E%E7%94%A8%E7%9A%84"><span class="toc-text">非常实用的</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%81%97%E7%95%99%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">遗留的问题</span></a></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -852,36 +852,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-这里介绍几款我日常中使用频率最高的几个模块, 我是个宁缺毋滥的人, 相信我的选择多少也能帮到写你.
+        <p>这里介绍几款我日常中使用频率最高的几个模块, 我是个宁缺毋滥的人, 相信我的选择多少也能帮到写你.</p>
+<h2 id="应用罗列"><a href="#应用罗列" class="headerlink" title="应用罗列"></a>应用罗列</h2><h3 id="居家必备的"><a href="#居家必备的" class="headerlink" title="居家必备的"></a>居家必备的</h3><ul>
+<li><code>绿色守护</code> – 绿色化应用, 阻止一些应用后台偷偷吃内存, 这个东西我觉得是非常有用, 特别是开了捐赠版之后更是无敌</li>
+<li>X 状态栏农历日期(<code>X statusbar Lunar Date</code>) – 中国人基本上都需要, 它可以让你在下拉系统顶栏时看到日期中的农历</li>
+<li>GravityBox – 这是个很多小工具的集合体, 类似Tweak, 很多实用的功能: 一键清历史任务(我有强迫真), 任务列表顶栏显示可用内存等</li>
+</ul>
+<h3 id="杀手级的"><a href="#杀手级的" class="headerlink" title="杀手级的"></a>杀手级的</h3><ul>
+<li>阻止运行(<code>Prevent Running</code>) – 进制程序后台运行, 只要程序不再最近任务列表里就无法后台运行, 非常好奇它怎么实现的</li>
+<li><code>BootManager</code> – 什么, 你的应用随开机启动, 我好久没有听说过了</li>
+<li><code>RootCloak</code> – 有些时候你虽然root了, 但就是不想让app知道,譬如:打卡机, 网银什么的</li>
+<li>模拟位置(<code>fakegps</code>) – 模拟GPS的位置,这个应用我真的尝试过, 确实是有效的, 谷歌地图和微信都是支持的(就是百度有些问题)</li>
+</ul>
+<h3 id="非常实用的"><a href="#非常实用的" class="headerlink" title="非常实用的"></a>非常实用的</h3><ul>
+<li><code>Screenshot Delay Remover</code> – 截屏的时候让我等几秒是几个意思, 效率去哪里了</li>
+<li><code>WiFi Password</code> – 我家的<code>wifi</code>是<code>MAC</code>地址白名单的, 所以密码什么的不要搞得那么神秘, 我就想看连接密码的明文</li>
+<li><code>Burnt Toast</code> – 你有没有莫名其妙在手机底部看到一个小的弹框提示, 然后过几秒消失了,你虽然知道有问题却不知道是哪个应用的</li>
+</ul>
+<h2 id="遗留的问题"><a href="#遗留的问题" class="headerlink" title="遗留的问题"></a>遗留的问题</h2><p>现在经过调校, 手机基本上按照我的思路在工作, 所有的app基本我不关心就没法向我推送通知(真的很爽, 每次看到还有1G内存就无比开心).<br>但是, 新浪和网银的Light等应用有个周期启动的功能不知道是怎么实现的, 貌似每天晚上11点左右(时间点很固定)会成功向我推送消息,<br>令人发指, 继续折腾中~ing.</p>
 
-## 应用罗列
-
-### 居家必备的
-
-- `绿色守护` -- 绿色化应用, 阻止一些应用后台偷偷吃内存, 这个东西我觉得是非常有用, 特别是开了捐赠版之后更是无敌
--  X 状态栏农历日期(`X statusbar Lunar Date`) -- 中国人基本上都需要, 它可以让你在下拉系统顶栏时看到日期中的农历
--  GravityBox -- 这是个很多小工具的集合体, 类似Tweak, 很多实用的功能: 一键清历史任务(我有强迫真), 任务列表顶栏显示可用内存等
-
-### 杀手级的
-
--  阻止运行(`Prevent Running`) -- 进制程序后台运行, 只要程序不再最近任务列表里就无法后台运行, 非常好奇它怎么实现的
--  `BootManager` -- 什么, 你的应用随开机启动, 我好久没有听说过了
--  `RootCloak` -- 有些时候你虽然root了, 但就是不想让app知道,譬如:打卡机, 网银什么的
--  模拟位置(`fakegps`) -- 模拟GPS的位置,这个应用我真的尝试过, 确实是有效的, 谷歌地图和微信都是支持的(就是百度有些问题)
-
-### 非常实用的
-
-- `Screenshot Delay Remover` -- 截屏的时候让我等几秒是几个意思, 效率去哪里了
-- `WiFi Password` -- 我家的`wifi`是`MAC`地址白名单的, 所以密码什么的不要搞得那么神秘, 我就想看连接密码的明文
-- `Burnt Toast` -- 你有没有莫名其妙在手机底部看到一个小的弹框提示, 然后过几秒消失了,你虽然知道有问题却不知道是哪个应用的
-
-
-## 遗留的问题
-
-现在经过调校, 手机基本上按照我的思路在工作, 所有的app基本我不关心就没法向我推送通知(真的很爽, 每次看到还有1G内存就无比开心).
-但是, 新浪和网银的Light等应用有个周期启动的功能不知道是怎么实现的, 貌似每天晚上11点左右(时间点很固定)会成功向我推送消息,
-令人发指, 继续折腾中~ing.
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
     </div>

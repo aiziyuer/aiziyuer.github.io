@@ -6,12 +6,12 @@
   <meta name="keywords" content=" 技术 ">
   <meta name="description" content="怎样为你的博客增加评论功能 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -832,7 +832,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%AE%A2%E5%BE%AE%E8%B0%83"><span class="toc-text">博客微调</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E4%BF%AE%E6%94%B9"><span class="toc-text">页面修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E4%BF%AE%E6%94%B9"><span class="toc-text">脚本修改</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -848,60 +848,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>看了那么多网上使用多说失败的帖子, 所以决定直接使用<a target="_blank" rel="noopener" href="https://disqus.com/"><code>disqus</code></a>作为我的博客系统</p>
+<h2 id="博客微调"><a href="#博客微调" class="headerlink" title="博客微调"></a>博客微调</h2><p>这个评论系统做的真的非常棒, 暂时还不了解它的工作原理, 不明白它怎么区分不同的文章的, 不管怎样,先布上去再说.</p>
+<h3 id="页面修改"><a href="#页面修改" class="headerlink" title="页面修改"></a>页面修改</h3><p>我的博客比较简单, 因为我只想给每个<code>post</code>页面, 所以在post页面中多一个<code>include</code>文件<code>disqus</code>, 内容如下:</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- An element a visitor can click if they &lt;3 comments! --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;disqus_thread&quot;</span> <span class="attr">name</span>=<span class="string">&quot;&#123;&#123; site.disqus.shortname &#125;&#125;&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">noscript</span>&gt;</span>Please enable JavaScript to view the <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;https://disqus.com/?ref_noscript&quot;</span>&gt;</span>comments powered by Disqus.<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://disqus.com&quot;</span> <span class="attr">class</span>=<span class="string">&quot;dsq-brlink&quot;</span> <span class="attr">target</span>=<span class="string">&quot;_blank&quot;</span>&gt;</span>Loading Disqus comments...<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-看了那么多网上使用多说失败的帖子, 所以决定直接使用[`disqus`](https://disqus.com/)作为我的博客系统
+<p>这样每个页面在加完后都会多个div来表示需要拉取谁的评论信息, 我这里使用的jekyll博客, 所以这里的配置其实是来自<code>_config.yml</code>:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line"><span class="attr">disqus:</span></span><br><span class="line">  <span class="attr">shortname:</span> <span class="string">aiziyuer</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
 
-
-## 博客微调
-
-这个评论系统做的真的非常棒, 暂时还不了解它的工作原理, 不明白它怎么区分不同的文章的, 不管怎样,先布上去再说.
-
-### 页面修改
-
-我的博客比较简单, 因为我只想给每个`post`页面, 所以在post页面中多一个`include`文件`disqus`, 内容如下:
-
-``` html
-<!-- An element a visitor can click if they <3 comments! -->
-<div id="disqus_thread" name="{{ site.disqus.shortname }}">
-  <noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="http://disqus.com" class="dsq-brlink" target="_blank">Loading Disqus comments...</a>
-</div>
-```
-
-这样每个页面在加完后都会多个div来表示需要拉取谁的评论信息, 我这里使用的jekyll博客, 所以这里的配置其实是来自`_config.yml`:
-
-``` yaml
-# ...
-
-disqus:
-  shortname: aiziyuer
-
-# ...
-```
-
-### 脚本修改
-
-我这里使用的ajax的方式执行js, 详细如下:
-
-``` javascript
-var ds_loaded = false;
-var top = $('#disqus_thread').offset().top;
-window.disqus_shortname = $('#disqus_thread').attr('name');
-
-function check() {
-if ( !ds_loaded && container.scrollTop() + container.height() > top ) {
-  $.ajax({
-    type: 'GET',
-    url: '//' + disqus_shortname + '.disqus.com/embed.js',
-    dataType: 'script',
-    cache: true
-  });
-  ds_loaded = true;
-}
-}check();
-container.scroll(check);
-```
+<h3 id="脚本修改"><a href="#脚本修改" class="headerlink" title="脚本修改"></a>脚本修改</h3><p>我这里使用的ajax的方式执行js, 详细如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ds_loaded = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> top = $(<span class="string">&#x27;#disqus_thread&#x27;</span>).<span class="title function_">offset</span>().<span class="property">top</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="property">disqus_shortname</span> = $(<span class="string">&#x27;#disqus_thread&#x27;</span>).<span class="title function_">attr</span>(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">check</span>(<span class="params"></span>) &#123;</span><br><span class="line"><span class="keyword">if</span> ( !ds_loaded &amp;&amp; container.<span class="title function_">scrollTop</span>() + container.<span class="title function_">height</span>() &gt; top ) &#123;</span><br><span class="line">  $.<span class="title function_">ajax</span>(&#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;//&#x27;</span> + disqus_shortname + <span class="string">&#x27;.disqus.com/embed.js&#x27;</span>,</span><br><span class="line">    <span class="attr">dataType</span>: <span class="string">&#x27;script&#x27;</span>,</span><br><span class="line">    <span class="attr">cache</span>: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">  ds_loaded = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;<span class="title function_">check</span>();</span><br><span class="line">container.<span class="title function_">scroll</span>(check);</span><br></pre></td></tr></table></figure>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>

@@ -6,12 +6,12 @@
   <meta name="keywords" content=" 算法，java ">
   <meta name="description" content="区间查找算法 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -832,7 +832,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E8%80%83%E8%99%91"><span class="toc-text">性能考虑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E8%A1%8C%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-text">可行性分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%9C%E7%B4%A2%E5%AE%9E%E7%8E%B0"><span class="toc-text">搜索实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81"><span class="toc-text">伪代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB%E5%9E%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">类型说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E8%B1%A1%E6%88%90%E7%AD%96%E7%95%A5"><span class="toc-text">抽象成策略</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">具体实现</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%8C%BA%E9%97%B4%EF%BC%8C%E5%8E%BB%E9%99%A4%E9%87%8D%E5%8F%A0%E9%83%A8%E5%88%86"><span class="toc-text">处理区间，去除重叠部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%AA%E4%BB%A3%E7%A0%81-1"><span class="toc-text">伪代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -848,268 +848,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        有一个需求，业务里需要判断一个数组的数值变化趋势，所以定义了一套门限，但是现在觉得这个门限太全局了，需要缩小范围，
-最好一段一段的，趋势的判断也会改变原来的逻辑，每次获取门限的时候都带上数组的索引，因此需要设计一个算法，接受到一个
-数组索引，可以快速查询出对应的门限区间，进而拿到该门限。
+        <p>有一个需求，业务里需要判断一个数组的数值变化趋势，所以定义了一套门限，但是现在觉得这个门限太全局了，需要缩小范围，<br>最好一段一段的，趋势的判断也会改变原来的逻辑，每次获取门限的时候都带上数组的索引，因此需要设计一个算法，接受到一个<br>数组索引，可以快速查询出对应的门限区间，进而拿到该门限。</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>需要满足以下几个条件：</p>
+<ol>
+<li>区间有可能会重合，需要做区间的去重操作；</li>
+<li>区间的查询速度一定要快，因为原始的数组非常大，每个数组元素都会访问一遍；</li>
+</ol>
+<h2 id="性能考虑"><a href="#性能考虑" class="headerlink" title="性能考虑"></a>性能考虑</h2><p>因为有可能分段会非常多，所以提升速度，选用二叉搜索来提升效率，但是有一点需要注意，二叉查询前必须要确保区间没有重叠，<br>这个可以最后做一下数据的预处理。</p>
+<h2 id="可行性分析"><a href="#可行性分析" class="headerlink" title="可行性分析"></a>可行性分析</h2><p>有序的区间序列有特点：当前区间的起始一定小于前一个区间的结束；因此如果给定一个值想知道在哪个区间，二分是可行的。</p>
+<h2 id="搜索实现"><a href="#搜索实现" class="headerlink" title="搜索实现"></a>搜索实现</h2><p>以下是保证区间没有重复后所实现的搜索方法。因为我的代码还没有用作实际的生产，所以只是定义接口进行测试.</p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> value; <span class="comment">// 给定的值</span></span><br><span class="line">IRange wantedRange; <span class="comment">// 结果区间</span></span><br><span class="line">IRange[] range; <span class="comment">// 区间端信息</span></span><br><span class="line"><span class="type">int</span> start=<span class="number">0</span>, end=range.length; <span class="comment">// 区间的默认始末</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二分查找</span></span><br><span class="line"><span class="keyword">while</span>(start &lt;= end)</span><br><span class="line">&#123;</span><br><span class="line">	mid = (start + end) / <span class="number">2</span>; <span class="comment">//折半</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(value &lt;= range[mid].start)</span><br><span class="line">	&#123;</span><br><span class="line">  		end = mid - <span class="number">1</span>; </span><br><span class="line">  		<span class="keyword">continue</span>; <span class="comment">// 修正区间继续</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(value &gt; range[mid].end)</span><br><span class="line">	&#123;</span><br><span class="line">  		start = mid + <span class="number">1</span>;</span><br><span class="line">  		<span class="keyword">continue</span>; <span class="comment">// 修正区间继续</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	wantedRange = range[mid]; <span class="comment">// 找到了</span></span><br><span class="line">	<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-## 分析
-需要满足以下几个条件：
-1. 区间有可能会重合，需要做区间的去重操作；
-2. 区间的查询速度一定要快，因为原始的数组非常大，每个数组元素都会访问一遍；
+<h3 id="类型说明"><a href="#类型说明" class="headerlink" title="类型说明"></a>类型说明</h3><p>因为没有具体类型的设计，所以定义接口(<code>IRagion.java</code>)类型供算法使用:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.moss.arithmetic;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 类型： 区域, 左开右闭</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IRagion</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取区间起始</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 区间起始</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">double</span> <span class="title function_">getStart</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取区间结束</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 区间结束</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="type">double</span> <span class="title function_">getEnd</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修正区间的起始</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> start 新的区间起始</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">setStart</span><span class="params">(<span class="type">double</span> start)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 修正区间结束</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end 新的区间结束</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">setEnd</span><span class="params">(<span class="type">double</span> end)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="抽象成策略"><a href="#抽象成策略" class="headerlink" title="抽象成策略"></a>抽象成策略</h3><p>因为考虑到可能还会有更加完美的算法，所以搜素定义成策略接口(<code>IRagionStrategy.java</code>)，做到与具体实现分离:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.moss.arithmetic;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 区间搜索策略接口</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">IRagionStrategy</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 根据给定的值搜索所在的区间， 如果没有找到， 返回null */</span></span><br><span class="line">    IRagion <span class="title function_">search</span><span class="params">(<span class="type">double</span> value)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-## 性能考虑
-因为有可能分段会非常多，所以提升速度，选用二叉搜索来提升效率，但是有一点需要注意，二叉查询前必须要确保区间没有重叠，
-这个可以最后做一下数据的预处理。
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><p>目前我能想到的好方法还只是使用二叉来提高搜索效率<code>RagionStrategy.java</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.moss.arithmetic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 分区查找策略</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RagionStrategy</span> <span class="keyword">implements</span> <span class="title class_">IRagionStrategy</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 保存分段信息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;IRagion&gt; ragionList;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前的位置</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> value;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 入参务必要保证区间不能重合</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ragionList 区间列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RagionStrategy</span><span class="params">(List&lt;IRagion&gt; ragionList)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.ragionList = ragionList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 搜索距离所在的区间</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value 输入的位置</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 位置所处的区间， 如果找不到返回null</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> IRagion <span class="title function_">search</span><span class="params">(<span class="type">double</span> value)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> binarySearch(value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 二分查找</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> value 需要查询的值</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 找到的值所在区间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> IRagion <span class="title function_">binarySearch</span><span class="params">(<span class="type">double</span> value)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 默认找不到区间</span></span><br><span class="line">        <span class="type">IRagion</span> <span class="variable">ret</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 初始化区间的始末</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">start</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">end</span> <span class="operator">=</span> ragionList.size() - <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 只要区间合法， 就会一直搜索</span></span><br><span class="line">        <span class="keyword">while</span> (start &lt;= end) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 取出中点计算</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">mid</span> <span class="operator">=</span> (start + end) / <span class="number">2</span>;</span><br><span class="line">            <span class="type">IRagion</span> <span class="variable">ragion</span> <span class="operator">=</span> ragionList.get(mid);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果要找的值比区间起始还要小，则只有区间左边的才有可能是</span></span><br><span class="line">            <span class="keyword">if</span> (Double.compare(value, ragion.getStart()) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                end = mid - <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果要找的值比区间的结束还要大，则只有区间右边的才有可能是</span></span><br><span class="line">            <span class="keyword">if</span> (value &gt; ragion.getEnd()) &#123;</span><br><span class="line">                start = mid + <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果改值落在区间内(start, end],则说明找到了</span></span><br><span class="line">            ret = ragion;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-## 可行性分析
-有序的区间序列有特点：当前区间的起始一定小于前一个区间的结束；因此如果给定一个值想知道在哪个区间，二分是可行的。
-
-## 搜索实现
-以下是保证区间没有重复后所实现的搜索方法。因为我的代码还没有用作实际的生产，所以只是定义接口进行测试.
-
-### 伪代码
-``` java
-double value; // 给定的值
-IRange wantedRange; // 结果区间
-IRange[] range; // 区间端信息
-int start=0, end=range.length; // 区间的默认始末
-
-// 二分查找
-while(start <= end)
-{
-	mid = (start + end) / 2; //折半
-
-	if(value <= range[mid].start)
-	{
-  		end = mid - 1; 
-  		continue; // 修正区间继续
-	}
-
-	if(value > range[mid].end)
-	{
-  		start = mid + 1;
-  		continue; // 修正区间继续
-	}
-
-	wantedRange = range[mid]; // 找到了
-	break;
-}
-```
-
-### 类型说明
-因为没有具体类型的设计，所以定义接口(`IRagion.java`)类型供算法使用:
-
-``` java
-package com.moss.arithmetic;
-
-/**
- * 类型： 区域, 左开右闭
- */
-public interface IRagion {
-
-    /**
-     * 获取区间起始
-     *
-     * @return 区间起始
-     */
-    double getStart();
-
-    /**
-     * 获取区间结束
-     *
-     * @return 区间结束
-     */
-    double getEnd();
-
-    /**
-     * 修正区间的起始
-     *
-     * @param start 新的区间起始
-     */
-    void setStart(double start);
-
-    /**
-     * 修正区间结束
-     *
-     * @param end 新的区间结束
-     */
-    void setEnd(double end);
-}
-```
-
-### 抽象成策略
-因为考虑到可能还会有更加完美的算法，所以搜素定义成策略接口(`IRagionStrategy.java`)，做到与具体实现分离:
-
-```java
-package com.moss.arithmetic;
-/**
- * 区间搜索策略接口
- */
-public interface IRagionStrategy {
-
-    /** 根据给定的值搜索所在的区间， 如果没有找到， 返回null */
-    IRagion search(double value);
-}
-```
-
-### 具体实现
-目前我能想到的好方法还只是使用二叉来提高搜索效率`RagionStrategy.java`:
-
-```java
-package com.moss.arithmetic;
-
-import java.util.List;
-
-/**
- * 分区查找策略
- */
-public class RagionStrategy implements IRagionStrategy {
-
-    /**
-     * 保存分段信息
-     */
-    private List<IRagion> ragionList;
-
-    /**
-     * 当前的位置
-     */
-    private double value;
-
-    /**
-     * 入参务必要保证区间不能重合
-     *
-     * @param ragionList 区间列表
-     */
-    public RagionStrategy(List<IRagion> ragionList) {
-        this.ragionList = ragionList;
-    }
-
-    /**
-     * 搜索距离所在的区间
-     *
-     * @param value 输入的位置
-     * @return 位置所处的区间， 如果找不到返回null
-     */
-    @Override
-    public IRagion search(double value) {
-        return binarySearch(value);
-    }
-
-    /**
-     * 二分查找
-     *
-     * @param value 需要查询的值
-     * @return 找到的值所在区间
-     */
-    private IRagion binarySearch(double value) {
-
-        // 默认找不到区间
-        IRagion ret = null;
-
-        // 初始化区间的始末
-        int start = 0;
-        int end = ragionList.size() - 1;
-
-        // 只要区间合法， 就会一直搜索
-        while (start <= end) {
-
-            // 取出中点计算
-            int mid = (start + end) / 2;
-            IRagion ragion = ragionList.get(mid);
-
-            // 如果要找的值比区间起始还要小，则只有区间左边的才有可能是
-            if (Double.compare(value, ragion.getStart()) <= 0) {
-                end = mid - 1;
-                continue;
-            }
-
-            // 如果要找的值比区间的结束还要大，则只有区间右边的才有可能是
-            if (value > ragion.getEnd()) {
-                start = mid + 1;
-                continue;
-            }
-
-            // 如果改值落在区间内(start, end],则说明找到了
-            ret = ragion;
-            break;
-        }
-
-        return ret;
-    }
-
-}
-
-```
-
-## 处理区间，去除重叠部分
-假定我们的规则是，区间重叠部分认为是无效的部分，那么处理区间的逻辑简化为修正区间的起始和结束。
-
-### 伪代码
-1. 按照区间的起始位置排序, 这样区间至少起始是有序的；
-2. 如果区间存在重叠，那么一定是当前区间的结束位置要后于下一个区间的起始，则去除重复后, 
-当前区间的结束就是下个区间的开始，下个区间的开始就是当前区间的结束，相当于交换前后当前区间的结束和下一个区间的开始
-
-### 代码实现
-因为是数据的特殊预处理，所以用一个简单的适配器`RagionAdapter.java`:
-
-```java
-package com.moss.arithmetic;
-
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-/**
- * 区间适配器，在进入算法前，对数据进行预处理
- */
-public class RagionAdapter {
-
-    /**
-     * 区间比较，按照区间的起始位置比较
-     */
-    private class RagionComparator implements Comparator<IRagion> {
-
-        @Override
-        public int compare(IRagion o1, IRagion o2) {
-            return Double.compare(o1.getStart(), o2.getStart());
-        }
-
-    }
-
-    /**
-     * 处理区间为后面的算法做准备，去除区间的重合部分
-     *
-     * @param ragionList 原始的区间列表
-     */
-    public void handleRagion(List<IRagion> ragionList) {
-
-        if (ragionList == null) {
-            return;
-        }
-
-        // 先排序区间
-        Collections.sort(ragionList, new RagionComparator());
-
-        for (int i = 0, end = ragionList.size() - 1; i < end; i++) {
-
-            IRagion currentRagion = ragionList.get(i);
-            IRagion nextRagion = ragionList.get(i + 1);
-
-            double currentEnd = currentRagion.getEnd();
-            double nextStart = nextRagion.getStart();
-
-            // 如果发现区间重合，直接去掉重合部分
-            if (nextStart > currentEnd) {
-                currentRagion.setEnd(nextStart);
-                nextRagion.setStart(currentEnd);
-            }
-
-        }
-    }
-}
-
-```
+<h2 id="处理区间，去除重叠部分"><a href="#处理区间，去除重叠部分" class="headerlink" title="处理区间，去除重叠部分"></a>处理区间，去除重叠部分</h2><p>假定我们的规则是，区间重叠部分认为是无效的部分，那么处理区间的逻辑简化为修正区间的起始和结束。</p>
+<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><ol>
+<li>按照区间的起始位置排序, 这样区间至少起始是有序的；</li>
+<li>如果区间存在重叠，那么一定是当前区间的结束位置要后于下一个区间的起始，则去除重复后,<br>当前区间的结束就是下个区间的开始，下个区间的开始就是当前区间的结束，相当于交换前后当前区间的结束和下一个区间的开始</li>
+</ol>
+<h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><p>因为是数据的特殊预处理，所以用一个简单的适配器<code>RagionAdapter.java</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.moss.arithmetic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.Comparator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 区间适配器，在进入算法前，对数据进行预处理</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RagionAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 区间比较，按照区间的起始位置比较</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">RagionComparator</span> <span class="keyword">implements</span> <span class="title class_">Comparator</span>&lt;IRagion&gt; &#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(IRagion o1, IRagion o2)</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Double.compare(o1.getStart(), o2.getStart());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理区间为后面的算法做准备，去除区间的重合部分</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> ragionList 原始的区间列表</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleRagion</span><span class="params">(List&lt;IRagion&gt; ragionList)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ragionList == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 先排序区间</span></span><br><span class="line">        Collections.sort(ragionList, <span class="keyword">new</span> <span class="title class_">RagionComparator</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>, end = ragionList.size() - <span class="number">1</span>; i &lt; end; i++) &#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">IRagion</span> <span class="variable">currentRagion</span> <span class="operator">=</span> ragionList.get(i);</span><br><span class="line">            <span class="type">IRagion</span> <span class="variable">nextRagion</span> <span class="operator">=</span> ragionList.get(i + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">            <span class="type">double</span> <span class="variable">currentEnd</span> <span class="operator">=</span> currentRagion.getEnd();</span><br><span class="line">            <span class="type">double</span> <span class="variable">nextStart</span> <span class="operator">=</span> nextRagion.getStart();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果发现区间重合，直接去掉重合部分</span></span><br><span class="line">            <span class="keyword">if</span> (nextStart &gt; currentEnd) &#123;</span><br><span class="line">                currentRagion.setEnd(nextStart);</span><br><span class="line">                nextRagion.setStart(currentEnd);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>

@@ -6,12 +6,12 @@
   <meta name="keywords" content=" 2015 , sublime , 前端 ">
   <meta name="description" content="Sublime-配置 | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta name="description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tomcat支持双向认证">
 <meta property="og:url" content="https://aiziyuer.github.io/2025/03/22/web/2015-06-18-Tomcat%E6%94%AF%E6%8C%81%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下：  ### 1.生成服务器端的密钥，用于加密服务器端的信息：  &#96;&#96;&#96;bash keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#39;an, ST&#x3D;Sh">
+<meta property="og:description" content="因为项目中需要加密传输网络，所以考虑让tomcat支持双向认证，客户端需要验证服务器的可信性，服务器端也需要验证客户端的可信性，实现如下： 1.生成服务器端的密钥，用于加密服务器端的信息：1keytool -genkey -keystore tomcat.keystore -dname &quot;CN&#x3D;Moss, OU&#x3D;Moss, O&#x3D;Moss, L&#x3D;Xi&#x27;an, ST&#x3D;Shanxi,">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-22T11:29:07.975Z">
 <meta property="article:modified_time" content="2025-03-22T11:29:07.975Z">
@@ -577,20 +577,20 @@
         </a>
         
         
-        <a  class="All "
-           href="/2025/03/22/tools/2015-10-24-vim-compile/"
-           data-tag=""
-           data-author="" >
-            <span class="post-title" title="vim-compile">vim-compile</span>
-            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
-        </a>
-        
-        
         <a  class="All 工具 "
            href="/2025/03/22/tools/2015-04-26-sublime%E9%85%8D%E7%BD%AE/"
            data-tag="2015,sublime,前端"
            data-author="" >
             <span class="post-title" title="Sublime-配置">Sublime-配置</span>
+            <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
+        </a>
+        
+        
+        <a  class="All "
+           href="/2025/03/22/tools/2015-10-24-vim-compile/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="vim-compile">vim-compile</span>
             <span class="post-date" title="2025-03-22 19:29:07">2025/03/22</span>
         </a>
         
@@ -836,7 +836,7 @@
     
     <div class="toc-ref">
     
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">系统的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5"><span class="toc-text">同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E7%B3%BB%E7%BB%9FPackage%E7%9A%84%E7%9B%AE%E5%BD%95%EF%BC%9A"><span class="toc-text">各系统Package的目录：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9B%B4%E6%8D%A2%E5%9B%BE%E6%A0%87"><span class="toc-text">更换图标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">编辑器的配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E5%90%84%E6%A0%B7%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="toc-text">各种各样有意思的插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="toc-text">基本的插件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jekyll%E6%94%AF%E6%8C%81"><span class="toc-text">jekyll支持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E5%BC%80%E5%8F%91"><span class="toc-text">web开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91"><span class="toc-text">代码编辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85"><span class="toc-text">主题安装</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -852,120 +852,75 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-## 前言
-考虑到在sb2上有些插件已经不在支持了(sidebarenhancements), 所以我还是选择sb3, 但是暂时不选择购买, 还比较小资, 对我来说太贵了, 所以以后的文章都是针对sb3.
-
-## 系统的配置
-
-### 同步
-一劳永逸的事情, sb所有的包都是放在package里面, 所以选择同步这个文件夹就可以做到多个系统同步:
-1. 打开Sublime Text -> Browse Packages找到包的目录, mac下是`~/Library/Application Support/Sublime Text 3`
-2. 目录下的`Packages`移动到Dropbox,我的目录`~/Dropbox/Sync/Sublime3/Packages`
-3. 进入support目录,建立软连接`ln -s ~/Dropbox/Sync/Sublime3/Packages Packages`
-4. 选择喜欢的工具进行同步(github/dropbox)
-5. 下次需要使用的时候, 只要重复以上几步即可
-
-### 各系统Package的目录：
-
-* OS X:
-
-> ~/Library/Application Support/Sublime Text 3/Packages/
-
-* Linux:
-
-> ~/.config/sublime-text-2/Packages/
-
-* Windows:
-
-> %APPDATA%/Roaming/Sublime Text 3/Packages/
-
-
-### 更换图标
-
-* Mac下面直接找到应用`CMD+i`进入应用信息的查看,然后吧要准备好的图表拖拽到信息中的图标上就可以了
-
-* Windows下有待补充
-
-
-### 编辑器的配置
-因为考虑到我自己有些使用习惯，所以配置如下：
-
-```json
-// 让 minimap(就是大纲里面的小框) 里的当前位置更显眼点
-"always_show_minimap_viewport": true,
-"draw_minimap_border": true,
-
-// 设置主题的名称
-"theme": "Soda Dark.sublime-theme",
-"soda_classic_tabs": true,
-"soda_folder_icons": true,
-
-// 设置颜色主题
-"color_scheme": "Packages/Monokai Extended/Monokai Extended.tmTheme",	
-
-// ST 里我经常找不到光标在哪儿, 这个开启后可以高亮当前行
-"highlight_modified_tabs": true,
-
-// 启用Vinageouss
-"ignored_packages":
-[
-],
-
-// Finder 里打开文件时, 不会新开窗口了
-"open_files_in_new_window": false,
-
-// 显示文件编码
-"show_encoding": true,
-
-// 标题栏上显示完整路径, 有时候不小心开错了文件, 这样能帮你早点发现.
-"show_full_path": true,
-"show_line_endings": true,
-
-// vim使用系统的剪贴板
-"vintageous_use_sys_clipboard": true
-```
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>考虑到在sb2上有些插件已经不在支持了(sidebarenhancements), 所以我还是选择sb3, 但是暂时不选择购买, 还比较小资, 对我来说太贵了, 所以以后的文章都是针对sb3.</p>
+<h2 id="系统的配置"><a href="#系统的配置" class="headerlink" title="系统的配置"></a>系统的配置</h2><h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><p>一劳永逸的事情, sb所有的包都是放在package里面, 所以选择同步这个文件夹就可以做到多个系统同步:</p>
+<ol>
+<li>打开Sublime Text -&gt; Browse Packages找到包的目录, mac下是<code>~/Library/Application Support/Sublime Text 3</code></li>
+<li>目录下的<code>Packages</code>移动到Dropbox,我的目录<code>~/Dropbox/Sync/Sublime3/Packages</code></li>
+<li>进入support目录,建立软连接<code>ln -s ~/Dropbox/Sync/Sublime3/Packages Packages</code></li>
+<li>选择喜欢的工具进行同步(github&#x2F;dropbox)</li>
+<li>下次需要使用的时候, 只要重复以上几步即可</li>
+</ol>
+<h3 id="各系统Package的目录："><a href="#各系统Package的目录：" class="headerlink" title="各系统Package的目录："></a>各系统Package的目录：</h3><ul>
+<li>OS X:</li>
+</ul>
+<blockquote>
+<p>~&#x2F;Library&#x2F;Application Support&#x2F;Sublime Text 3&#x2F;Packages&#x2F;</p>
+</blockquote>
+<ul>
+<li>Linux:</li>
+</ul>
+<blockquote>
+<p>~&#x2F;.config&#x2F;sublime-text-2&#x2F;Packages&#x2F;</p>
+</blockquote>
+<ul>
+<li>Windows:</li>
+</ul>
+<blockquote>
+<p>%APPDATA%&#x2F;Roaming&#x2F;Sublime Text 3&#x2F;Packages&#x2F;</p>
+</blockquote>
+<h3 id="更换图标"><a href="#更换图标" class="headerlink" title="更换图标"></a>更换图标</h3><ul>
+<li><p>Mac下面直接找到应用<code>CMD+i</code>进入应用信息的查看,然后吧要准备好的图表拖拽到信息中的图标上就可以了</p>
+</li>
+<li><p>Windows下有待补充</p>
+</li>
+</ul>
+<h3 id="编辑器的配置"><a href="#编辑器的配置" class="headerlink" title="编辑器的配置"></a>编辑器的配置</h3><p>因为考虑到我自己有些使用习惯，所以配置如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 让 minimap(就是大纲里面的小框) 里的当前位置更显眼点</span></span><br><span class="line"><span class="attr">&quot;always_show_minimap_viewport&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;draw_minimap_border&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置主题的名称</span></span><br><span class="line"><span class="attr">&quot;theme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Soda Dark.sublime-theme&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;soda_classic_tabs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;soda_folder_icons&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置颜色主题</span></span><br><span class="line"><span class="attr">&quot;color_scheme&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Packages/Monokai Extended/Monokai Extended.tmTheme&quot;</span><span class="punctuation">,</span>	</span><br><span class="line"></span><br><span class="line"><span class="comment">// ST 里我经常找不到光标在哪儿, 这个开启后可以高亮当前行</span></span><br><span class="line"><span class="attr">&quot;highlight_modified_tabs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 启用Vinageouss</span></span><br><span class="line"><span class="attr">&quot;ignored_packages&quot;</span><span class="punctuation">:</span></span><br><span class="line"><span class="punctuation">[</span></span><br><span class="line"><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Finder 里打开文件时, 不会新开窗口了</span></span><br><span class="line"><span class="attr">&quot;open_files_in_new_window&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示文件编码</span></span><br><span class="line"><span class="attr">&quot;show_encoding&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 标题栏上显示完整路径, 有时候不小心开错了文件, 这样能帮你早点发现.</span></span><br><span class="line"><span class="attr">&quot;show_full_path&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;show_line_endings&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// vim使用系统的剪贴板</span></span><br><span class="line"><span class="attr">&quot;vintageous_use_sys_clipboard&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br></pre></td></tr></table></figure>
 
 
-## 各种各样有意思的插件
-因为插件非常丰富,所以这里根据用途、平台、语言等来分类进行总结。
-
-### 基本的插件
-1. Git -- 用来替代命令行处理文件，我的博客放在github上，所以有时候写文章写到一半不想写了，用来撤销用
-2. GitGutter -- GitGutter 更好的帮助开发者查看文件之前的改动和差异，提升开发效率
-3. SideBarEnhancements -- 可以是你的sidebar右击多出很多有用的菜单
-4. AutoFileName -- 自动补全文件路径-非常方便
-5. PlainTasks -- 支持todo后缀的文件进行任务状态的跟踪
-
-### jekyll支持
-我的博客都是用Sublime编写的，并且使用的是jekyll排版系统，jekyll真的非常方便，但是它只专注于写文章，高亮和其他还需要其他插件完成
-
-1. 安装jekyll插件
-2. Markdown Extended -- 使用扩展的Markdown的方式，代码高亮非常好用(````里面可以书写语言就能高亮)
-3. MonoKai Extended -- 颜色主题，配合Markdown Extended进行语法高亮, 支持
-
-### web开发
-1. 编辑器的vi支持，自带的不好用，直接禁用：
-
-> "Vintagous" 非常棒的vi插件
-
-
-### 代码编辑
-代码编辑过程中有些事情很繁琐，譬如注释，代码补全，匹配括号高亮，自动对齐什么的，以下插件用来解决：
-
-1. DocBlockr -- 成为你编写代码文档的有效工具。当输入/**并且按下Tab键的时候，这个插件会自动解析任何一个函数并且为你准备好合适的模板
-
->  "jsdocs_extend_double_slash": false //否则双斜杠了之后，下一行会跟着学习
-
-2. CodeIntel -- 语法补全
-3. BracketHighlighter -- 高亮匹配的括号
-
-### 主题安装
-这里推荐Soda Theme， 安装简单，功能稳定
-
-
-
-
+<h2 id="各种各样有意思的插件"><a href="#各种各样有意思的插件" class="headerlink" title="各种各样有意思的插件"></a>各种各样有意思的插件</h2><p>因为插件非常丰富,所以这里根据用途、平台、语言等来分类进行总结。</p>
+<h3 id="基本的插件"><a href="#基本的插件" class="headerlink" title="基本的插件"></a>基本的插件</h3><ol>
+<li>Git – 用来替代命令行处理文件，我的博客放在github上，所以有时候写文章写到一半不想写了，用来撤销用</li>
+<li>GitGutter – GitGutter 更好的帮助开发者查看文件之前的改动和差异，提升开发效率</li>
+<li>SideBarEnhancements – 可以是你的sidebar右击多出很多有用的菜单</li>
+<li>AutoFileName – 自动补全文件路径-非常方便</li>
+<li>PlainTasks – 支持todo后缀的文件进行任务状态的跟踪</li>
+</ol>
+<h3 id="jekyll支持"><a href="#jekyll支持" class="headerlink" title="jekyll支持"></a>jekyll支持</h3><p>我的博客都是用Sublime编写的，并且使用的是jekyll排版系统，jekyll真的非常方便，但是它只专注于写文章，高亮和其他还需要其他插件完成</p>
+<ol>
+<li>安装jekyll插件</li>
+<li>Markdown Extended – 使用扩展的Markdown的方式，代码高亮非常好用(&#96;&#96;&#96;&#96;里面可以书写语言就能高亮)</li>
+<li>MonoKai Extended – 颜色主题，配合Markdown Extended进行语法高亮, 支持</li>
+</ol>
+<h3 id="web开发"><a href="#web开发" class="headerlink" title="web开发"></a>web开发</h3><ol>
+<li>编辑器的vi支持，自带的不好用，直接禁用：</li>
+</ol>
+<blockquote>
+<p>“Vintagous” 非常棒的vi插件</p>
+</blockquote>
+<h3 id="代码编辑"><a href="#代码编辑" class="headerlink" title="代码编辑"></a>代码编辑</h3><p>代码编辑过程中有些事情很繁琐，譬如注释，代码补全，匹配括号高亮，自动对齐什么的，以下插件用来解决：</p>
+<ol>
+<li>DocBlockr – 成为你编写代码文档的有效工具。当输入&#x2F;**并且按下Tab键的时候，这个插件会自动解析任何一个函数并且为你准备好合适的模板</li>
+</ol>
+<blockquote>
+<p> “jsdocs_extend_double_slash”: false &#x2F;&#x2F;否则双斜杠了之后，下一行会跟着学习</p>
+</blockquote>
+<ol start="2">
+<li>CodeIntel – 语法补全</li>
+<li>BracketHighlighter – 高亮匹配的括号</li>
+</ol>
+<h3 id="主题安装"><a href="#主题安装" class="headerlink" title="主题安装"></a>主题安装</h3><p>这里推荐Soda Theme， 安装简单，功能稳定</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
